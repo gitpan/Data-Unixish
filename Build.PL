@@ -13,22 +13,28 @@ my %module_build_args = (
   "configure_requires" => {
     "Module::Build" => "0.3601"
   },
-  "dist_abstract" => "Data transformation framework, inspired by Unix toolbox philosophy",
+  "dist_abstract" => "Pass input unchanged",
   "dist_author" => [
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Data-Unixish",
-  "dist_version" => "1.0.0",
+  "dist_version" => "1.20",
   "license" => "perl",
   "module_name" => "Data::Unixish",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
-    "Data::Unixish::Implementation" => "0.01",
+    "Log::Any" => 0,
+    "Perinci::CmdLine" => "0.53",
     "Rinci" => "1.1.0",
+    "SHARYANTO::Package::Util" => 0,
+    "Tie::Diamond" => "0.03",
+    "Unixish" => "1.0.1",
     "perl" => "5.010000"
   },
-  "script_files" => []
+  "script_files" => [
+    "bin/dux"
+  ]
 );
 
 

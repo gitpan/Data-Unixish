@@ -1,5 +1,5 @@
 {
-   "abstract" : "Data transformation framework, inspired by Unix toolbox philosophy",
+   "abstract" : "Pass input unchanged",
    "author" : [
       "Steven Haryanto <stevenharyanto@gmail.com>"
    ],
@@ -26,8 +26,12 @@
       },
       "runtime" : {
          "requires" : {
-            "Data::Unixish::Implementation" : "0.01",
+            "Log::Any" : 0,
+            "Perinci::CmdLine" : "0.53",
             "Rinci" : "v1.1.0",
+            "SHARYANTO::Package::Util" : 0,
+            "Tie::Diamond" : "0.03",
+            "Unixish" : "v1.0.1",
             "perl" : "5.010000"
          }
       },
@@ -39,11 +43,11 @@
    },
    "release_status" : "stable",
    "resources" : {
-      "homepage" : "http://metacpan.org/dist/Data-Unixish/",
+      "homepage" : "http://metacpan.org/dist/Data-Unixish",
       "repository" : {
          "url" : "http://github.com/sharyanto/perl-Data-Unixish"
       }
    },
-   "version" : "1.0.0"
+   "version" : "1.20"
 }
 

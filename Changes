@@ -1,5 +1,46 @@
-Revision history for Data-Unixish
+Revision history for Data-Unixish-Implementation
 
-1.0.0   2012-07-13 (SHARYANTO)
+1.20    2012-07-21 (SHARYANTO)
+
+        No functional changes. Rename distribution from
+        Data-Unixish-Implementation to Data-Unixish, since the specification is
+        now renamed to Unixish. Bump version number to work around PAUSE
+        restriction.
+
+
+0.03    2012-07-18 (SHARYANTO)
+
+        [ENHANCEMENTS]
+
+        - Add 'dux --version'
+
+        - Add dux functions: sum, cat (for testing), date (preliminary, naive
+          version)
+
+        - Add tests
+
+
+0.02    2012-07-16 (SHARYANTO)
+
+        [ENHANCEMENTS]
+
+        - use Tie::Diamond so that STDIN is really processed as stream.
+
+        - Add Data::Unixish::Apply to apply one or more functions to Perl data.
+
+        - New dux functions: sort (currently supporting -n, -i, -c)
+
+        - By default setting env LOG=0 to speedup startup. Run with LOG=1 to
+          enable logging.
+
+        [BUG FIXES]
+
+        - dzil: Add missing dep [CT]
+
+        - 'dux FUNC --help' didn't work.
+
+
+
+0.01    2012-07-13 (SHARYANTO)
 
         First version.

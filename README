@@ -1,9 +1,32 @@
 NAME
-    Data::Unixish - Data transformation framework, inspired by Unix toolbox
-    philosophy
+    Data::Unixish::cat - Pass input unchanged
 
 VERSION
-    version 1.0.0
+    version 1.20
+
+DESCRIPTION
+    This module has Rinci metadata.
+
+FUNCTIONS
+    None are exported by default, but they are exportable.
+
+  cat(%args) -> [status, msg, result, meta]
+    Pass input unchanged.
+
+    Arguments ('*' denotes required arguments):
+
+    *   in => *any*
+
+    *   out => *any*
+
+    Return value:
+
+    Returns an enveloped result (an array). First element (status) is an
+    integer containing HTTP status code (200 means OK, 4xx caller error, 5xx
+    function error). Second element (msg) is a string containing error
+    message, or 'OK' if status is 200. Third element (result) is optional,
+    the actual result. Fourth element (meta) is called result metadata and
+    is optional, a hash that contains extra information.
 
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
