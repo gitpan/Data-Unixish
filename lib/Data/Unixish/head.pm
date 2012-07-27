@@ -1,12 +1,12 @@
 package Data::Unixish::head;
 
 use 5.010;
-use feature::each_on_array; # for Perl < 5.12
 use strict;
+use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.21.0'; # VERSION
+our $VERSION = '1.21.1'; # VERSION
 
 our %SPEC;
 
@@ -50,7 +50,7 @@ Data::Unixish::head - Output the first items of data
 
 =head1 VERSION
 
-version 1.21.0
+version 1.21.1
 
 =head1 DESCRIPTION
 

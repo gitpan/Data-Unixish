@@ -1,5 +1,5 @@
 ---
-abstract: 'Pass input unchanged'
+abstract: 'Implementation for Unixish, a data transformation framework'
 author:
   - 'Steven Haryanto <stevenharyanto@gmail.com>'
 build_requires:
@@ -19,11 +19,11 @@ requires:
   Perinci::CmdLine: 0.53
   Rinci: 1.1.0
   SHARYANTO::Package::Util: 0
+  Syntax::Feature::EachOnArray: 0
   Tie::Diamond: 0.03
   Unixish: 1.0.1
-  feature::each_on_array: 0
   perl: 5.010000
 resources:
   homepage: http://metacpan.org/dist/Data-Unixish
   repository: http://github.com/sharyanto/perl-Data-Unixish
-version: 1.21.0
+version: 1.21.1

@@ -13,12 +13,12 @@ my %module_build_args = (
   "configure_requires" => {
     "Module::Build" => "0.3601"
   },
-  "dist_abstract" => "Pass input unchanged",
+  "dist_abstract" => "Implementation for Unixish, a data transformation framework",
   "dist_author" => [
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Data-Unixish",
-  "dist_version" => "1.21.0",
+  "dist_version" => "1.21.1",
   "license" => "perl",
   "module_name" => "Data::Unixish",
   "recommends" => {},
@@ -28,9 +28,9 @@ my %module_build_args = (
     "Perinci::CmdLine" => "0.53",
     "Rinci" => "1.1.0",
     "SHARYANTO::Package::Util" => 0,
+    "Syntax::Feature::EachOnArray" => 0,
     "Tie::Diamond" => "0.03",
     "Unixish" => "1.0.1",
-    "feature::each_on_array" => 0,
     "perl" => "5.010000"
   },
   "script_files" => [

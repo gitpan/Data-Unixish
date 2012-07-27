@@ -8,6 +8,7 @@ META.yml
 README
 bin/dux
 dist.ini
+lib/Data/Unixish.pm
 lib/Data/Unixish/Apply.pm
 lib/Data/Unixish/CmdLine.pm
 lib/Data/Unixish/cat.pm

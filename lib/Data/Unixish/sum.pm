@@ -1,13 +1,13 @@
 package Data::Unixish::sum;
 
 use 5.010;
-use feature::each_on_array; # for Perl < 5.12
 use strict;
+use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.21.0'; # VERSION
+our $VERSION = '1.21.1'; # VERSION
 
 our %SPEC;
 
@@ -45,7 +45,7 @@ Data::Unixish::sum - Sum numbers
 
 =head1 VERSION
 
-version 1.21.0
+version 1.21.1
 
 =head1 DESCRIPTION
 

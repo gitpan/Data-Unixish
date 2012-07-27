@@ -1,26 +1,34 @@
-package Perinci::CmdLine::dux::I18N::en;
-use parent qw(Perinci::CmdLine::dux::I18N Perinci::CmdLine::I18N::en);
+package Data::Unixish;
 
-use Locale::Maketext::Lexicon::Gettext;
-our %Lexicon = %{ Locale::Maketext::Lexicon::Gettext->parse(<DATA>) };
+use 5.010;
+use strict;
+use warnings;
 
 our $VERSION = '1.21.1'; # VERSION
 
-#use Data::Dump; dd \%Lexicon;
-
 1;
-# ABSTRACT: English translation for Perinci::CmdLine::dux
+# ABSTRACT: Implementation for Unixish, a data transformation framework
 
 
+__END__
 =pod
 
 =head1 NAME
 
-Perinci::CmdLine::dux::I18N::en - English translation for Perinci::CmdLine::dux
+Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
 version 1.21.1
+
+=head1 DESCRIPTION
+
+This distribution implements L<Unixish>, a data transformation framework
+inspired by Unix toolbox philosophy.
+
+=head1 SEE ALSO
+
+L<Unixish>
 
 =head1 DESCRIPTION
 
@@ -45,8 +53,3 @@ the same terms as the Perl 5 programming language system itself.
 
 =cut
 
-
-__DATA__
-
-msgid  ""
-msgstr ""
