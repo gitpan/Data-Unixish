@@ -1,4 +1,4 @@
-package Data::Unixish::cat;
+package Data::Unixish::shuf;
 
 use 5.010;
 use feature::each_on_array; # for Perl < 5.12
@@ -6,39 +6,43 @@ use strict;
 use warnings;
 use Log::Any '$log';
 
+use List::Util qw(shuffle);
+
 our $VERSION = '1.21.0'; # VERSION
 
 our %SPEC;
 
-$SPEC{cat} = {
+$SPEC{shuf} = {
     v => 1.1,
-    summary => 'Pass input unchanged',
+    summary => 'Shuffle items',
     args => {
         in  => {schema=>'any'},
         out => {schema=>'any'},
     },
-    tags => [qw/filtering/],
+    tags => [qw/ordering/],
 };
-sub cat {
+sub shuf {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
 
+    my @tmp;
     while (my ($index, $item) = each @$in) {
-        push @$out, $item;
+        push @tmp, $item;
     }
 
+    push @$out, $_ for shuffle @tmp;
     [200, "OK"];
 }
 
 1;
-# ABSTRACT: Pass input unchanged
+# ABSTRACT: Shuffle items
 
 __END__
 =pod
 
 =head1 NAME
 
-Data::Unixish::cat - Pass input unchanged
+Data::Unixish::shuf - Shuffle items
 
 =head1 VERSION
 
@@ -54,9 +58,9 @@ This module has L<Rinci> metadata.
 
 None are exported by default, but they are exportable.
 
-=head2 cat(%args) -> [status, msg, result, meta]
+=head2 shuf(%args) -> [status, msg, result, meta]
 
-Pass input unchanged.
+Shuffle items.
 
 Arguments ('*' denotes required arguments):
 

@@ -1,11 +1,12 @@
 package Data::Unixish::sort;
 
 use 5.010;
+use feature::each_on_array; # for Perl < 5.12
 use strict;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.20'; # VERSION
+our $VERSION = '1.21.0'; # VERSION
 
 our %SPEC;
 
@@ -42,7 +43,7 @@ _
             cmdline_aliases => { R=>{} },
         },
     },
-    tags => [qw/sorting/],
+    tags => [qw/ordering/],
 };
 sub sort {
     my %args = @_;
@@ -100,7 +101,7 @@ Data::Unixish::sort - Sort items
 
 =head1 VERSION
 
-version 1.20
+version 1.21.0
 
 =head1 DESCRIPTION
 

@@ -2,7 +2,7 @@ NAME
     Data::Unixish::cat - Pass input unchanged
 
 VERSION
-    version 1.20
+    version 1.21.0
 
 DESCRIPTION
     This module has Rinci metadata.

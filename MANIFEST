@@ -10,10 +10,12 @@ bin/dux
 dist.ini
 lib/Data/Unixish/Apply.pm
 lib/Data/Unixish/CmdLine.pm
-lib/Data/Unixish/Implementation.pm
 lib/Data/Unixish/cat.pm
 lib/Data/Unixish/date.pm
 lib/Data/Unixish/head.pm
+lib/Data/Unixish/pick.pm
+lib/Data/Unixish/rev.pm
+lib/Data/Unixish/shuf.pm
 lib/Data/Unixish/sort.pm
 lib/Data/Unixish/sum.pm
 lib/Data/Unixish/tail.pm
@@ -27,6 +29,7 @@ t/date.t
 t/head.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
+t/rev.t
 t/sort.t
 t/sum.t
 t/tail.t

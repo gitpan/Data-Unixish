@@ -18,7 +18,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Data-Unixish",
-  "dist_version" => "1.20",
+  "dist_version" => "1.21.0",
   "license" => "perl",
   "module_name" => "Data::Unixish",
   "recommends" => {},
@@ -30,6 +30,7 @@ my %module_build_args = (
     "SHARYANTO::Package::Util" => 0,
     "Tie::Diamond" => "0.03",
     "Unixish" => "1.0.1",
+    "feature::each_on_array" => 0,
     "perl" => "5.010000"
   },
   "script_files" => [

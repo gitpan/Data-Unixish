@@ -21,8 +21,9 @@ requires:
   SHARYANTO::Package::Util: 0
   Tie::Diamond: 0.03
   Unixish: 1.0.1
+  feature::each_on_array: 0
   perl: 5.010000
 resources:
   homepage: http://metacpan.org/dist/Data-Unixish
   repository: http://github.com/sharyanto/perl-Data-Unixish
-version: 1.20
+version: 1.21.0

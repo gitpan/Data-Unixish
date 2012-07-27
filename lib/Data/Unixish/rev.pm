@@ -1,4 +1,4 @@
-package Data::Unixish::cat;
+package Data::Unixish::rev;
 
 use 5.010;
 use feature::each_on_array; # for Perl < 5.12
@@ -10,35 +10,37 @@ our $VERSION = '1.21.0'; # VERSION
 
 our %SPEC;
 
-$SPEC{cat} = {
+$SPEC{rev} = {
     v => 1.1,
-    summary => 'Pass input unchanged',
+    summary => 'Reverse items',
     args => {
         in  => {schema=>'any'},
         out => {schema=>'any'},
     },
-    tags => [qw/filtering/],
+    tags => [qw/ordering/],
 };
-sub cat {
+sub rev {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
 
+    my @tmp;
     while (my ($index, $item) = each @$in) {
-        push @$out, $item;
+        push @tmp, $item;
     }
 
+    push @$out, pop @tmp while @tmp;
     [200, "OK"];
 }
 
 1;
-# ABSTRACT: Pass input unchanged
+# ABSTRACT: Reverse items
 
 __END__
 =pod
 
 =head1 NAME
 
-Data::Unixish::cat - Pass input unchanged
+Data::Unixish::rev - Reverse items
 
 =head1 VERSION
 
@@ -54,9 +56,9 @@ This module has L<Rinci> metadata.
 
 None are exported by default, but they are exportable.
 
-=head2 cat(%args) -> [status, msg, result, meta]
+=head2 rev(%args) -> [status, msg, result, meta]
 
-Pass input unchanged.
+Reverse items.
 
 Arguments ('*' denotes required arguments):
 

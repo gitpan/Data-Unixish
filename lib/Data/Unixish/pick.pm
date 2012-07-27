@@ -1,4 +1,4 @@
-package Data::Unixish::cat;
+package Data::Unixish::pick;
 
 use 5.010;
 use feature::each_on_array; # for Perl < 5.12
@@ -10,35 +10,50 @@ our $VERSION = '1.21.0'; # VERSION
 
 our %SPEC;
 
-$SPEC{cat} = {
+$SPEC{pick} = {
     v => 1.1,
-    summary => 'Pass input unchanged',
+    summary => 'Pick one or more random items',
     args => {
         in  => {schema=>'any'},
         out => {schema=>'any'},
+        items => {
+            summary => 'Number of items to pick',
+            schema=>['int*' => {default=>1}],
+            tags => ['main'],
+            cmdline_aliases => { n=>{} },
+        },
     },
     tags => [qw/filtering/],
 };
-sub cat {
+sub pick {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
+    my $n = $args{items} // 1;
 
+    my @picked;
     while (my ($index, $item) = each @$in) {
-        push @$out, $item;
+        if (@picked < $n) {
+            push @picked, $item;
+            my ($r1, $r2) = (rand(@picked), rand(@picked));
+            ($picked[$r1], $picked[$r2]) = ($picked[$r2], $picked[$r1]);
+        } else {
+            rand($.) <= $n and $picked[rand(@picked)] = $item;
+        }
     }
 
+    push @$out, $_ for @picked;
     [200, "OK"];
 }
 
 1;
-# ABSTRACT: Pass input unchanged
+# ABSTRACT: Pick one or more random items
 
 __END__
 =pod
 
 =head1 NAME
 
-Data::Unixish::cat - Pass input unchanged
+Data::Unixish::pick - Pick one or more random items
 
 =head1 VERSION
 
@@ -54,15 +69,19 @@ This module has L<Rinci> metadata.
 
 None are exported by default, but they are exportable.
 
-=head2 cat(%args) -> [status, msg, result, meta]
+=head2 pick(%args) -> [status, msg, result, meta]
 
-Pass input unchanged.
+Pick one or more random items.
 
 Arguments ('*' denotes required arguments):
 
 =over 4
 
 =item * B<in> => I<any>
+
+=item * B<items> => I<int> (default: 1)
+
+Number of items to pick.
 
 =item * B<out> => I<any>
 
