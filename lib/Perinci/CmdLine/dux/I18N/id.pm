@@ -4,7 +4,7 @@ use parent qw(Perinci::CmdLine::dux::I18N Perinci::CmdLine::I18N::id);
 use Locale::Maketext::Lexicon::Gettext;
 our %Lexicon = %{ Locale::Maketext::Lexicon::Gettext->parse(<DATA>) };
 
-our $VERSION = '1.21.1'; # VERSION
+our $VERSION = '1.22'; # VERSION
 
 #use Data::Dump; dd \%Lexicon;
 
@@ -20,7 +20,7 @@ Perinci::CmdLine::dux::I18N::id - Indonesian translation for Perinci::CmdLine::d
 
 =head1 VERSION
 
-version 1.21.1
+version 1.22
 
 =head1 DESCRIPTION
 

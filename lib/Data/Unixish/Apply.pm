@@ -8,7 +8,7 @@ use Log::Any '$log';
 use SHARYANTO::Package::Util qw(package_exists);
 use Module::Load;
 
-our $VERSION = '1.21.1'; # VERSION
+our $VERSION = '1.22'; # VERSION
 
 our %SPEC;
 
@@ -114,7 +114,7 @@ Data::Unixish::Apply - Apply one or more dux functions to data
 
 =head1 VERSION
 
-version 1.21.1
+version 1.22
 
 =head1 SYNOPSIS
 
