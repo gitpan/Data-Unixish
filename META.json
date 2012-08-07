@@ -27,11 +27,9 @@
       "runtime" : {
          "requires" : {
             "Log::Any" : 0,
-            "Perinci::CmdLine" : "0.53",
             "Rinci" : "v1.1.0",
             "SHARYANTO::Package::Util" : 0,
             "Syntax::Feature::EachOnArray" : 0,
-            "Tie::Diamond" : "0.03",
             "Unixish" : "v1.0.1",
             "perl" : "5.010000"
          }
@@ -49,6 +47,6 @@
          "url" : "http://github.com/sharyanto/perl-Data-Unixish"
       }
    },
-   "version" : "1.22"
+   "version" : "1.23"
 }
 

@@ -8,7 +8,7 @@ use Log::Any '$log';
 
 use List::Util qw(shuffle);
 
-our $VERSION = '1.22'; # VERSION
+our $VERSION = '1.23'; # VERSION
 
 our %SPEC;
 
@@ -46,7 +46,7 @@ Data::Unixish::shuf - Shuffle items
 
 =head1 VERSION
 
-version 1.22
+version 1.23
 
 =head1 DESCRIPTION
 

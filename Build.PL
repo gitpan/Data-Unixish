@@ -18,24 +18,20 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Data-Unixish",
-  "dist_version" => "1.22",
+  "dist_version" => "1.23",
   "license" => "perl",
   "module_name" => "Data::Unixish",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "Log::Any" => 0,
-    "Perinci::CmdLine" => "0.53",
     "Rinci" => "1.1.0",
     "SHARYANTO::Package::Util" => 0,
     "Syntax::Feature::EachOnArray" => 0,
-    "Tie::Diamond" => "0.03",
     "Unixish" => "1.0.1",
     "perl" => "5.010000"
   },
-  "script_files" => [
-    "bin/dux"
-  ]
+  "script_files" => []
 );
 
 
