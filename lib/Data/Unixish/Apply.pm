@@ -8,7 +8,7 @@ use Log::Any '$log';
 use SHARYANTO::Package::Util qw(package_exists);
 use Module::Load;
 
-our $VERSION = '1.23'; # VERSION
+our $VERSION = '1.24'; # VERSION
 
 our %SPEC;
 
@@ -38,7 +38,7 @@ Example:
     [
         'sort', # no arguments (all default)
         'date', # no arguments (all default)
-        ['head', {lines=>5}], # specify arguments
+        ['head', {items=>5}], # specify arguments
     ]
 
 _
@@ -114,7 +114,7 @@ Data::Unixish::Apply - Apply one or more dux functions to data
 
 =head1 VERSION
 
-version 1.23
+version 1.24
 
 =head1 SYNOPSIS
 
@@ -122,7 +122,7 @@ version 1.23
  Data::Unixish::Apply::apply(
      in => [1, 4, 2, 6, 7, 10],
      functions => ['sort', ['printf', {fmt=>'%04d'}]],
-);
+ ); # will result in [qw/0001 0002 0004 0006 0007 0010/],
 
 =head1 DESCRIPTION
 
@@ -157,7 +157,7 @@ Example:
     [
         'sort', # no arguments (all default)
         'date', # no arguments (all default)
-        ['head', {lines=>5}], # specify arguments
+        ['head', {items=>5}], # specify arguments
     ]
 
 =item * B<in>* => I<any>

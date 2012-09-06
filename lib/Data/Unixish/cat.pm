@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.23'; # VERSION
+our $VERSION = '1.24'; # VERSION
 
 our %SPEC;
 
@@ -33,6 +33,8 @@ sub cat {
 1;
 # ABSTRACT: Pass input unchanged
 
+
+
 __END__
 =pod
 
@@ -42,7 +44,23 @@ Data::Unixish::cat - Pass input unchanged
 
 =head1 VERSION
 
-version 1.23
+version 1.24
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::cat;
+ my $in  = [1, 2, 3];
+ my $out = [];
+ Data::Unixish::cat::cat(in=>$in, out=>$out); # $out = [1, 2, 3]
+
+In command line:
+
+ % echo -e "1\n2\n3" | dux cat --format=text-simple
+ 1
+ 2
+ 3
 
 =head1 DESCRIPTION
 

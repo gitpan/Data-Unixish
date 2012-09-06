@@ -8,7 +8,7 @@ use Log::Any '$log';
 use POSIX qw(strftime);
 use Scalar::Util qw(looks_like_number blessed);
 
-our $VERSION = '1.23'; # VERSION
+our $VERSION = '1.24'; # VERSION
 
 our %SPEC;
 
@@ -61,6 +61,8 @@ sub date {
 1;
 # ABSTRACT: Format date
 
+
+
 __END__
 =pod
 
@@ -70,7 +72,23 @@ Data::Unixish::date - Format date
 
 =head1 VERSION
 
-version 1.23
+version 1.24
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::cat;
+ my $in  = [DateTime->new(year=>2012, month=>9, day=>6), 1290380232, "foo"];
+ my $out = [];
+ Data::Unixish::cat::cat(in=>$in, out=>$out, format=>"%Y-%m-%d");
+ # $out = ["2012-09-06","2010-11-22","foo"]
+
+In command line:
+
+ % echo -e "1290380232\nfoo" | dux date --format=text-simple
+ 2010-11-22 05:57:12
+ foo
 
 =head1 DESCRIPTION
 

@@ -7,7 +7,7 @@ use warnings;
 use Log::Any '$log';
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.23'; # VERSION
+our $VERSION = '1.24'; # VERSION
 
 our %SPEC;
 
@@ -36,6 +36,7 @@ sub sum {
 1;
 # ABSTRACT: Sum numbers
 
+
 __END__
 =pod
 
@@ -45,7 +46,23 @@ Data::Unixish::sum - Sum numbers
 
 =head1 VERSION
 
-version 1.23
+version 1.24
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::sum;
+ my $in  = [1, 2, 3];
+ my $out = [];
+ Data::Unixish::sum::sum(in=>$in, out=>$out); # $out = [6]
+
+In command line:
+
+ % seq 1 100 | dux sum
+ .------.
+ | 5050 |
+ '------'
 
 =head1 DESCRIPTION
 

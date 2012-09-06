@@ -8,7 +8,7 @@ use Log::Any '$log';
 
 use List::Util qw(shuffle);
 
-our $VERSION = '1.23'; # VERSION
+our $VERSION = '1.24'; # VERSION
 
 our %SPEC;
 
@@ -37,6 +37,8 @@ sub shuf {
 1;
 # ABSTRACT: Shuffle items
 
+
+
 __END__
 =pod
 
@@ -46,7 +48,23 @@ Data::Unixish::shuf - Shuffle items
 
 =head1 VERSION
 
-version 1.23
+version 1.24
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::shuf;
+ my $in  = [1, 2, 3];
+ my $out = [];
+ Data::Unixish::shuf::shuf(in=>$in, out=>$out); # $out = [2, 1, 3]
+
+In command line:
+
+ % echo -e "1\n2\n3" | dux shuf --format=text-simple
+ 3
+ 1
+ 2
 
 =head1 DESCRIPTION
 

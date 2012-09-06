@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.23'; # VERSION
+our $VERSION = '1.24'; # VERSION
 
 our %SPEC;
 
@@ -33,10 +33,12 @@ sub pick {
     my @picked;
     while (my ($index, $item) = each @$in) {
         if (@picked < $n) {
-            push @picked, $item;
-            my ($r1, $r2) = (rand(@picked), rand(@picked));
-            ($picked[$r1], $picked[$r2]) = ($picked[$r2], $picked[$r1]);
+            # we haven't reached n items, put item to picked list, in a random
+            # position
+            splice @picked, rand(@picked), 0, $item;
         } else {
+            # we have reached n items, just replace an item randomly, using
+            # algorithm from Learning Perl, slightly modified.
             rand($.) <= $n and $picked[rand(@picked)] = $item;
         }
     }
@@ -48,6 +50,7 @@ sub pick {
 1;
 # ABSTRACT: Pick one or more random items
 
+
 __END__
 =pod
 
@@ -57,7 +60,23 @@ Data::Unixish::pick - Pick one or more random items
 
 =head1 VERSION
 
-version 1.23
+version 1.24
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::pick;
+ my $in  = [1..100];
+ my $out = [];
+ Data::Unixish::pick::pick(in=>$in, out=>$out); # $out = [73]
+
+In command line:
+
+ % seq 1 100 | dux pick -n 3
+ .-------------------.
+ | 18 | 22 |  2 | 24 |
+ '----+----+----+----'
 
 =head1 DESCRIPTION
 
