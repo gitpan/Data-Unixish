@@ -8,7 +8,7 @@ use Module::Build 0.3601;
 my %module_build_args = (
   "build_requires" => {
     "Module::Build" => "0.3601",
-    "Test::More" => "0.96"
+    "Test::More" => "0.98"
   },
   "configure_requires" => {
     "Module::Build" => "0.3601"
@@ -18,7 +18,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Data-Unixish",
-  "dist_version" => "1.24",
+  "dist_version" => "1.25",
   "license" => "perl",
   "module_name" => "Data::Unixish",
   "recommends" => {},
@@ -29,7 +29,7 @@ my %module_build_args = (
     "SHARYANTO::Package::Util" => 0,
     "Syntax::Feature::EachOnArray" => 0,
     "Unixish" => "v1.0.1",
-    "perl" => "5.010000"
+    "perl" => "5.010001"
   },
   "script_files" => []
 );

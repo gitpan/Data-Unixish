@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.24'; # VERSION
+our $VERSION = '1.25'; # VERSION
 
 our %SPEC;
 
@@ -103,7 +103,7 @@ Data::Unixish::sort - Sort items
 
 =head1 VERSION
 
-version 1.24
+version 1.25
 
 =head1 SYNOPSIS
 
@@ -121,48 +121,12 @@ In command line:
  b
  c
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
+=head2 sort() -> [status, msg, result, meta]
 
-=head2 sort(%args) -> [status, msg, result, meta]
-
-Sort items.
-
-By default sort ascibetically, unless C<numeric> is set to true to sort
-numerically.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<ci> => I<bool> (default: 0)
-
-Whether to ignore case.
-
-=item * B<in> => I<any>
-
-=item * B<numeric> => I<bool> (default: 0)
-
-Whether to sort numerically.
-
-=item * B<out> => I<any>
-
-=item * B<random> => I<bool> (default: 0)
-
-Whether to sort by random.
-
-=item * B<reverse> => I<bool> (default: 0)
-
-Whether to reverse sort result.
-
-=back
+No arguments.
 
 Return value:
 
@@ -174,7 +138,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

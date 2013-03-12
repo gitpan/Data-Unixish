@@ -8,7 +8,7 @@ use Log::Any '$log';
 use POSIX qw(strftime);
 use Scalar::Util qw(looks_like_number blessed);
 
-our $VERSION = '1.24'; # VERSION
+our $VERSION = '1.25'; # VERSION
 
 our %SPEC;
 
@@ -34,8 +34,6 @@ sub date {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
     my $format  = $args{format} // '%Y-%m-%d %H:%M:%S';
-
-    my $required;
 
     while (my ($index, $item) = each @$in) {
         my @lt;
@@ -72,16 +70,16 @@ Data::Unixish::date - Format date
 
 =head1 VERSION
 
-version 1.24
+version 1.25
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::cat;
+ use Data::Unixish::date;
  my $in  = [DateTime->new(year=>2012, month=>9, day=>6), 1290380232, "foo"];
  my $out = [];
- Data::Unixish::cat::cat(in=>$in, out=>$out, format=>"%Y-%m-%d");
+ Data::Unixish::date::date(in=>$in, out=>$out, format=>"%Y-%m-%d");
  # $out = ["2012-09-06","2010-11-22","foo"]
 
 In command line:
@@ -90,33 +88,12 @@ In command line:
  2010-11-22 05:57:12
  foo
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
+=head2 date() -> [status, msg, result, meta]
 
-=head2 date(%args) -> [status, msg, result, meta]
-
-Format date.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<format> => I<str> (default: 0)
-
-Format.
-
-=item * B<in> => I<any>
-
-=item * B<out> => I<any>
-
-=back
+No arguments.
 
 Return value:
 
@@ -128,7 +105,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

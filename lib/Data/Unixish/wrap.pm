@@ -1,29 +1,49 @@
-package Data::Unixish::cat;
+package Data::Unixish::wrap;
 
 use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
+
+use Text::Wrap ();
 
 our $VERSION = '1.25'; # VERSION
 
 our %SPEC;
 
-$SPEC{cat} = {
+$SPEC{wrap} = {
     v => 1.1,
-    summary => 'Pass input unchanged',
+    summary => 'Wrap text',
+    description => <<'_',
+
+Currently implemented using Text::Wrap standard Perl module.
+
+_
     args => {
         in  => {schema=>'any'},
         out => {schema=>'any'},
+        columns => {
+            summary => 'Target column width',
+            schema =>[int => {default=>80, min=>1}],
+            cmdline_aliases => { c=>{} },
+        },
     },
-    tags => [qw/filtering/],
+    tags => [qw/text/],
 };
-sub cat {
+sub wrap {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
+    my $cols = $args{columns} // 80;
+
+    local $Text::Wrap::columns = $cols;
 
     while (my ($index, $item) = each @$in) {
+        my @lt;
+        if (defined($item) && !ref($item)) {
+            $item = Text::Wrap::wrap("", "", $item);
+        }
+
         push @$out, $item;
     }
 
@@ -31,7 +51,7 @@ sub cat {
 }
 
 1;
-# ABSTRACT: Pass input unchanged
+# ABSTRACT: Wrap text
 
 
 
@@ -40,7 +60,7 @@ __END__
 
 =head1 NAME
 
-Data::Unixish::cat - Pass input unchanged
+Data::Unixish::wrap - Wrap text
 
 =head1 VERSION
 
@@ -50,22 +70,22 @@ version 1.25
 
 In Perl:
 
- use Data::Unixish::cat;
- my $in  = [1, 2, 3];
+ use Data::Unixish::wrap;
+ my $in  = ["xxxx xxxx xxxx xxxx xxxx"];
  my $out = [];
- Data::Unixish::cat::cat(in=>$in, out=>$out); # $out = [1, 2, 3]
+ Data::Unixish::wrap::wrap(in=>$in, out=>$out, columns => 20);
+ # $out = ["xxxx xxxx xxxx xxxx\nxxxx"]
 
 In command line:
 
- % echo -e "1\n2\n3" | dux cat --format=text-simple
- 1
- 2
- 3
+ % echo -e "xxxx xxxx xxxx xxxx xxxx" | dux rtrim -c 20
+ xxxx xxxx xxxx xxxx
+ xxxx
 
 =head1 FUNCTIONS
 
 
-=head2 cat() -> [status, msg, result, meta]
+=head2 wrap() -> [status, msg, result, meta]
 
 No arguments.
 

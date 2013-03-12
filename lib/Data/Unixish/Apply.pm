@@ -8,7 +8,7 @@ use Log::Any '$log';
 use SHARYANTO::Package::Util qw(package_exists);
 use Module::Load;
 
-our $VERSION = '1.24'; # VERSION
+our $VERSION = '1.25'; # VERSION
 
 our %SPEC;
 
@@ -17,15 +17,15 @@ $SPEC{apply} = {
     summary => 'Apply one or more dux functions',
     args => {
         in => {
-            schema => 'any', # XXX stream
+            schema => ['any'], # XXX stream
             req => 1,
         },
         functions => {
             summary => 'Function(s) to apply',
-            schema => ['any*' => {of=>[
+            schema => ['any*', of => [
                 'str*',
-                ['array*', {of => ['str*', 'array*']}],
-            ]}],
+                ['array*', of => ['any' => of => [['str*'], ['array*']]]],
+            ]],
             req => 1,
             description => <<'_',
 
@@ -114,7 +114,7 @@ Data::Unixish::Apply - Apply one or more dux functions to data
 
 =head1 VERSION
 
-version 1.24
+version 1.25
 
 =head1 SYNOPSIS
 
@@ -126,43 +126,12 @@ version 1.24
 
 =head1 DESCRIPTION
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
+=head2 apply() -> [status, msg, result, meta]
 
-=head2 apply(%args) -> [status, msg, result, meta]
-
-Apply one or more dux functions.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<functions>* => I<array|str>
-
-Function(s) to apply.
-
-A list of functions to apply. Each element is either a string (function name),
-or a 2-element array (function names + arguments hashref). If you do not want to
-specify arguments to a function, you can use a string.
-
-Example:
-
-    [
-        'sort', # no arguments (all default)
-        'date', # no arguments (all default)
-        ['head', {items=>5}], # specify arguments
-    ]
-
-=item * B<in>* => I<any>
-
-=back
+No arguments.
 
 Return value:
 
@@ -174,7 +143,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

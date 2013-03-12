@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.24'; # VERSION
+our $VERSION = '1.25'; # VERSION
 
 our %SPEC;
 
@@ -57,7 +57,7 @@ Data::Unixish::tail - Output the last items of data
 
 =head1 VERSION
 
-version 1.24
+version 1.25
 
 =head1 SYNOPSIS
 
@@ -77,33 +77,12 @@ In command line:
  99
  100
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
+=head2 tail() -> [status, msg, result, meta]
 
-=head2 tail(%args) -> [status, msg, result, meta]
-
-Output the last items of data.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<in> => I<any>
-
-=item * B<items> => I<int> (default: 10)
-
-Number of items to output.
-
-=item * B<out> => I<any>
-
-=back
+No arguments.
 
 Return value:
 
@@ -115,7 +94,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

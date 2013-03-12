@@ -7,7 +7,7 @@ use warnings;
 use Test::More 0.96;
 use Module::Load;
 
-our $VERSION = '1.24'; # VERSION
+our $VERSION = '1.25'; # VERSION
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -40,6 +40,7 @@ sub test_dux_func {
 1;
 # ABSTRACT: Routines to test Data::Unixish
 
+
 __END__
 =pod
 
@@ -49,17 +50,11 @@ Test::Data::Unixish - Routines to test Data::Unixish
 
 =head1 VERSION
 
-version 1.24
+version 1.25
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
+=for Pod::Coverage .+
 
 =head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
 
 =head1 AUTHOR
 
@@ -67,7 +62,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -8,7 +8,7 @@ use Log::Any '$log';
 
 use List::Util qw(shuffle);
 
-our $VERSION = '1.24'; # VERSION
+our $VERSION = '1.25'; # VERSION
 
 our %SPEC;
 
@@ -48,7 +48,7 @@ Data::Unixish::shuf - Shuffle items
 
 =head1 VERSION
 
-version 1.24
+version 1.25
 
 =head1 SYNOPSIS
 
@@ -66,29 +66,12 @@ In command line:
  1
  2
 
-=head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
+=head2 shuf() -> [status, msg, result, meta]
 
-=head2 shuf(%args) -> [status, msg, result, meta]
-
-Shuffle items.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<in> => I<any>
-
-=item * B<out> => I<any>
-
-=back
+No arguments.
 
 Return value:
 
@@ -100,7 +83,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Steven Haryanto.
+This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

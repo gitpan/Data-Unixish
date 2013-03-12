@@ -4,7 +4,7 @@
       "Steven Haryanto <stevenharyanto@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640",
+   "generated_by" : "Dist::Zilla version 4.300015, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -24,19 +24,24 @@
             "Module::Build" : "0.3601"
          }
       },
+      "develop" : {
+         "requires" : {
+            "Test::Rinci" : "0.01"
+         }
+      },
       "runtime" : {
          "requires" : {
-            "Log::Any" : 0,
+            "Log::Any" : "0",
             "Rinci" : "v1.1.0",
-            "SHARYANTO::Package::Util" : 0,
-            "Syntax::Feature::EachOnArray" : 0,
+            "SHARYANTO::Package::Util" : "0",
+            "Syntax::Feature::EachOnArray" : "0",
             "Unixish" : "v1.0.1",
-            "perl" : "5.010000"
+            "perl" : "5.010001"
          }
       },
       "test" : {
          "requires" : {
-            "Test::More" : "0.96"
+            "Test::More" : "0.98"
          }
       }
    },
@@ -47,6 +52,6 @@
          "url" : "http://github.com/sharyanto/perl-Data-Unixish"
       }
    },
-   "version" : "1.24"
+   "version" : "1.25"
 }
 
