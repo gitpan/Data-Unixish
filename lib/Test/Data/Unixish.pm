@@ -7,7 +7,7 @@ use warnings;
 use Test::More 0.96;
 use Module::Load;
 
-our $VERSION = '1.25'; # VERSION
+our $VERSION = '1.26'; # VERSION
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -30,7 +30,8 @@ sub test_dux_func {
                 my $out = [];
                 my $res = $f->(in=>$in, out=>$out, %{$t->{args}});
                 is($res->[0], 200, "status");
-                is_deeply($out, $t->{out}, "out");
+                is_deeply($out, $t->{out}, "out")
+                    or diag explain $out;
             };
             $i++;
         }
@@ -50,11 +51,9 @@ Test::Data::Unixish - Routines to test Data::Unixish
 
 =head1 VERSION
 
-version 1.25
+version 1.26
 
 =for Pod::Coverage .+
-
-=head1 FUNCTIONS
 
 =head1 AUTHOR
 
@@ -66,6 +65,16 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 DESCRIPTION
+
+
+This module has L<Rinci> metadata.
+
+=head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =cut
 

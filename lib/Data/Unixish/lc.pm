@@ -1,29 +1,35 @@
-package Data::Unixish::cat;
+package Data::Unixish::lc;
 
 use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
 our $VERSION = '1.26'; # VERSION
 
 our %SPEC;
 
-$SPEC{cat} = {
+$SPEC{lc} = {
     v => 1.1,
-    summary => 'Pass input unchanged',
+    summary => 'Convert text to lowercase',
+    description => <<'_',
+
+_
     args => {
         in  => {schema=>'any'},
         out => {schema=>'any'},
     },
-    tags => [qw/filtering/],
+    tags => [qw/text/],
 };
-sub cat {
+sub lc {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
 
     while (my ($index, $item) = each @$in) {
+        if (defined($item) && !ref($item)) {
+            $item = CORE::lc($item);
+        }
         push @$out, $item;
     }
 
@@ -31,7 +37,7 @@ sub cat {
 }
 
 1;
-# ABSTRACT: Pass input unchanged
+# ABSTRACT: Convert text to lowercase
 
 
 
@@ -40,7 +46,7 @@ __END__
 
 =head1 NAME
 
-Data::Unixish::cat - Pass input unchanged
+Data::Unixish::lc - Convert text to lowercase
 
 =head1 VERSION
 
@@ -50,17 +56,16 @@ version 1.26
 
 In Perl:
 
- use Data::Unixish::cat;
- my $in  = [1, 2, 3];
+ use Data::Unixish::lc;
+ my $in  = ["STEVEN"];
  my $out = [];
- Data::Unixish::cat::cat(in=>$in, out=>$out); # $out = [1, 2, 3]
+ Data::Unixish::lc::lc(in=>$in, out=>$out);
+ # $out = ["steven"]
 
 In command line:
 
- % echo -e "1\n2\n3" | dux cat --format=text-simple
- 1
- 2
- 3
+ % echo -e "STEVEN" | dux lc
+ steven
 
 =head1 AUTHOR
 
@@ -83,9 +88,9 @@ This module has L<Rinci> metadata.
 
 None are exported by default, but they are exportable.
 
-=head2 cat(%args) -> [status, msg, result, meta]
+=head2 lc(%args) -> [status, msg, result, meta]
 
-Pass input unchanged.
+Convert text to lowercase.
 
 Arguments ('*' denotes required arguments):
 

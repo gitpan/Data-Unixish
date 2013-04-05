@@ -3,16 +3,17 @@ NAME
     framework
 
 VERSION
-    version 1.25
+    version 1.26
 
 DESCRIPTION
     This distribution implements Unixish, a data transformation framework
     inspired by Unix toolbox philosophy.
 
+    This module has Rinci metadata.
+
 SEE ALSO
     Unixish
 
-FUNCTIONS
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
 
@@ -21,4 +22,7 @@ COPYRIGHT AND LICENSE
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
+
+FUNCTIONS
+    None are exported by default, but they are exportable.
 

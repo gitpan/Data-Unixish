@@ -4,7 +4,7 @@ use 5.010001;
 use strict;
 use warnings;
 
-our $VERSION = '1.25'; # VERSION
+our $VERSION = '1.26'; # VERSION
 
 1;
 # ABSTRACT: Implementation for Unixish, a data transformation framework
@@ -19,18 +19,19 @@ Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-version 1.25
+version 1.26
 
 =head1 DESCRIPTION
 
 This distribution implements L<Unixish>, a data transformation framework
 inspired by Unix toolbox philosophy.
 
+
+This module has L<Rinci> metadata.
+
 =head1 SEE ALSO
 
 L<Unixish>
-
-=head1 FUNCTIONS
 
 =head1 AUTHOR
 
@@ -42,6 +43,11 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
 
 =cut
 

@@ -8,7 +8,7 @@ use Log::Any '$log';
 use SHARYANTO::Package::Util qw(package_exists);
 use Module::Load;
 
-our $VERSION = '1.25'; # VERSION
+our $VERSION = '1.26'; # VERSION
 
 our %SPEC;
 
@@ -114,7 +114,7 @@ Data::Unixish::Apply - Apply one or more dux functions to data
 
 =head1 VERSION
 
-version 1.25
+version 1.26
 
 =head1 SYNOPSIS
 
@@ -126,16 +126,8 @@ version 1.25
 
 =head1 DESCRIPTION
 
-=head1 FUNCTIONS
 
-
-=head2 apply() -> [status, msg, result, meta]
-
-No arguments.
-
-Return value:
-
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+This module has L<Rinci> metadata.
 
 =head1 AUTHOR
 
@@ -147,6 +139,43 @@ This software is copyright (c) 2013 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+=head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
+
+=head2 apply(%args) -> [status, msg, result, meta]
+
+Apply one or more dux functions.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<functions>* => I<array|str>
+
+Function(s) to apply.
+
+A list of functions to apply. Each element is either a string (function name),
+or a 2-element array (function names + arguments hashref). If you do not want to
+specify arguments to a function, you can use a string.
+
+Example:
+
+    [
+        'sort', # no arguments (all default)
+        'date', # no arguments (all default)
+        ['head', {items=>5}], # specify arguments
+    ]
+
+=item * B<in>* => I<any>
+
+=back
+
+Return value:
+
+Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =cut
 
