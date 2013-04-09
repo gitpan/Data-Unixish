@@ -7,7 +7,7 @@ use warnings;
 use Test::More 0.96;
 use Module::Load;
 
-our $VERSION = '1.26'; # VERSION
+our $VERSION = '1.27'; # VERSION
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -26,6 +26,10 @@ sub test_dux_func {
         for my $t (@{$args{tests}}) {
             my $tn = $t->{name} // "test[$i]";
             subtest $tn => sub {
+                if ($t->{skip}) {
+                    my $msg = $t->{skip}->();
+                    plan skip_all => $msg if $msg;
+                }
                 my $in  = $t->{in};
                 my $out = [];
                 my $res = $f->(in=>$in, out=>$out, %{$t->{args}});
@@ -33,8 +37,8 @@ sub test_dux_func {
                 is_deeply($out, $t->{out}, "out")
                     or diag explain $out;
             };
-            $i++;
         }
+        $i++;
     };
 }
 
@@ -51,7 +55,7 @@ Test::Data::Unixish - Routines to test Data::Unixish
 
 =head1 VERSION
 
-version 1.26
+version 1.27
 
 =for Pod::Coverage .+
 

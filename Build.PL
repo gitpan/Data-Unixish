@@ -18,7 +18,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Data-Unixish",
-  "dist_version" => "1.26",
+  "dist_version" => "1.27",
   "license" => "perl",
   "module_name" => "Data::Unixish",
   "recommends" => {},
@@ -27,7 +27,10 @@ my %module_build_args = (
     "Log::Any" => 0,
     "Rinci" => "v1.1.0",
     "SHARYANTO::Package::Util" => 0,
+    "SHARYANTO::String::Util" => "0.24",
     "Syntax::Feature::EachOnArray" => 0,
+    "Text::ANSI::Util" => "0.06",
+    "Text::WideChar::Util" => "0.02",
     "Text::sprintfn" => 0,
     "Unixish" => "v1.0.1",
     "perl" => "5.010001"

@@ -8,7 +8,7 @@ use warnings;
 
 use Text::Wrap ();
 
-our $VERSION = '1.26'; # VERSION
+our $VERSION = '1.27'; # VERSION
 
 our %SPEC;
 
@@ -64,7 +64,7 @@ Data::Unixish::wrap - Wrap text
 
 =head1 VERSION
 
-version 1.26
+version 1.27
 
 =head1 SYNOPSIS
 

@@ -8,7 +8,7 @@ use Log::Any '$log';
 use POSIX qw(strftime);
 use Scalar::Util qw(looks_like_number blessed);
 
-our $VERSION = '1.26'; # VERSION
+our $VERSION = '1.27'; # VERSION
 
 our %SPEC;
 
@@ -70,7 +70,7 @@ Data::Unixish::date - Format date
 
 =head1 VERSION
 
-version 1.26
+version 1.27
 
 =head1 SYNOPSIS
 

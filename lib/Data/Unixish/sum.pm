@@ -7,7 +7,7 @@ use warnings;
 use Log::Any '$log';
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.26'; # VERSION
+our $VERSION = '1.27'; # VERSION
 
 our %SPEC;
 
@@ -46,7 +46,7 @@ Data::Unixish::sum - Sum numbers
 
 =head1 VERSION
 
-version 1.26
+version 1.27
 
 =head1 SYNOPSIS
 
