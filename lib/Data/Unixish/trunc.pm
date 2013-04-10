@@ -10,7 +10,7 @@ use Log::Any '$log';
 use Text::ANSI::Util qw(ta_trunc ta_mbtrunc);
 use Text::WideChar::Util qw(mbtrunc);
 
-our $VERSION = '1.27'; # VERSION
+our $VERSION = '1.28'; # VERSION
 
 our %SPEC;
 
@@ -81,13 +81,15 @@ sub trunc {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::trunc - Truncate string to a certain column width
 
 =head1 VERSION
 
-version 1.27
+version 1.28
 
 =head1 SYNOPSIS
 
@@ -118,9 +120,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
 
 =head1 FUNCTIONS
 

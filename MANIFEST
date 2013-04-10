@@ -10,6 +10,7 @@ dist.ini
 lib/Data/Unixish.pm
 lib/Data/Unixish/Apply.pm
 lib/Data/Unixish/CmdLine.pm
+lib/Data/Unixish/Util.pm
 lib/Data/Unixish/_pad.pm
 lib/Data/Unixish/bool.pm
 lib/Data/Unixish/cat.pm
@@ -20,6 +21,7 @@ lib/Data/Unixish/lc.pm
 lib/Data/Unixish/lcfirst.pm
 lib/Data/Unixish/lpad.pm
 lib/Data/Unixish/ltrim.pm
+lib/Data/Unixish/num.pm
 lib/Data/Unixish/pick.pm
 lib/Data/Unixish/rev.pm
 lib/Data/Unixish/rpad.pm
@@ -46,6 +48,7 @@ t/lc.t
 t/lcfirst.t
 t/lpad.t
 t/ltrim.t
+t/num.t
 t/pick.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t

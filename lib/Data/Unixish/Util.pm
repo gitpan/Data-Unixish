@@ -1,14 +1,9 @@
-package Data::Unixish::CmdLine;
-
-use 5.010;
-use strict;
-use warnings;
+package Data::Unixish::Util;
 
 our $VERSION = '1.28'; # VERSION
 
 1;
-# ABSTRACT: Run a dux function from the command-line
-
+#ABSTRACT: Utility routines
 
 __END__
 =pod
@@ -17,15 +12,11 @@ __END__
 
 =head1 NAME
 
-Data::Unixish::CmdLine - Run a dux function from the command-line
+Data::Unixish::Util - Utility routines
 
 =head1 VERSION
 
 version 1.28
-
-=head1 SYNOPSIS
-
- # for now, use dux script
 
 =head1 AUTHOR
 

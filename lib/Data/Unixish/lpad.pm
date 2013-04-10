@@ -9,7 +9,7 @@ use Log::Any '$log';
 
 use Data::Unixish::_pad;
 
-our $VERSION = '1.27'; # VERSION
+our $VERSION = '1.28'; # VERSION
 
 our %SPEC;
 
@@ -70,13 +70,15 @@ sub lpad {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::lpad - Pad text to the left until a certain column width
 
 =head1 VERSION
 
-version 1.27
+version 1.28
 
 =head1 SYNOPSIS
 
@@ -106,9 +108,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
 
 =head1 FUNCTIONS
 

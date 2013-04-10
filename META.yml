@@ -16,7 +16,9 @@ meta-spec:
 name: Data-Unixish
 requires:
   Log::Any: 0
+  Number::Format: 0
   Rinci: v1.1.0
+  SHARYANTO::Number::Util: 0.38
   SHARYANTO::Package::Util: 0
   SHARYANTO::String::Util: 0.24
   Syntax::Feature::EachOnArray: 0
@@ -28,4 +30,4 @@ requires:
 resources:
   homepage: http://metacpan.org/dist/Data-Unixish
   repository: http://github.com/sharyanto/perl-Data-Unixish
-version: 1.27
+version: 1.28

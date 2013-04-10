@@ -4,7 +4,7 @@ use 5.010001;
 use strict;
 use warnings;
 
-our $VERSION = '1.27'; # VERSION
+our $VERSION = '1.28'; # VERSION
 
 1;
 # ABSTRACT: Implementation for Unixish, a data transformation framework
@@ -13,21 +13,20 @@ our $VERSION = '1.27'; # VERSION
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-version 1.27
+version 1.28
 
 =head1 DESCRIPTION
 
 This distribution implements L<Unixish>, a data transformation framework
 inspired by Unix toolbox philosophy.
-
-
-This module has L<Rinci> metadata.
 
 =head1 SEE ALSO
 

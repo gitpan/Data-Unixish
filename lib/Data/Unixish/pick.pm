@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.27'; # VERSION
+our $VERSION = '1.28'; # VERSION
 
 our %SPEC;
 
@@ -54,13 +54,15 @@ sub pick {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::pick - Pick one or more random items
 
 =head1 VERSION
 
-version 1.27
+version 1.28
 
 =head1 SYNOPSIS
 
@@ -90,9 +92,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
 
 =head1 FUNCTIONS
 

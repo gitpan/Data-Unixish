@@ -18,14 +18,16 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Data-Unixish",
-  "dist_version" => "1.27",
+  "dist_version" => "1.28",
   "license" => "perl",
   "module_name" => "Data::Unixish",
   "recommends" => {},
   "recursive_test_files" => 1,
   "requires" => {
     "Log::Any" => 0,
+    "Number::Format" => 0,
     "Rinci" => "v1.1.0",
+    "SHARYANTO::Number::Util" => "0.38",
     "SHARYANTO::Package::Util" => 0,
     "SHARYANTO::String::Util" => "0.24",
     "Syntax::Feature::EachOnArray" => 0,

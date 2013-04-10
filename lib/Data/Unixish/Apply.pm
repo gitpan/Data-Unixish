@@ -8,7 +8,7 @@ use Log::Any '$log';
 use SHARYANTO::Package::Util qw(package_exists);
 use Module::Load;
 
-our $VERSION = '1.27'; # VERSION
+our $VERSION = '1.28'; # VERSION
 
 our %SPEC;
 
@@ -108,13 +108,15 @@ sub apply {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::Apply - Apply one or more dux functions to data
 
 =head1 VERSION
 
-version 1.27
+version 1.28
 
 =head1 SYNOPSIS
 
@@ -125,9 +127,6 @@ version 1.27
  ); # will result in [qw/0001 0002 0004 0006 0007 0010/],
 
 =head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
 
 =head1 AUTHOR
 

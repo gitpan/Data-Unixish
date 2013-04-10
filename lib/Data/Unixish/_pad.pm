@@ -11,7 +11,7 @@ use SHARYANTO::String::Util qw(pad);
 use Text::ANSI::Util qw(ta_pad ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
 
-our $VERSION = '1.27'; # VERSION
+our $VERSION = '1.28'; # VERSION
 
 sub _pad {
     my ($which, %args) = @_;
@@ -49,13 +49,15 @@ sub _pad {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::_pad - _pad
 
 =head1 VERSION
 
-version 1.27
+version 1.28
 
 =head1 AUTHOR
 
@@ -69,9 +71,6 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =head1 DESCRIPTION
-
-
-This module has L<Rinci> metadata.
 
 =head1 FUNCTIONS
 

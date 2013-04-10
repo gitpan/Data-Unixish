@@ -1,0 +1,263 @@
+package Data::Unixish::num;
+
+use 5.010;
+use locale;
+use strict;
+use syntax 'each_on_array'; # to support perl < 5.12
+use warnings;
+use Log::Any '$log';
+
+use Number::Format;
+use POSIX qw(locale_h);
+use Scalar::Util 'looks_like_number';
+use SHARYANTO::Number::Util qw(format_metric);
+
+our $VERSION = '1.28'; # VERSION
+
+our %SPEC;
+
+my %styles = (
+    general    => 'General formatting, e.g. 1, 2.345',
+    fixed      => 'Fixed number of decimal digits, e.g. 1.00, default decimal digits=2',
+    scientific => 'Scientific notation, e.g. 1.23e+21',
+    kilo       => 'Use K/M/G/etc suffix with base-2, e.g. 1.2M',
+    kibi       => 'Use Ki/Mi/GiB/etc suffix with base-10 [1000], e.g. 1.2Mi',
+    # XXX percent
+    # XXX fraction
+    # XXX currency?
+);
+
+# XXX negative number -X or (X)
+# XXX colorize negative number?
+# XXX leading zeros/spaces
+
+$SPEC{num} = {
+    v => 1.1,
+    summary => 'Format number',
+    description => <<'_',
+
+Observe locale environment variable settings.
+
+Undef and non-numbers are ignored.
+
+_
+    args => {
+        in  => {schema=>'any'},
+        out => {schema=>'any'},
+        style => {
+            schema=>['str*', in=>[keys %styles], default=>'general'],
+            cmdline_aliases => { s=>{} },
+            description => "Available styles:\n\n".
+                join("", map {" * $_  ($styles{$_}\n"} sort keys %styles),
+        },
+        decimal_digits => {
+            summary => 'Number of digits to the right of decimal point',
+        },
+        thousands_sep => {
+            summary => 'Use a custom thousand separator character',
+            description => <<'_',
+
+Default is from locale (e.g. dot "." for en_US, etc).
+
+Use empty string "" if you want to disable printing thousands separator.
+
+_
+            schema => ['str*'],
+        },
+        prefix => {
+            summary => 'Add some string at the beginning (e.g. for currency)',
+            schema => ['str*'],
+        },
+        suffix => {
+            summary => 'Add some string at the end (e.g. for unit)',
+            schema => ['str*'],
+        },
+    },
+    tags => [qw/format/],
+};
+sub num {
+    my %args = @_;
+    my ($in, $out) = ($args{in}, $args{out});
+    my $style = $args{style} // 'general';
+    $style = 'general' if !$styles{$style};
+
+    my $prefix  = $args{prefix} // "";
+    my $suffix  = $args{suffix} // "";
+    my $decdigs = $args{decimal_digits} //
+        ($style eq 'kilo' || $style eq 'kibi' ? 1 : 2);
+
+    my $orig_locale = setlocale(LC_ALL);
+    if ($ENV{LC_NUMERIC}) {
+        setlocale(LC_NUMERIC, $ENV{LC_NUMERIC});
+    } elsif ($ENV{LC_ALL}) {
+        setlocale(LC_ALL, $ENV{LC_ALL});
+    } elsif ($ENV{LANG}) {
+        setlocale(LC_ALL, $ENV{LANG});
+    }
+
+    my %nfargs;
+    if (defined $args{thousands_sep}) {
+        $nfargs{THOUSANDS_SEP} = $args{thousands_sep};
+    }
+    my $nf = Number::Format->new(%nfargs);
+
+    while (my ($index, $item) = each @$in) {
+        {
+            last if !defined($item) || !looks_like_number($item);
+            if ($style eq 'fixed') {
+                $item = $nf->format_number($item, $decdigs, $decdigs);
+            } elsif ($style eq 'scientific') {
+                $item = sprintf("%.${decdigs}e", $item);
+            } elsif ($style eq 'kilo') {
+                my $res = format_metric(
+                    $item, {base=>2, return_array=>1});
+                $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
+                    $res->[1];
+            } elsif ($style eq 'kibi') {
+                my $res = format_metric(
+                    $item, {base=>10, return_array=>1});
+                $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
+                    $res->[1];
+            } else {
+                # general
+                $item = $nf->format_number($item);
+            }
+
+            $item = "$prefix$item$suffix";
+        }
+        push @$out, $item;
+    }
+
+    setlocale(LC_ALL, $orig_locale);
+
+    [200, "OK"];
+}
+
+1;
+# ABSTRACT: Format number
+
+
+__END__
+=pod
+
+=encoding utf-8
+
+=head1 NAME
+
+Data::Unixish::num - Format number
+
+=head1 VERSION
+
+version 1.28
+
+=head1 SYNOPSIS
+
+In Perl:
+
+ use Data::Unixish::num;
+ my $in  = [0, 10, -2, 34.5 [2], {}, "", undef];
+ my $out = [];
+ Data::Unixish::num::num(in=>$in, out=>$out, style=>"fixed");
+ # $out = ["0.00", "10.00", "-2.00", "34.50", [2], {}, "", undef];
+
+In command line:
+
+ % echo -e "1\n-2\n" | dux num -s fixed --format=text-simple
+ 1.00
+ -2.00
+
+=head1 AUTHOR
+
+Steven Haryanto <stevenharyanto@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2013 by Steven Haryanto.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=head1 DESCRIPTION
+
+=head1 FUNCTIONS
+
+
+None are exported by default, but they are exportable.
+
+=head2 num(%args) -> [status, msg, result, meta]
+
+Format number.
+
+Observe locale environment variable settings.
+
+Undef and non-numbers are ignored.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<decimal_digits> => I<any>
+
+Number of digits to the right of decimal point.
+
+=item * B<in> => I<any>
+
+=item * B<out> => I<any>
+
+=item * B<prefix> => I<str>
+
+Add some string at the beginning (e.g. for currency).
+
+=item * B<style> => I<str> (default: "general")
+
+Available styles:
+
+=over
+
+=item *
+
+fixed  (Fixed number of decimal digits, e.g. 1.00, default decimal digits=2
+
+
+=item *
+
+general  (General formatting, e.g. 1, 2.345
+
+
+=item *
+
+kibi  (Use Ki/Mi/GiB/etc suffix with base-10 [1000], e.g. 1.2Mi
+
+
+=item *
+
+kilo  (Use K/M/G/etc suffix with base-2, e.g. 1.2M
+
+
+=item *
+
+scientific  (Scientific notation, e.g. 1.23e+21
+
+
+=back
+
+=item * B<suffix> => I<str>
+
+Add some string at the end (e.g. for unit).
+
+=item * B<thousands_sep> => I<str>
+
+Use a custom thousand separator character.
+
+Default is from locale (e.g. dot "." for en_US, etc).
+
+Use empty string "" if you want to disable printing thousands separator.
+
+=back
+
+Return value:
+
+Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+
+=cut
+
