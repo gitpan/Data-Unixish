@@ -10,8 +10,10 @@ dist.ini
 lib/Data/Unixish.pm
 lib/Data/Unixish/Apply.pm
 lib/Data/Unixish/CmdLine.pm
+lib/Data/Unixish/List.pm
 lib/Data/Unixish/Util.pm
 lib/Data/Unixish/_pad.pm
+lib/Data/Unixish/avg.pm
 lib/Data/Unixish/bool.pm
 lib/Data/Unixish/cat.pm
 lib/Data/Unixish/centerpad.pm
@@ -39,6 +41,9 @@ lib/Data/Unixish/ucfirst.pm
 lib/Data/Unixish/wrap.pm
 lib/Test/Data/Unixish.pm
 t/00-compile.t
+t/Apply.t
+t/List.t
+t/avg.t
 t/bool.t
 t/cat.t
 t/centerpad.t

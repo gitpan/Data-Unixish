@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -62,20 +62,18 @@ Data::Unixish::pick - Pick one or more random items
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::pick;
- my $in  = [1..100];
- my $out = [];
- Data::Unixish::pick::pick(in=>$in, out=>$out); # $out = [73]
+ use Data::Unixish::List qw(dux);
+ my @pick = dux([pick => {items=>2}], 1..100); # => (52, 33)
 
 In command line:
 
- % seq 1 100 | dux pick -n 3
+ % seq 1 100 | dux pick -n 4
  .-------------------.
  | 18 | 22 |  2 | 24 |
  '----+----+----+----'

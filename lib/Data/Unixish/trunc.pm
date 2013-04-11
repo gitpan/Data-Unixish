@@ -10,7 +10,7 @@ use Log::Any '$log';
 use Text::ANSI::Util qw(ta_trunc ta_mbtrunc);
 use Text::WideChar::Util qw(mbtrunc);
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -89,17 +89,14 @@ Data::Unixish::trunc - Truncate string to a certain column width
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::trunc;
- my $in  = ["123", "1234", "12345"];
- my $out = [];
- Data::Unixish::trunc::trunc(in=>$in, out=>$out, width=>4);
- # $out = ["123", "1234", "1234"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux([trunc => {width=>4}], "123", "1234", "12345"); # => ("123", "1234", "1234")
 
 In command line:
 

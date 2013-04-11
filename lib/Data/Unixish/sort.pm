@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -105,16 +105,16 @@ Data::Unixish::sort - Sort items
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::sort;
- my $in  = [4, 7, 2, 5];
- my $out = [];
- Data::Unixish::sort::sort(in=>$in, out=>$out); # $out = [2, 4, 5, 7]
+ use Data::Unixish::List qw(dux);
+ my @res;
+ @res = dux('sort', 4, 7, 2, 5); # => (2, 4, 5, 7)
+ @res = dux([sort => {reverse=>1}], 4, 7, 2, 5); # => (7, 5, 4, 2)
 
 In command line:
 

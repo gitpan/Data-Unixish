@@ -7,7 +7,7 @@ use warnings;
 use Log::Any '$log';
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -48,16 +48,14 @@ Data::Unixish::sum - Sum numbers
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::sum;
- my $in  = [1, 2, 3];
- my $out = [];
- Data::Unixish::sum::sum(in=>$in, out=>$out); # $out = [6]
+ use Data::Unixish::List qw(dux);
+ my $sum = dux('sum', 1, 2, 3, 4, 5); # => 15
 
 In command line:
 

@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -48,16 +48,14 @@ Data::Unixish::rev - Reverse items
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::rev;
- my $in  = [1, 2, 3];
- my $out = [];
- Data::Unixish::rev::rev(in=>$in, out=>$out); # $out = [3, 2, 1]
+ use Data::Unixish::List qw(dux);
+ my @rev = dux('rev', 1, 2, 3); # => (3, 2, 1)
 
 In command line:
 

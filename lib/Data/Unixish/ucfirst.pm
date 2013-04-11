@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -52,17 +52,14 @@ Data::Unixish::ucfirst - Convert first character of text to uppercase
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::ucfirst;
- my $in  = ["steven"];
- my $out = [];
- Data::Unixish::ucfirst::ucfirst(in=>$in, out=>$out);
- # $out = ["Steven"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux('ucfirst', 'steven', 'de Java'); # => ('Steven', 'De Java')
 
 In command line:
 

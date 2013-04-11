@@ -7,7 +7,7 @@ use utf8;
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -120,17 +120,15 @@ Data::Unixish::bool - Format bool
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::bool;
- my $in  = [0, "one", 2, ""];
- my $out = [];
- Data::Unixish::bool::bool(in=>$in, out=>$out, style=>"check_cross");
- # $out = ["✕","✓","✓","✕"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux([bool => {style=>"check_cross"}], [0, "one", 2, ""])
+ # => ("✕","✓","✓","✕")
 
 In command line:
 

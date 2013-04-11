@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -64,17 +64,15 @@ Data::Unixish::trim - Strip whitespace at the beginning and end of each line of 
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::trim;
- my $in  = ["x", "   a   ", "  b  \n   c  \n", undef, [" d "]];
- my $out = [];
- Data::Unixish::trim::trim(in=>$in, out=>$out);
- # $out = ["x", "a", "b\nc\n", undef, [" d "]]
+ use Data::Unixish::List qw(dux);
+ dux('trim', "x", "   a   ", "  b  \n   c  \n", undef, [" d "]);
+ # => ("x", "a", "b\nc\n", undef, [" d "])
 
 In command line:
 

@@ -4,7 +4,7 @@ use 5.010;
 use strict;
 use warnings;
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 1;
 # ABSTRACT: Run a dux function from the command-line
@@ -21,7 +21,7 @@ Data::Unixish::CmdLine - Run a dux function from the command-line
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 

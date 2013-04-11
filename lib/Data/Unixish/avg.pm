@@ -1,53 +1,44 @@
-package Data::Unixish::rtrim;
+package Data::Unixish::avg;
 
 use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-#use Log::Any '$log';
+use Log::Any '$log';
+use Scalar::Util 'looks_like_number';
 
 our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
-$SPEC{rtrim} = {
+$SPEC{avg} = {
     v => 1.1,
-    summary => 'Strip whitespace at the end of each line of text',
-    description => <<'_',
-
-_
+    summary => 'Average numbers',
     args => {
         in  => {schema=>'any'},
         out => {schema=>'any'},
-        strip_newline => {
-            summary => 'Whether to strip newlines at the end of text',
-            schema =>[bool => {default=>0}],
-            cmdline_aliases => { nl=>{} },
-        },
     },
-    tags => [qw/text/],
+    tags => [qw/group/],
 };
-sub rtrim {
+sub avg {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $nl  = $args{nl} // 0;
 
+    my $sum = 0;
+    my $n = 0;
     while (my ($index, $item) = each @$in) {
-        my @lt;
-        if (defined($item) && !ref($item)) {
-            $item =~ s/[\r\n]+\z// if $nl;
-            $item =~ s/[ \t]+$//mg;
-        }
-
-        push @$out, $item;
+        $n++;
+        $sum += $item if looks_like_number($item);
     }
 
+    my $avg = $n ? $sum/$n : 0;
+
+    push @$out, $avg;
     [200, "OK"];
 }
 
 1;
-# ABSTRACT: Strip whitespace at the end of each line of text
-
+# ABSTRACT: Average numbers
 
 
 __END__
@@ -57,7 +48,7 @@ __END__
 
 =head1 NAME
 
-Data::Unixish::rtrim - Strip whitespace at the end of each line of text
+Data::Unixish::avg - Average numbers
 
 =head1 VERSION
 
@@ -68,14 +59,14 @@ version 1.29
 In Perl:
 
  use Data::Unixish::List qw(dux);
- my @res = dux('rtrim', "x", "a   ", "b \nc  \n", undef, ["d "]);
- # => ("x", "a", "b\nc\n", undef, ["d "])
+ my $avg = dux('avg', 1, 2, 3, 4, 5); # => 3
 
 In command line:
 
- % echo -e "x\na  " | dux rtrim
- x
- a
+ % seq 0 100 | dux avg
+ .----.
+ | 50 |
+ '----'
 
 =head1 AUTHOR
 
@@ -95,9 +86,9 @@ the same terms as the Perl 5 programming language system itself.
 
 None are exported by default, but they are exportable.
 
-=head2 rtrim(%args) -> [status, msg, result, meta]
+=head2 avg(%args) -> [status, msg, result, meta]
 
-Strip whitespace at the end of each line of text.
+Average numbers.
 
 Arguments ('*' denotes required arguments):
 
@@ -106,10 +97,6 @@ Arguments ('*' denotes required arguments):
 =item * B<in> => I<any>
 
 =item * B<out> => I<any>
-
-=item * B<strip_newline> => I<bool> (default: 0)
-
-Whether to strip newlines at the end of text.
 
 =back
 

@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -52,17 +52,14 @@ Data::Unixish::lcfirst - Convert first character of text to lowercase
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::lcfirst;
- my $in  = ["STEVEN"];
- my $out = [];
- Data::Unixish::lcfirst::lcfirst(in=>$in, out=>$out);
- # $out = ["sTEVEN"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux('lcfirst', 'Steven', 'STEVEN'); # => ('steven', 'sTEVEN')
 
 In command line:
 

@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -46,16 +46,14 @@ Data::Unixish::cat - Pass input unchanged
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::cat;
- my $in  = [1, 2, 3];
- my $out = [];
- Data::Unixish::cat::cat(in=>$in, out=>$out); # $out = [1, 2, 3]
+ use Data::Unixish::List qw(dux);
+ my @res = dux("cat", 1, 2, 3, 4); # => (1, 2, 3, 4)
 
 In command line:
 

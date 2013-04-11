@@ -11,7 +11,7 @@ use SHARYANTO::String::Util qw(pad);
 use Text::ANSI::Util qw(ta_pad ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 sub _pad {
     my ($which, %args) = @_;
@@ -19,7 +19,7 @@ sub _pad {
     my $w     = $args{width};
     my $ansi  = $args{ansi};
     my $mb    = $args{mb};
-    my $char  = $args{padchar} // " ";
+    my $char  = $args{char} // " ";
     my $trunc = $args{trunc};
 
     while (my ($index, $item) = each @$in) {
@@ -57,7 +57,7 @@ Data::Unixish::_pad - _pad
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 AUTHOR
 

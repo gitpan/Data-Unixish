@@ -6,9 +6,11 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
+use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
+use Text::WideChar::Util qw(mbwrap);
 use Text::Wrap ();
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -28,6 +30,14 @@ _
             schema =>[int => {default=>80, min=>1}],
             cmdline_aliases => { c=>{} },
         },
+        ansi => {
+            summary => 'Whether to handle ANSI escape codes',
+            schema => ['bool', default => 0],
+        },
+        mb => {
+            summary => 'Whether to handle wide characters',
+            schema => ['bool', default => 0],
+        },
     },
     tags => [qw/text/],
 };
@@ -35,15 +45,26 @@ sub wrap {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
     my $cols = $args{columns} // 80;
+    my $ansi  = $args{ansi};
+    my $mb    = $args{mb};
 
     local $Text::Wrap::columns = $cols;
 
     while (my ($index, $item) = each @$in) {
-        my @lt;
-        if (defined($item) && !ref($item)) {
-            $item = Text::Wrap::wrap("", "", $item);
+        {
+            last if !defined($item) || ref($item);
+            if ($ansi) {
+                if ($mb) {
+                    $item = ta_mbwrap($item, $cols);
+                } else {
+                    $item = ta_wrap  ($item, $cols);
+                }
+            } elsif ($mb) {
+                $item = mbwrap($item, $cols);
+            } else {
+                $item = Text::Wrap::wrap("", "", $item);
+            }
         }
-
         push @$out, $item;
     }
 
@@ -66,21 +87,18 @@ Data::Unixish::wrap - Wrap text
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::wrap;
- my $in  = ["xxxx xxxx xxxx xxxx xxxx"];
- my $out = [];
- Data::Unixish::wrap::wrap(in=>$in, out=>$out, columns => 20);
- # $out = ["xxxx xxxx xxxx xxxx\nxxxx"]
+ use Data::Unixish::List qw(dux);
+ $wrapped = dux([wrap => {columns=>20}], "xxxx xxxx xxxx xxxx xxxx"); # "xxxx xxxx xxxx xxxx\nxxxx"
 
 In command line:
 
- % echo -e "xxxx xxxx xxxx xxxx xxxx" | dux rtrim -c 20
+ % echo -e "xxxx xxxx xxxx xxxx xxxx" | dux wrap -c 20
  xxxx xxxx xxxx xxxx
  xxxx
 
@@ -112,11 +130,19 @@ Arguments ('*' denotes required arguments):
 
 =over 4
 
+=item * B<ansi> => I<bool> (default: 0)
+
+Whether to handle ANSI escape codes.
+
 =item * B<columns> => I<int> (default: 80)
 
 Target column width.
 
 =item * B<in> => I<any>
+
+=item * B<mb> => I<bool> (default: 0)
+
+Whether to handle wide characters.
 
 =item * B<out> => I<any>
 

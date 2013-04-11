@@ -12,7 +12,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use SHARYANTO::Number::Util qw(format_metric);
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -148,23 +148,21 @@ Data::Unixish::num - Format number
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::num;
- my $in  = [0, 10, -2, 34.5 [2], {}, "", undef];
- my $out = [];
- Data::Unixish::num::num(in=>$in, out=>$out, style=>"fixed");
- # $out = ["0.00", "10.00", "-2.00", "34.50", [2], {}, "", undef];
+ use Data::Unixish::List qw(dux);
+ my @res = dux([num => {style=>"fixed"}], 0, 10, -2, 34.5, [2], {}, "", undef);
+ # => ("0.00", "10.00", "-2.00", "34.50", [2], {}, "", undef)
 
 In command line:
 
- % echo -e "1\n-2\n" | dux num -s fixed --format=text-simple
- 1.00
- -2.00
+ % echo -e "1\n-2\n" | LANG=id_ID dux num -s fixed --format=text-simple
+ 1,00
+ -2,00
 
 =head1 AUTHOR
 

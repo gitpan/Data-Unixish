@@ -4,7 +4,7 @@ use 5.010001;
 use strict;
 use warnings;
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 1;
 # ABSTRACT: Implementation for Unixish, a data transformation framework
@@ -21,7 +21,7 @@ Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 DESCRIPTION
 

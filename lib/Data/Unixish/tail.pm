@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -59,16 +59,16 @@ Data::Unixish::tail - Output the last items of data
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::tail;
- my $in  = [1..100];
- my $out = [];
- Data::Unixish::tail::tail(in=>$in, out=>$out); # $out = [91..100]
+ use Data::Unixish::List qw(dux);
+ my @res;
+ @res = dux(tail => (1..100)); # => (91..100)
+ @res = dux([tail => {items=>3}], (1..100)); # => (98, 99, 100)
 
 In command line:
 

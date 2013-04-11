@@ -10,7 +10,7 @@ use Log::Any '$log';
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -100,17 +100,15 @@ Data::Unixish::sprintf - Apply sprintf() on input
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::sprintf;
- my $in  = [0, 1, [2], {}, "", undef];
- my $out = [];
- Data::Unixish::sprintf::sprintf(in=>$in, out=>$out, format=>"%.1f");
- # $out = ["0.0", "1.0", "2.0", {}, "", undef];
+ use Data::Unixish::List qw(dux);
+ my @res = dux([sprintf => {format=>"%.1f"}], 0, 1, [2], {}, "", undef);
+ # => ("0.0", "1.0", "2.0", {}, "", undef)
 
 In command line:
 

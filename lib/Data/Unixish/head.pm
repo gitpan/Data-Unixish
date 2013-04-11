@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 use Log::Any '$log';
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -53,16 +53,16 @@ Data::Unixish::head - Output the first items of data
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
  use Data::Unixish::head;
- my $in  = [1..100];
- my $out = [];
- Data::Unixish::head::head(in=>$in, out=>$out); # $out = [1..10]
+ my @res;
+ @res = dux("head", 1..100); # => (1..10)
+ @res = dux([head => {items=>3}], 1..100); # => (1, 2, 3)
 
 In command line:
 

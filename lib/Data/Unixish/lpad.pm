@@ -9,7 +9,7 @@ use Log::Any '$log';
 
 use Data::Unixish::_pad;
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -78,17 +78,15 @@ Data::Unixish::lpad - Pad text to the left until a certain column width
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::lpad;
- my $in  = ["123", "1234"];
- my $out = [];
- Data::Unixish::lpad::lpad(in=>$in, out=>$out, width=>6);
- # $out = ["   123", "  1234"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux([lpad => {width=>6}], "123", "1234");
+ # => ("   123", "  1234")
 
 In command line:
 

@@ -11,7 +11,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use Text::sprintfn ();
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -104,17 +104,15 @@ Data::Unixish::sprintfn - Like sprintf, but use sprintfn() from Text::sprintfn
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::sprintfn;
- my $in  = [{n=>1}, {n=>2}, "", undef];
- my $out = [];
- Data::Unixish::sprintfn::sprintfn(in=>$in, out=>$out, format=>"%(n).1f");
- # $out = ["1.0", "2.0", "", undef];
+ use Data::Unixish::List qw(dux);
+ my @res = dux([sprintfn => {format=>"%(n).1f"}], {n=>1}, {n=>2}, "", undef);
+ # => ("1.0", "2.0", "", undef)
 
 =head1 AUTHOR
 

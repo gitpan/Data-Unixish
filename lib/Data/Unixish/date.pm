@@ -8,7 +8,7 @@ use Log::Any '$log';
 use POSIX qw(strftime);
 use Scalar::Util qw(looks_like_number blessed);
 
-our $VERSION = '1.28'; # VERSION
+our $VERSION = '1.29'; # VERSION
 
 our %SPEC;
 
@@ -72,17 +72,15 @@ Data::Unixish::date - Format date
 
 =head1 VERSION
 
-version 1.28
+version 1.29
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::date;
- my $in  = [DateTime->new(year=>2012, month=>9, day=>6), 1290380232, "foo"];
- my $out = [];
- Data::Unixish::date::date(in=>$in, out=>$out, format=>"%Y-%m-%d");
- # $out = ["2012-09-06","2010-11-22","foo"]
+ use Data::Unixish::List qw(dux);
+ my @res = dux([date => {format=>"%Y-%m-%d"}], DateTime->new(year=>2012, month=>9, day=>6), 1290380232, "foo");
+ # => ("2012-09-06","2010-11-22","foo")
 
 In command line:
 
