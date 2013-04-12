@@ -4,9 +4,11 @@ use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
-our $VERSION = '1.29'; # VERSION
+use Data::Unixish::Util qw(%common_args);
+
+our $VERSION = '1.30'; # VERSION
 
 our %SPEC;
 
@@ -20,8 +22,7 @@ numerically.
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         numeric => {
             summary => 'Whether to sort numerically',
             schema=>[bool => {default=>0}],
@@ -105,7 +106,7 @@ Data::Unixish::sort - Sort items
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 
@@ -158,11 +159,15 @@ Whether to ignore case.
 
 =item * B<in> => I<any>
 
+Input stream (e.g. array or filehandle).
+
 =item * B<numeric> => I<bool> (default: 0)
 
 Whether to sort numerically.
 
 =item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
 
 =item * B<random> => I<bool> (default: 0)
 

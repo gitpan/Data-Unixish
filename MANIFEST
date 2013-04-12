@@ -38,6 +38,7 @@ lib/Data/Unixish/trim.pm
 lib/Data/Unixish/trunc.pm
 lib/Data/Unixish/uc.pm
 lib/Data/Unixish/ucfirst.pm
+lib/Data/Unixish/wc.pm
 lib/Data/Unixish/wrap.pm
 lib/Test/Data/Unixish.pm
 t/00-compile.t
@@ -71,5 +72,6 @@ t/trim.t
 t/trunc.t
 t/uc.t
 t/ucfirst.t
+t/wc.t
 t/wrap.t
 weaver.ini

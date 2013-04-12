@@ -5,14 +5,15 @@ use locale;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
+use Data::Unixish::Util qw(%common_args);
 use Number::Format;
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use SHARYANTO::Number::Util qw(format_metric);
 
-our $VERSION = '1.29'; # VERSION
+our $VERSION = '1.30'; # VERSION
 
 our %SPEC;
 
@@ -42,8 +43,7 @@ Undef and non-numbers are ignored.
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         style => {
             schema=>['str*', in=>[keys %styles], default=>'general'],
             cmdline_aliases => { s=>{} },
@@ -148,7 +148,7 @@ Data::Unixish::num - Format number
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 
@@ -200,7 +200,11 @@ Number of digits to the right of decimal point.
 
 =item * B<in> => I<any>
 
+Input stream (e.g. array or filehandle).
+
 =item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
 
 =item * B<prefix> => I<str>
 

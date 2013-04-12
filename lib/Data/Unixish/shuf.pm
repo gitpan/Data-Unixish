@@ -4,11 +4,12 @@ use 5.010;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
+use Data::Unixish::Util qw(%common_args);
 use List::Util qw(shuffle);
 
-our $VERSION = '1.29'; # VERSION
+our $VERSION = '1.30'; # VERSION
 
 our %SPEC;
 
@@ -16,8 +17,7 @@ $SPEC{shuf} = {
     v => 1.1,
     summary => 'Shuffle items',
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
     },
     tags => [qw/ordering/],
 };
@@ -50,7 +50,7 @@ Data::Unixish::shuf - Shuffle items
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 
@@ -94,7 +94,11 @@ Arguments ('*' denotes required arguments):
 
 =item * B<in> => I<any>
 
+Input stream (e.g. array or filehandle).
+
 =item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
 
 =back
 

@@ -5,9 +5,11 @@ use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use utf8;
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
-our $VERSION = '1.29'; # VERSION
+use Data::Unixish::Util qw(%common_args);
+
+our $VERSION = '1.30'; # VERSION
 
 our %SPEC;
 
@@ -49,8 +51,7 @@ $SPEC{bool} = {
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         style => {
             schema=>[str => in=>[keys %styles], default=>'one_zero'],
             description => "Available styles:\n\n".
@@ -120,7 +121,7 @@ Data::Unixish::bool - Format bool
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 
@@ -170,6 +171,8 @@ Instead of style, you can also specify character for true value.
 
 =item * B<in> => I<any>
 
+Input stream (e.g. array or filehandle).
+
 =item * B<notion> => I<str> (default: "perl")
 
 What notion to use to determine true/false.
@@ -182,6 +185,8 @@ empty hash is considered false.
 TODO: add Ruby, Python, PHP, JavaScript, etc notion.
 
 =item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
 
 =item * B<style> => I<str> (default: "one_zero")
 

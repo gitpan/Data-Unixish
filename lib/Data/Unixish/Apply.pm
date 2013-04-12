@@ -3,12 +3,13 @@ package Data::Unixish::Apply;
 use 5.010;
 use strict;
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
-use SHARYANTO::Package::Util qw(package_exists);
+use Data::Unixish::Util qw(%common_args);
 use Module::Load;
+use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.29'; # VERSION
+our $VERSION = '1.30'; # VERSION
 
 our %SPEC;
 
@@ -116,7 +117,7 @@ Data::Unixish::Apply - Apply one or more dux functions to data
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 

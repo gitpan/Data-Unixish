@@ -5,13 +5,13 @@ use locale;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
 use SHARYANTO::String::Util qw(pad);
 use Text::ANSI::Util qw(ta_pad ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
 
-our $VERSION = '1.29'; # VERSION
+our $VERSION = '1.30'; # VERSION
 
 sub _pad {
     my ($which, %args) = @_;
@@ -57,7 +57,7 @@ Data::Unixish::_pad - _pad
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 AUTHOR
 

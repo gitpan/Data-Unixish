@@ -5,10 +5,10 @@ use strict;
 use warnings;
 #use Log::Any '$log';
 
-use SHARYANTO::Package::Util qw(package_exists);
 use Module::Load;
+use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.29'; # VERSION
+our $VERSION = '1.30'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -55,7 +55,7 @@ Data::Unixish::List - Apply dux function to a list (and return the result as a l
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 

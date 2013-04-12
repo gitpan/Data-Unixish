@@ -6,7 +6,9 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-our $VERSION = '1.29'; # VERSION
+use Data::Unixish::Util qw(%common_args);
+
+our $VERSION = '1.30'; # VERSION
 
 our %SPEC;
 
@@ -17,8 +19,7 @@ $SPEC{lcfirst} = {
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
     },
     tags => [qw/text/],
 };
@@ -52,7 +53,7 @@ Data::Unixish::lcfirst - Convert first character of text to lowercase
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 
@@ -94,7 +95,11 @@ Arguments ('*' denotes required arguments):
 
 =item * B<in> => I<any>
 
+Input stream (e.g. array or filehandle).
+
 =item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
 
 =back
 

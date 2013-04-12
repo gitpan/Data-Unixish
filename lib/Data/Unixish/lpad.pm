@@ -5,11 +5,12 @@ use locale;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
-use Log::Any '$log';
+#use Log::Any '$log';
 
 use Data::Unixish::_pad;
+use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.29'; # VERSION
+our $VERSION = '1.30'; # VERSION
 
 our %SPEC;
 
@@ -26,8 +27,7 @@ you can turn of `mb` option even when your text contains wide characters.
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         width => {
             schema => ['int*', min => 0],
             req => 1,
@@ -78,7 +78,7 @@ Data::Unixish::lpad - Pad text to the left until a certain column width
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 
@@ -138,11 +138,15 @@ Character should have column width of 1. The default is space (ASCII 32).
 
 =item * B<in> => I<any>
 
+Input stream (e.g. array or filehandle).
+
 =item * B<mb> => I<bool> (default: 0)
 
 Whether to handle wide characters.
 
 =item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
 
 =item * B<trunc> => I<bool> (default: 0)
 

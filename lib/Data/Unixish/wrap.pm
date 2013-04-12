@@ -6,11 +6,12 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
+use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
 use Text::WideChar::Util qw(mbwrap);
 use Text::Wrap ();
 
-our $VERSION = '1.29'; # VERSION
+our $VERSION = '1.30'; # VERSION
 
 our %SPEC;
 
@@ -23,8 +24,7 @@ Currently implemented using Text::Wrap standard Perl module.
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         columns => {
             summary => 'Target column width',
             schema =>[int => {default=>80, min=>1}],
@@ -87,7 +87,7 @@ Data::Unixish::wrap - Wrap text
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 
@@ -140,11 +140,15 @@ Target column width.
 
 =item * B<in> => I<any>
 
+Input stream (e.g. array or filehandle).
+
 =item * B<mb> => I<bool> (default: 0)
 
 Whether to handle wide characters.
 
 =item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
 
 =back
 

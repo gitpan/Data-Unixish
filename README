@@ -3,7 +3,7 @@ NAME
     framework
 
 VERSION
-    version 1.29
+    version 1.30
 
 DESCRIPTION
     This distribution implements Unixish, a data transformation framework

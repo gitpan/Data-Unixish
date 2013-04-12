@@ -7,7 +7,7 @@ use warnings;
 use Test::More 0.96;
 use Module::Load;
 
-our $VERSION = '1.29'; # VERSION
+our $VERSION = '1.30'; # VERSION
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -57,7 +57,7 @@ Test::Data::Unixish - Routines to test Data::Unixish
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =for Pod::Coverage .+
 

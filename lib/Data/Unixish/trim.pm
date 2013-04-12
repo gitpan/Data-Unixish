@@ -6,7 +6,9 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-our $VERSION = '1.29'; # VERSION
+our $VERSION = '1.30'; # VERSION
+
+use Data::Unixish::Util qw(%common_args);
 
 our %SPEC;
 
@@ -17,8 +19,7 @@ $SPEC{trim} = {
 
 _
     args => {
-        in  => {schema=>'any'},
-        out => {schema=>'any'},
+        %common_args,
         strip_newline => {
             summary => 'Whether to strip newlines at the '.
                 'beginning and end of text',
@@ -64,7 +65,7 @@ Data::Unixish::trim - Strip whitespace at the beginning and end of each line of 
 
 =head1 VERSION
 
-version 1.29
+version 1.30
 
 =head1 SYNOPSIS
 
@@ -108,7 +109,11 @@ Arguments ('*' denotes required arguments):
 
 =item * B<in> => I<any>
 
+Input stream (e.g. array or filehandle).
+
 =item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
 
 =item * B<strip_newline> => I<bool> (default: 0)
 
