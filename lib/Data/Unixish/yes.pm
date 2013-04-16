@@ -1,4 +1,4 @@
-package Data::Unixish::ltrim;
+package Data::Unixish::yes;
 
 use 5.010;
 use strict;
@@ -7,47 +7,45 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-
 our $VERSION = '1.31'; # VERSION
 
 our %SPEC;
 
-$SPEC{ltrim} = {
+$SPEC{yes} = {
     v => 1.1,
-    summary => 'Strip whitespace at the beginning of each line of text',
+    summary => 'Output a string repeatedly until killed',
     description => <<'_',
+
+This is like the Unix `yes` utility.
 
 _
     args => {
         %common_args,
-        strip_newline => {
-            summary => 'Whether to strip newlines at the beginning of text',
-            schema =>[bool => {default=>0}],
-            cmdline_aliases => { nl=>{} },
+        string => {
+            schema => ['str*', default=>'y'],
+            pos    => 0,
+            greedy => 1,
         },
     },
     tags => [qw/text/],
+    'x.dux.is_stream_output' => 1,
 };
-sub ltrim {
+sub yes {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $nl  = $args{nl} // 0;
 
-    while (my ($index, $item) = each @$in) {
-        my @lt;
-        if (defined($item) && !ref($item)) {
-            $item =~ s/\A[\r\n]+// if $nl;
-            $item =~ s/^[ \t]+//mg;
-        }
+    my $str = $args{string} // 'y';
+    $str .= "\n" unless $str =~ /\n\z/;
 
-        push @$out, $item;
+    while (1) {
+        push @$out, $str;
     }
 
     [200, "OK"];
 }
 
 1;
-# ABSTRACT: Strip whitespace at the beginning of each line of text
+# ABSTRACT: Output a string repeatedly until killed
 
 
 
@@ -56,7 +54,7 @@ __END__
 
 =head1 NAME
 
-Data::Unixish::ltrim - Strip whitespace at the beginning of each line of text
+Data::Unixish::yes - Output a string repeatedly until killed
 
 =head1 VERSION
 
@@ -64,17 +62,13 @@ version 1.31
 
 =head1 SYNOPSIS
 
-In Perl:
-
- use Data::Unixish::List qw(dux);
- my @res = dux('ltrim', "x", "   a", "  b\n   c\n", undef, [" d"]);
- # => ("x", "a", "b\nc\n", undef, [" d"])
-
 In command line:
 
- % echo -e "x\n  a" | dux ltrim
- x
- a
+ % dux yes
+ y
+ y
+ y
+ ...
 
 =head1 AUTHOR
 
@@ -90,7 +84,7 @@ the same terms as the Perl 5 programming language system itself.
 =head1 FUNCTIONS
 
 
-=head2 ltrim() -> [status, msg, result, meta]
+=head2 yes() -> [status, msg, result, meta]
 
 No arguments.
 

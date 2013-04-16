@@ -8,10 +8,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
-use Text::WideChar::Util qw(mbwrap);
-use Text::Wrap ();
+use Text::WideChar::Util qw(mbwrap wrap);
 
-our $VERSION = '1.30'; # VERSION
+our $VERSION = '1.31'; # VERSION
 
 our %SPEC;
 
@@ -48,8 +47,6 @@ sub wrap {
     my $ansi  = $args{ansi};
     my $mb    = $args{mb};
 
-    local $Text::Wrap::columns = $cols;
-
     while (my ($index, $item) = each @$in) {
         {
             last if !defined($item) || ref($item);
@@ -62,7 +59,7 @@ sub wrap {
             } elsif ($mb) {
                 $item = mbwrap($item, $cols);
             } else {
-                $item = Text::Wrap::wrap("", "", $item);
+                $item = wrap  ($item, $cols);
             }
         }
         push @$out, $item;
@@ -79,15 +76,13 @@ sub wrap {
 __END__
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 Data::Unixish::wrap - Wrap text
 
 =head1 VERSION
 
-version 1.30
+version 1.31
 
 =head1 SYNOPSIS
 
@@ -113,44 +108,12 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
+=head2 wrap() -> [status, msg, result, meta]
 
-=head2 wrap(%args) -> [status, msg, result, meta]
-
-Wrap text.
-
-Currently implemented using Text::Wrap standard Perl module.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<ansi> => I<bool> (default: 0)
-
-Whether to handle ANSI escape codes.
-
-=item * B<columns> => I<int> (default: 80)
-
-Target column width.
-
-=item * B<in> => I<any>
-
-Input stream (e.g. array or filehandle).
-
-=item * B<mb> => I<bool> (default: 0)
-
-Whether to handle wide characters.
-
-=item * B<out> => I<any>
-
-Output stream (e.g. array or filehandle).
-
-=back
+No arguments.
 
 Return value:
 

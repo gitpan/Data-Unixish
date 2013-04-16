@@ -9,7 +9,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.30'; # VERSION
+our $VERSION = '1.31'; # VERSION
 
 our %SPEC;
 
@@ -113,15 +113,13 @@ sub bool {
 __END__
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 Data::Unixish::bool - Format bool
 
 =head1 VERSION
 
-version 1.30
+version 1.31
 
 =head1 SYNOPSIS
 
@@ -150,117 +148,12 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
+=head2 bool() -> [status, msg, result, meta]
 
-=head2 bool(%args) -> [status, msg, result, meta]
-
-Format boolean.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<false_char> => I<str>
-
-Instead of style, you can also specify character for true value.
-
-=item * B<in> => I<any>
-
-Input stream (e.g. array or filehandle).
-
-=item * B<notion> => I<str> (default: "perl")
-
-What notion to use to determine true/false.
-
-C<perl> uses Perl notion.
-
-C<n1> (for lack of better name) is just like Perl notion, but empty array and
-empty hash is considered false.
-
-TODO: add Ruby, Python, PHP, JavaScript, etc notion.
-
-=item * B<out> => I<any>
-
-Output stream (e.g. array or filehandle).
-
-=item * B<style> => I<str> (default: "one_zero")
-
-Available styles:
-
-=over
-
-=item *
-
-Y_N: N Y
-
-
-=item *
-
-check (uses Unicode):   ✓
-
-
-=item *
-
-check_cross (uses Unicode): ✕ ✓
-
-
-=item *
-
-dot (uses Unicode):   ●
-
-
-=item *
-
-dot_cross (uses Unicode): ✘ ●
-
-
-=item *
-
-heavyI<check>cross (uses Unicode): ✘ ✔
-
-
-=item *
-
-one_zero: 0 1
-
-
-=item *
-
-t_f: f t
-
-
-=item *
-
-true_false: false true
-
-
-=item *
-
-v_X: X v
-
-
-=item *
-
-y_n: n y
-
-
-=item *
-
-yes_no: no yes
-
-
-=back
-
-=item * B<true_char> => I<str>
-
-Instead of style, you can also specify character for true value.
-
-=back
+No arguments.
 
 Return value:
 

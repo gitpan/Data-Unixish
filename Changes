@@ -1,5 +1,10 @@
 Revision history for Data-Unixish
 
+1.31    2013-04-14 (SHARYANTO)
+
+        - Add dux function: yes (test output streaming, App::dux 1.32+).
+
+
 1.30    2013-04-12 (SHARYANTO)
 
         - Add dux function: wc.
@@ -108,7 +113,6 @@ Revision history for Data-Unixish
         - dzil: Add missing dep [CT]
 
         - 'dux FUNC --help' didn't work.
-
 
 
 0.01    2012-07-13 (SHARYANTO)

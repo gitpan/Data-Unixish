@@ -9,7 +9,7 @@ use Data::Unixish::Util qw(%common_args);
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.30'; # VERSION
+our $VERSION = '1.31'; # VERSION
 
 our %SPEC;
 
@@ -109,15 +109,13 @@ sub apply {
 __END__
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 Data::Unixish::Apply - Apply one or more dux functions to data
 
 =head1 VERSION
 
-version 1.30
+version 1.31
 
 =head1 SYNOPSIS
 
@@ -143,35 +141,9 @@ the same terms as the Perl 5 programming language system itself.
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
+=head2 apply() -> [status, msg, result, meta]
 
-=head2 apply(%args) -> [status, msg, result, meta]
-
-Apply one or more dux functions.
-
-Arguments ('*' denotes required arguments):
-
-=over 4
-
-=item * B<functions>* => I<array|str>
-
-Function(s) to apply.
-
-A list of functions to apply. Each element is either a string (function name),
-or a 2-element array (function names + arguments hashref). If you do not want to
-specify arguments to a function, you can use a string.
-
-Example:
-
-    [
-        'sort', # no arguments (all default)
-        'date', # no arguments (all default)
-        ['head', {items=>5}], # specify arguments
-    ]
-
-=item * B<in>* => I<any>
-
-=back
+No arguments.
 
 Return value:
 
