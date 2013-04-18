@@ -74,5 +74,5 @@ t/trunc.t
 t/uc.t
 t/ucfirst.t
 t/wc.t
-t/wrap.t-
+t/wrap.t
 weaver.ini
