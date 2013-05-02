@@ -8,7 +8,7 @@ use warnings;
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.32'; # VERSION
+our $VERSION = '1.33'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -48,15 +48,13 @@ sub dux {
 __END__
 =pod
 
-=encoding utf-8
-
 =head1 NAME
 
 Data::Unixish::List - Apply dux function to a list (and return the result as a list)
 
 =head1 VERSION
 
-version 1.32
+version 1.33
 
 =head1 SYNOPSIS
 
@@ -86,9 +84,6 @@ C<Data::Unixish::> prefix) or a 2-element array like C<[$fname, \%args]> where
 the first element is the dux function name and the second element contains the
 arguments for the function. If you do not need to pass any arguments/options to
 the dux function, you can use the simpler string version.
-
-
-None are exported by default, but they are exportable.
 
 =head1 SEE ALSO
 
