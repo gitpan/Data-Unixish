@@ -10,7 +10,7 @@ use Scalar::Util qw(looks_like_number blessed);
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.33'; # VERSION
+our $VERSION = '1.34'; # VERSION
 
 our %SPEC;
 
@@ -71,7 +71,7 @@ Data::Unixish::date - Format date
 
 =head1 VERSION
 
-version 1.33
+version 1.34
 
 =head1 SYNOPSIS
 

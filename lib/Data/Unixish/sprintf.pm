@@ -11,7 +11,7 @@ use Data::Unixish::Util qw(%common_args);
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.33'; # VERSION
+our $VERSION = '1.34'; # VERSION
 
 our %SPEC;
 
@@ -98,7 +98,7 @@ Data::Unixish::sprintf - Apply sprintf() on input
 
 =head1 VERSION
 
-version 1.33
+version 1.34
 
 =head1 SYNOPSIS
 

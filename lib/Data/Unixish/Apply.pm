@@ -9,7 +9,7 @@ use Data::Unixish::Util qw(%common_args);
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.33'; # VERSION
+our $VERSION = '1.34'; # VERSION
 
 our %SPEC;
 
@@ -115,7 +115,7 @@ Data::Unixish::Apply - Apply one or more dux functions to data
 
 =head1 VERSION
 
-version 1.33
+version 1.34
 
 =head1 SYNOPSIS
 

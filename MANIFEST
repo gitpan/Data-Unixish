@@ -9,7 +9,6 @@ README
 dist.ini
 lib/Data/Unixish.pm
 lib/Data/Unixish/Apply.pm
-lib/Data/Unixish/CmdLine.pm
 lib/Data/Unixish/List.pm
 lib/Data/Unixish/Util.pm
 lib/Data/Unixish/_pad.pm
@@ -43,8 +42,8 @@ lib/Data/Unixish/wrap.pm
 lib/Data/Unixish/yes.pm
 lib/Test/Data/Unixish.pm
 t/00-compile.t
+t/01-basics.t
 t/Apply.t
-t/List.t
 t/avg.t
 t/bool.t
 t/cat.t

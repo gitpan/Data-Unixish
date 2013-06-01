@@ -1,6 +1,6 @@
 package Data::Unixish::Util;
 
-our $VERSION = '1.33'; # VERSION
+our $VERSION = '1.34'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -31,7 +31,7 @@ Data::Unixish::Util - Utility routines
 
 =head1 VERSION
 
-version 1.33
+version 1.34
 
 =head1 AUTHOR
 

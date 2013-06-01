@@ -7,7 +7,7 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-our $VERSION = '1.33'; # VERSION
+our $VERSION = '1.34'; # VERSION
 
 our %SPEC;
 
@@ -57,7 +57,7 @@ Data::Unixish::yes - Output a string repeatedly until killed
 
 =head1 VERSION
 
-version 1.33
+version 1.34
 
 =head1 SYNOPSIS
 

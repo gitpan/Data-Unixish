@@ -25,9 +25,10 @@ requires:
   Text::ANSI::Util: 0.06
   Text::WideChar::Util: 0.03
   Text::sprintfn: 0
+  Tie::Simple: 0
   Unixish: v1.0.1
   perl: 5.010001
 resources:
   homepage: http://metacpan.org/dist/Data-Unixish
   repository: http://github.com/sharyanto/perl-Data-Unixish
-version: 1.33
+version: 1.34

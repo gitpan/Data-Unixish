@@ -11,7 +11,7 @@ use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_trunc ta_mbtrunc);
 use Text::WideChar::Util qw(mbtrunc);
 
-our $VERSION = '1.33'; # VERSION
+our $VERSION = '1.34'; # VERSION
 
 our %SPEC;
 
@@ -87,7 +87,7 @@ Data::Unixish::trunc - Truncate string to a certain column width
 
 =head1 VERSION
 
-version 1.33
+version 1.34
 
 =head1 SYNOPSIS
 

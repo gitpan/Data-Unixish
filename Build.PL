@@ -18,7 +18,7 @@ my %module_build_args = (
     "Steven Haryanto <stevenharyanto\@gmail.com>"
   ],
   "dist_name" => "Data-Unixish",
-  "dist_version" => "1.33",
+  "dist_version" => "1.34",
   "license" => "perl",
   "module_name" => "Data::Unixish",
   "recommends" => {},
@@ -34,6 +34,7 @@ my %module_build_args = (
     "Text::ANSI::Util" => "0.06",
     "Text::WideChar::Util" => "0.03",
     "Text::sprintfn" => 0,
+    "Tie::Simple" => 0,
     "Unixish" => "v1.0.1",
     "perl" => "5.010001"
   },

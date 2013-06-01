@@ -3,14 +3,84 @@ NAME
     framework
 
 VERSION
-    version 1.33
+    version 1.34
+
+SYNOPSIS
+     # the a/f/l prefix determines whether function accepts
+     # arrayref/file(handle)/list as input. the a/f/l/c suffix determines whether
+     # function returns an array, a list, a filehandle, or calls a callback. If
+     # filehandle is selected, a child process is forked to
+
+     use Data::Unixish qw(
+                           aduxa fduxa lduxa
+                           aduxc fduxc lduxc
+                           aduxf fduxf lduxf
+                           aduxl fduxl lduxl
+     );
+
+     # apply function, without argument
+     my @out = lduxl('sort', 7, 2, 4, 1);  # => (1, 2, 4, 7)
+     my $out = lduxa('uc', "a", "b", "c"); # => ["A", "B", "C"]
+     my $res = fduxl('wc', "file.txt");    # => "12\n234\n2093" # like wc's output
+
+     # apply function, with some arguments
+     my $fh = fduxf([trunc => {width=>80, ansi=>1, mb=>1}], \*STDIN);
+     say while <$fh>;
 
 DESCRIPTION
     This distribution implements Unixish, a data transformation framework
     inspired by Unix toolbox philosophy.
 
+FUNCTIONS
+  aduxa($func, \@input) => ARRAYREF
+  aduxc($func, $callback, \@input)
+  aduxf($func, \@input) => FILEHANDLE
+  aduxl($func, \@input) => LIST (OR SCALAR)
+    The "adux*" functions accept an arrayref as input. $func is a string
+    containing dux function name (if no arguments to the dux function is to
+    be supplied), or "[$func, \%args]" to supply arguments to the dux
+    function. Dux function name corresponds to module names
+    "Data::Unixish::NAME" without the prefix.
+
+    The *duxc functions will call the callback repeatedly with every output
+    item.
+
+    The *duxf functions returns filehandle immediately. A child process is
+    forked, and dux function is run in the child process. You read output as
+    lines from the returned filehandle.
+
+    The *duxl functions returns result as list. It can be evaluated in
+    scalar to return only the first element of the list. However, the whole
+    list will be calculated first. Use *duxf for streaming interface.
+
+  fduxa($func, $file_or_handle, @args) => ARRAYREF
+  fduxc($func, $callback, $file_or_handle, @args)
+  fduxf($func, $file_or_handle, @args) => FILEHANDLE
+  fduxl($func, $file_or_handle, @args) => LIST
+    The "fdux*" functions accepts filename or filehandle. @args is optional
+    and will be passed to Tie::File.
+
+  lduxa($func, @input) => ARRAYREF
+  lduxc($func, $callback, @input)
+  lduxf($func, @input) => FILEHANDLE
+  lduxl($func, @input) => LIST
+    The "ldux*" functions accepts list as input.
+
+FAQ
+  How do I use the diamond operator as input?
+    You can use Tie::Diamond, e.g.:
+
+     use Tie::Diamond;
+     tie my(@in), "Tie::Diamond";
+     my $out = aduxa($func, \@in);
+
+    Also see the dux command-line utility in the App::dux distribution which
+    allows you to access dux function from the command-line.
+
 SEE ALSO
     Unixish
+
+    dux script in App::dux
 
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
@@ -21,4 +91,3 @@ COPYRIGHT AND LICENSE
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
 
-FUNCTIONS
