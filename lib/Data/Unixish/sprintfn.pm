@@ -12,7 +12,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use Text::sprintfn ();
 
-our $VERSION = '1.34'; # VERSION
+our $VERSION = '1.35'; # VERSION
 
 our %SPEC;
 
@@ -96,13 +96,15 @@ sub sprintfn {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::sprintfn - Like sprintf, but use sprintfn() from Text::sprintfn
 
 =head1 VERSION
 
-version 1.34
+version 1.35
 
 =head1 SYNOPSIS
 
@@ -123,12 +125,40 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
+=head1 DESCRIPTION
+
 =head1 FUNCTIONS
 
 
-=head2 sprintfn() -> [status, msg, result, meta]
+None are exported by default, but they are exportable.
 
-No arguments.
+=head2 sprintfn(%args) -> [status, msg, result, meta]
+
+Like sprintf, but use sprintfn() from Text::sprintfn.
+
+Unlike in I<sprintf>, with this function, hash will also be processed.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<format>* => I<str>
+
+=item * B<in> => I<any>
+
+Input stream (e.g. array or filehandle).
+
+=item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
+
+=item * B<skip_array> => I<bool> (default: 0)
+
+=item * B<skip_hash> => I<bool> (default: 0)
+
+=item * B<skip_non_number> => I<bool> (default: 0)
+
+=back
 
 Return value:
 

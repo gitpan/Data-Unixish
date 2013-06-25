@@ -10,7 +10,7 @@ use warnings;
 use Data::Unixish::_pad;
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.34'; # VERSION
+our $VERSION = '1.35'; # VERSION
 
 our %SPEC;
 
@@ -70,13 +70,15 @@ sub centerpad {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::centerpad - Center text to a certain column width
 
 =head1 VERSION
 
-version 1.34
+version 1.35
 
 =head1 SYNOPSIS
 
@@ -102,12 +104,56 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
+=head1 DESCRIPTION
+
 =head1 FUNCTIONS
 
 
-=head2 centerpad() -> [status, msg, result, meta]
+None are exported by default, but they are exportable.
 
-No arguments.
+=head2 centerpad(%args) -> [status, msg, result, meta]
+
+Center text to a certain column width.
+
+This function can handle text containing wide characters and ANSI escape codes.
+
+Note: to center to a certain character length instead of column width (note that
+wide characters like Chinese can have width of more than 1 column in terminal),
+you can turn of C<mb> option even when your text contains wide characters.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<ansi> => I<bool> (default: 0)
+
+Whether to handle ANSI escape codes.
+
+=item * B<char> => I<str> (default: " ")
+
+Character to use for padding.
+
+Character should have column width of 1. The default is space (ASCII 32).
+
+=item * B<in> => I<any>
+
+Input stream (e.g. array or filehandle).
+
+=item * B<mb> => I<bool> (default: 0)
+
+Whether to handle wide characters.
+
+=item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
+
+=item * B<trunc> => I<bool> (default: 0)
+
+Whether to truncate text wider than specified width.
+
+=item * B<width>* => I<int>
+
+=back
 
 Return value:
 

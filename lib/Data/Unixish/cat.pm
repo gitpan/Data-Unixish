@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.34'; # VERSION
+our $VERSION = '1.35'; # VERSION
 
 our %SPEC;
 
@@ -39,13 +39,15 @@ sub cat {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::cat - Pass input unchanged
 
 =head1 VERSION
 
-version 1.34
+version 1.35
 
 =head1 SYNOPSIS
 
@@ -72,12 +74,30 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
+=head1 DESCRIPTION
+
 =head1 FUNCTIONS
 
 
-=head2 cat() -> [status, msg, result, meta]
+None are exported by default, but they are exportable.
 
-No arguments.
+=head2 cat(%args) -> [status, msg, result, meta]
+
+Pass input unchanged.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<in> => I<any>
+
+Input stream (e.g. array or filehandle).
+
+=item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
+
+=back
 
 Return value:
 

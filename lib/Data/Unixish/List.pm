@@ -7,7 +7,7 @@ use warnings;
 
 use Data::Unixish;
 
-our $VERSION = '1.34'; # VERSION
+our $VERSION = '1.35'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -22,13 +22,15 @@ sub dux { goto &Data::Unixish::lduxl }
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::List - (DEPRECATED) Apply dux function to list (and return result as list)
 
 =head1 VERSION
 
-version 1.34
+version 1.35
 
 =head1 SYNOPSIS
 
@@ -39,6 +41,9 @@ version 1.34
 =head1 FUNCTIONS
 
 =head2 dux($func, @input) => LIST (OR SCALAR)
+
+
+None are exported by default, but they are exportable.
 
 =head1 SEE ALSO
 

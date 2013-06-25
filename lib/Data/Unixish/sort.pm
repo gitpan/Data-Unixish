@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.34'; # VERSION
+our $VERSION = '1.35'; # VERSION
 
 our %SPEC;
 
@@ -98,13 +98,15 @@ sub sort {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::sort - Sort items
 
 =head1 VERSION
 
-version 1.34
+version 1.35
 
 =head1 SYNOPSIS
 
@@ -133,12 +135,49 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
+=head1 DESCRIPTION
+
 =head1 FUNCTIONS
 
 
-=head2 sort() -> [status, msg, result, meta]
+None are exported by default, but they are exportable.
 
-No arguments.
+=head2 sort(%args) -> [status, msg, result, meta]
+
+Sort items.
+
+By default sort ascibetically, unless C<numeric> is set to true to sort
+numerically.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<ci> => I<bool> (default: 0)
+
+Whether to ignore case.
+
+=item * B<in> => I<any>
+
+Input stream (e.g. array or filehandle).
+
+=item * B<numeric> => I<bool> (default: 0)
+
+Whether to sort numerically.
+
+=item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
+
+=item * B<random> => I<bool> (default: 0)
+
+Whether to sort by random.
+
+=item * B<reverse> => I<bool> (default: 0)
+
+Whether to reverse sort result.
+
+=back
 
 Return value:
 

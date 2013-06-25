@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.34'; # VERSION
+our $VERSION = '1.35'; # VERSION
 
 our %SPEC;
 
@@ -100,13 +100,15 @@ sub wc {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::wc - Print newline, word, and byte counts
 
 =head1 VERSION
 
-version 1.34
+version 1.35
 
 =head1 SYNOPSIS
 
@@ -132,12 +134,53 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
+=head1 DESCRIPTION
+
 =head1 FUNCTIONS
 
 
-=head2 wc() -> [status, msg, result, meta]
+None are exported by default, but they are exportable.
 
-No arguments.
+=head2 wc(%args) -> [status, msg, result, meta]
+
+Print newline, word, and byte counts.
+
+Behavior mimics that of the Unix C<wc> utility. The order of the counts which is
+returned is always: newline, word, character, byte, maximum line length.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<bytes> => I<bool> (default: 0)
+
+Return the bytes counts.
+
+=item * B<chars> => I<bool> (default: 0)
+
+Return the character counts.
+
+=item * B<in> => I<any>
+
+Input stream (e.g. array or filehandle).
+
+=item * B<lines> => I<bool> (default: 0)
+
+Return the newline counts.
+
+=item * B<max_line_length> => I<bool> (default: 0)
+
+Return the length of the longest line.
+
+=item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
+
+=item * B<words> => I<bool> (default: 0)
+
+Return the word counts.
+
+=back
 
 Return value:
 

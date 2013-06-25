@@ -13,7 +13,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use SHARYANTO::Number::Util qw(format_metric);
 
-our $VERSION = '1.34'; # VERSION
+our $VERSION = '1.35'; # VERSION
 
 our %SPEC;
 
@@ -142,13 +142,15 @@ sub num {
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish::num - Format number
 
 =head1 VERSION
 
-version 1.34
+version 1.35
 
 =head1 SYNOPSIS
 
@@ -175,12 +177,92 @@ This software is copyright (c) 2013 by Steven Haryanto.
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
+=head1 DESCRIPTION
+
 =head1 FUNCTIONS
 
 
-=head2 num() -> [status, msg, result, meta]
+None are exported by default, but they are exportable.
 
-No arguments.
+=head2 num(%args) -> [status, msg, result, meta]
+
+Format number.
+
+Observe locale environment variable settings.
+
+Undef and non-numbers are ignored.
+
+Arguments ('*' denotes required arguments):
+
+=over 4
+
+=item * B<decimal_digits> => I<any>
+
+Number of digits to the right of decimal point.
+
+=item * B<in> => I<any>
+
+Input stream (e.g. array or filehandle).
+
+=item * B<out> => I<any>
+
+Output stream (e.g. array or filehandle).
+
+=item * B<prefix> => I<str>
+
+Add some string at the beginning (e.g. for currency).
+
+=item * B<style> => I<str> (default: "general")
+
+Available styles:
+
+=over
+
+=item *
+
+fixed  (Fixed number of decimal digits, e.g. 1.00, default decimal digits=2)
+
+
+=item *
+
+general  (General formatting, e.g. 1, 2.345)
+
+
+=item *
+
+kibi  (Use Ki/Mi/GiB/etc suffix with base-10 [1000], e.g. 1.2Mi)
+
+
+=item *
+
+kilo  (Use K/M/G/etc suffix with base-2, e.g. 1.2M)
+
+
+=item *
+
+percent  (Percentage, e.g. 10.00%)
+
+
+=item *
+
+scientific  (Scientific notation, e.g. 1.23e+21)
+
+
+=back
+
+=item * B<suffix> => I<str>
+
+Add some string at the end (e.g. for unit).
+
+=item * B<thousands_sep> => I<str>
+
+Use a custom thousand separator character.
+
+Default is from locale (e.g. dot "." for en_US, etc).
+
+Use empty string "" if you want to disable printing thousands separator.
+
+=back
 
 Return value:
 

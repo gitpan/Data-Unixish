@@ -7,7 +7,7 @@ use warnings;
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.34'; # VERSION
+our $VERSION = '1.35'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -135,13 +135,15 @@ sub lduxl { _dux('l', 'l', @_) }
 __END__
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-version 1.34
+version 1.35
 
 =head1 SYNOPSIS
 
@@ -217,6 +219,9 @@ will be passed to L<Tie::File>.
 =head2 lduxl($func, @input) => LIST
 
 The C<ldux*> functions accepts list as input.
+
+
+None are exported by default, but they are exportable.
 
 =head1 FAQ
 
