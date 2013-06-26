@@ -31,4 +31,4 @@ requires:
 resources:
   homepage: http://metacpan.org/dist/Data-Unixish
   repository: http://github.com/sharyanto/perl-Data-Unixish
-version: 1.36
+version: 1.37

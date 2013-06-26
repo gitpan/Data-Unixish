@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-our $VERSION = '1.36'; # VERSION
+our $VERSION = '1.37'; # VERSION
 
 use Data::Unixish::Util qw(%common_args);
 
@@ -60,7 +60,7 @@ Data::Unixish::tail - Output the last items of data
 
 =head1 VERSION
 
-version 1.36
+version 1.37
 
 =head1 SYNOPSIS
 

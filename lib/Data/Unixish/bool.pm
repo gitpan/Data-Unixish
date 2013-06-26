@@ -9,7 +9,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.36'; # VERSION
+our $VERSION = '1.37'; # VERSION
 
 our %SPEC;
 
@@ -121,7 +121,7 @@ Data::Unixish::bool - Format bool
 
 =head1 VERSION
 
-version 1.36
+version 1.37
 
 =head1 SYNOPSIS
 
