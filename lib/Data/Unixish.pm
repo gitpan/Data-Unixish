@@ -7,7 +7,7 @@ use warnings;
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.35'; # VERSION
+our $VERSION = '1.36'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -17,6 +17,12 @@ our @EXPORT_OK = qw(
                        aduxf fduxf lduxf
                        aduxl fduxl lduxl
                );
+our %EXPORT_TAGS = (
+    all => [qw/aduxa fduxa lduxa
+               aduxc fduxc lduxc
+               aduxf fduxf lduxf
+               aduxl fduxl lduxl/],
+);
 
 sub _dux {
     my $accepts = shift;
@@ -143,14 +149,15 @@ Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-version 1.35
+version 1.36
 
 =head1 SYNOPSIS
 
  # the a/f/l prefix determines whether function accepts
  # arrayref/file(handle)/list as input. the a/f/l/c suffix determines whether
  # function returns an array, a list, a filehandle, or calls a callback. If
- # filehandle is selected, a child process is forked to
+ # filehandle is chosen as output, a child process is forked to process input as
+ # requested.
 
  use Data::Unixish qw(
                        aduxa fduxa lduxa
@@ -174,6 +181,9 @@ This distribution implements L<Unixish>, a data transformation framework
 inspired by Unix toolbox philosophy.
 
 =head1 FUNCTIONS
+
+The functions are not exported by default. They can be exported individually or
+altogether using export tag C<:all>.
 
 =head2 aduxa($func, \@input) => ARRAYREF
 

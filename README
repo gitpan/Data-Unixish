@@ -3,13 +3,14 @@ NAME
     framework
 
 VERSION
-    version 1.35
+    version 1.36
 
 SYNOPSIS
      # the a/f/l prefix determines whether function accepts
      # arrayref/file(handle)/list as input. the a/f/l/c suffix determines whether
      # function returns an array, a list, a filehandle, or calls a callback. If
-     # filehandle is selected, a child process is forked to
+     # filehandle is chosen as output, a child process is forked to process input as
+     # requested.
 
      use Data::Unixish qw(
                            aduxa fduxa lduxa
@@ -32,6 +33,9 @@ DESCRIPTION
     inspired by Unix toolbox philosophy.
 
 FUNCTIONS
+    The functions are not exported by default. They can be exported
+    individually or altogether using export tag ":all".
+
   aduxa($func, \@input) => ARRAYREF
   aduxc($func, $callback, \@input)
   aduxf($func, \@input) => FILEHANDLE

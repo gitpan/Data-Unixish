@@ -12,7 +12,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use Text::sprintfn ();
 
-our $VERSION = '1.35'; # VERSION
+our $VERSION = '1.36'; # VERSION
 
 our %SPEC;
 
@@ -104,7 +104,7 @@ Data::Unixish::sprintfn - Like sprintf, but use sprintfn() from Text::sprintfn
 
 =head1 VERSION
 
-version 1.35
+version 1.36
 
 =head1 SYNOPSIS
 
