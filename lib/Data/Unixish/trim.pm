@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-our $VERSION = '1.37'; # VERSION
+our $VERSION = '1.38'; # VERSION
 
 use Data::Unixish::Util qw(%common_args);
 
@@ -65,7 +65,7 @@ Data::Unixish::trim - Strip whitespace at the beginning and end of each line of 
 
 =head1 VERSION
 
-version 1.37
+version 1.38
 
 =head1 SYNOPSIS
 

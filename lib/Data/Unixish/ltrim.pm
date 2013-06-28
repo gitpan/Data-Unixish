@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.37'; # VERSION
+our $VERSION = '1.38'; # VERSION
 
 our %SPEC;
 
@@ -62,7 +62,7 @@ Data::Unixish::ltrim - Strip whitespace at the beginning of each line of text
 
 =head1 VERSION
 
-version 1.37
+version 1.38
 
 =head1 SYNOPSIS
 

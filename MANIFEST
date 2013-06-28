@@ -17,11 +17,13 @@ lib/Data/Unixish/bool.pm
 lib/Data/Unixish/cat.pm
 lib/Data/Unixish/centerpad.pm
 lib/Data/Unixish/date.pm
+lib/Data/Unixish/grep.pm
 lib/Data/Unixish/head.pm
 lib/Data/Unixish/lc.pm
 lib/Data/Unixish/lcfirst.pm
 lib/Data/Unixish/lpad.pm
 lib/Data/Unixish/ltrim.pm
+lib/Data/Unixish/map.pm
 lib/Data/Unixish/num.pm
 lib/Data/Unixish/pick.pm
 lib/Data/Unixish/rev.pm
@@ -49,11 +51,13 @@ t/bool.t
 t/cat.t
 t/centerpad.t
 t/date.t
+t/grep.t
 t/head.t
 t/lc.t
 t/lcfirst.t
 t/lpad.t
 t/ltrim.t
+t/map.t
 t/num.t
 t/pick.t
 t/release-pod-coverage.t

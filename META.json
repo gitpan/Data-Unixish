@@ -57,11 +57,11 @@
    },
    "release_status" : "stable",
    "resources" : {
-      "homepage" : "http://metacpan.org/dist/Data-Unixish",
+      "homepage" : "https://metacpan.org/release/Data-Unixish",
       "repository" : {
          "url" : "http://github.com/sharyanto/perl-Data-Unixish"
       }
    },
-   "version" : "1.37"
+   "version" : "1.38"
 }
 

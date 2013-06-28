@@ -1,42 +1,53 @@
-package Data::Unixish::shuf;
+package Data::Unixish::grep;
 
 use 5.010;
+use locale;
 use strict;
 use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-use List::Util qw(shuffle);
 
 our $VERSION = '1.38'; # VERSION
 
 our %SPEC;
 
-$SPEC{shuf} = {
+$SPEC{grep} = {
     v => 1.1,
-    summary => 'Shuffle items',
+    summary => 'Perl grep',
+    description => <<'_',
+
+Filter each item through a callback.
+
+_
     args => {
         %common_args,
+        callback => {
+            summary => 'The callback coderef or regexp to use',
+        },
     },
-    tags => [qw/ordering/],
+    tags => [qw//],
 };
-sub shuf {
+sub grep {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-
-    my @tmp;
-    while (my ($index, $item) = each @$in) {
-        push @tmp, $item;
+    my $callback = $args{callback} or die "missing callback for grep";
+    if (ref($callback) eq ref(qr{})) {
+        my $re = $callback;
+        $callback = sub { $_ =~ $re };
     }
 
-    push @$out, $_ for shuffle @tmp;
+    local ($., $_);
+    while (($., $_) = each @$in) {
+        push @$out, $_ if $callback->();
+    }
+
     [200, "OK"];
 }
 
 1;
-# ABSTRACT: Shuffle items
-
+# ABSTRACT: Perl grep
 
 
 __END__
@@ -46,7 +57,7 @@ __END__
 
 =head1 NAME
 
-Data::Unixish::shuf - Shuffle items
+Data::Unixish::grep - Perl grep
 
 =head1 VERSION
 
@@ -57,14 +68,8 @@ version 1.38
 In Perl:
 
  use Data::Unixish::List qw(dux);
- my @shuffled = dux('shuffle', 1, 2, 3); # => (2, 1, 3)
-
-In command line:
-
- % echo -e "1\n2\n3" | dux shuf --format=text-simple
- 3
- 1
- 2
+ my @res = dux([grep => {callback => sub { $_ % 2 }}], 1, 2, 3, 4, 5);
+ # => (1, 3, 5)
 
 =head1 AUTHOR
 
@@ -84,13 +89,19 @@ the same terms as the Perl 5 programming language system itself.
 
 None are exported by default, but they are exportable.
 
-=head2 shuf(%args) -> [status, msg, result, meta]
+=head2 grep(%args) -> [status, msg, result, meta]
 
-Shuffle items.
+Perl grep.
+
+Filter each item through a callback.
 
 Arguments ('*' denotes required arguments):
 
 =over 4
+
+=item * B<callback> => I<any>
+
+The callback coderef or regexp to use.
 
 =item * B<in> => I<any>
 

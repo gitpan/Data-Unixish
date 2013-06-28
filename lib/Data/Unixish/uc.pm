@@ -7,7 +7,7 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-our $VERSION = '1.37'; # VERSION
+our $VERSION = '1.38'; # VERSION
 
 our %SPEC;
 
@@ -52,7 +52,7 @@ Data::Unixish::uc - Convert text to uppercase
 
 =head1 VERSION
 
-version 1.37
+version 1.38
 
 =head1 SYNOPSIS
 
