@@ -3,7 +3,7 @@ use warnings;
 
 # this test was generated with Dist::Zilla::Plugin::Test::Compile 2.033
 
-use Test::More  tests => 38 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
+use Test::More  tests => 39 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 
 
@@ -23,6 +23,7 @@ my @module_files = (
     'Data/Unixish/lc.pm',
     'Data/Unixish/lcfirst.pm',
     'Data/Unixish/lins.pm',
+    'Data/Unixish/linum.pm',
     'Data/Unixish/lpad.pm',
     'Data/Unixish/ltrim.pm',
     'Data/Unixish/map.pm',

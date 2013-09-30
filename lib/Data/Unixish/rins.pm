@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.39'; # VERSION
+our $VERSION = '1.40'; # VERSION
 
 our %SPEC;
 
@@ -38,7 +38,6 @@ sub rins {
     my $text = $args{text};
 
     while (my ($index, $item) = each @$in) {
-        my @lt;
         if (defined($item) && !ref($item)) {
             $item =~ s/$/$text/mg;
         }
@@ -64,7 +63,7 @@ Data::Unixish::rins - Add some text at the end of each line of text
 
 =head1 VERSION
 
-version 1.39
+version 1.40
 
 =head1 SYNOPSIS
 

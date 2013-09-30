@@ -7,7 +7,7 @@ use warnings;
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.39'; # VERSION
+our $VERSION = '1.40'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -179,7 +179,7 @@ Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-version 1.39
+version 1.40
 
 =head1 SYNOPSIS
 

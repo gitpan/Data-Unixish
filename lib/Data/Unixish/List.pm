@@ -7,7 +7,7 @@ use warnings;
 
 use Data::Unixish;
 
-our $VERSION = '1.39'; # VERSION
+our $VERSION = '1.40'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -30,7 +30,7 @@ Data::Unixish::List - (DEPRECATED) Apply dux function to list (and return result
 
 =head1 VERSION
 
-version 1.39
+version 1.40
 
 =head1 SYNOPSIS
 

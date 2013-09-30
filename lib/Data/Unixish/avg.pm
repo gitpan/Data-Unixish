@@ -9,7 +9,7 @@ use warnings;
 use Data::Unixish::Util qw(%common_args);
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.39'; # VERSION
+our $VERSION = '1.40'; # VERSION
 
 our %SPEC;
 
@@ -53,7 +53,7 @@ Data::Unixish::avg - Average numbers
 
 =head1 VERSION
 
-version 1.39
+version 1.40
 
 =head1 SYNOPSIS
 

@@ -10,7 +10,7 @@ use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
 use Text::WideChar::Util qw(mbwrap);
 
-our $VERSION = '1.39'; # VERSION
+our $VERSION = '1.40'; # VERSION
 
 our %SPEC;
 
@@ -78,7 +78,7 @@ Data::Unixish::wrap - Wrap text
 
 =head1 VERSION
 
-version 1.39
+version 1.40
 
 =head1 SYNOPSIS
 

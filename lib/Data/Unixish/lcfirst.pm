@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.39'; # VERSION
+our $VERSION = '1.40'; # VERSION
 
 our %SPEC;
 
@@ -52,7 +52,7 @@ Data::Unixish::lcfirst - Convert first character of text to lowercase
 
 =head1 VERSION
 
-version 1.39
+version 1.40
 
 =head1 SYNOPSIS
 
