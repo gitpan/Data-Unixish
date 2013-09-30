@@ -1,4 +1,4 @@
-package Data::Unixish::shuf;
+package Data::Unixish::rins;
 
 use 5.010;
 use strict;
@@ -7,35 +7,50 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-use List::Util qw(shuffle);
 
 our $VERSION = '1.39'; # VERSION
 
 our %SPEC;
 
-$SPEC{shuf} = {
+$SPEC{rins} = {
     v => 1.1,
-    summary => 'Shuffle items',
+    summary => 'Add some text at the end of each line of text',
+    description => <<'_',
+
+This is sort of a counterpart for rtrim, which removes whitespace at the end
+(right) of each line of text.
+
+_
     args => {
         %common_args,
+        text => {
+            summary => 'The text to add',
+            schema  => ['str*'],
+            req     => 1,
+            pos     => 0,
+        },
     },
-    tags => [qw/ordering/],
+    tags => [qw/text/],
 };
-sub shuf {
+sub rins {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
+    my $text = $args{text};
 
-    my @tmp;
     while (my ($index, $item) = each @$in) {
-        push @tmp, $item;
+        my @lt;
+        if (defined($item) && !ref($item)) {
+            $item =~ s/$/$text/mg;
+        }
+
+        push @$out, $item;
     }
 
-    push @$out, $_ for shuffle @tmp;
     [200, "OK"];
 }
 
 1;
-# ABSTRACT: Shuffle items
+# ABSTRACT: Add some text at the end of each line of text
 
 __END__
 
@@ -45,7 +60,7 @@ __END__
 
 =head1 NAME
 
-Data::Unixish::shuf - Shuffle items
+Data::Unixish::rins - Add some text at the end of each line of text
 
 =head1 VERSION
 
@@ -55,15 +70,15 @@ version 1.39
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @shuffled = dux('shuffle', 1, 2, 3); # => (2, 1, 3)
+ use Data::Unixish qw(aduxa);
+ my @res = aduxa([rins => {text=>"xx"}, "a", "b ", "c\nd ", undef, ["e"]);
+ # => ("axx", "b xx", "cxx\nd xx", undef, ["e"])
 
 In command line:
 
- % echo -e "1\n2\n3" | dux shuf --format=text-simple
- 3
- 1
- 2
+ % echo -e "1\n2 " | dux rins --text xx
+ 1xx
+ 2 xx
 
 =head1 AUTHOR
 
@@ -83,7 +98,10 @@ the same terms as the Perl 5 programming language system itself.
 
 None are exported by default, but they are exportable.
 
-=head2 shuf(%args) -> [status, msg, result, meta]
+=head2 rins(%args) -> [status, msg, result, meta]
+
+This is sort of a counterpart for rtrim, which removes whitespace at the end
+(right) of each line of text.
 
 Arguments ('*' denotes required arguments):
 
@@ -96,6 +114,10 @@ Input stream (e.g. array or filehandle).
 =item * B<out> => I<any>
 
 Output stream (e.g. array or filehandle).
+
+=item * B<text>* => I<str>
+
+The text to add.
 
 =back
 

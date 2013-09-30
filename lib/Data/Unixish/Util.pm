@@ -1,6 +1,6 @@
 package Data::Unixish::Util;
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -23,6 +23,7 @@ our %common_args = (
 #ABSTRACT: Utility routines
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -33,7 +34,7 @@ Data::Unixish::Util - Utility routines
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 AUTHOR
 
@@ -54,4 +55,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-

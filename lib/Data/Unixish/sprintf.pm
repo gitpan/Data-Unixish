@@ -11,7 +11,7 @@ use Data::Unixish::Util qw(%common_args);
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 our %SPEC;
 
@@ -87,9 +87,8 @@ sub sprintf {
 1;
 # ABSTRACT: Apply sprintf() on input
 
-
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -100,7 +99,7 @@ Data::Unixish::sprintf - Apply sprintf() on input
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 SYNOPSIS
 
@@ -138,8 +137,6 @@ None are exported by default, but they are exportable.
 
 =head2 sprintf(%args) -> [status, msg, result, meta]
 
-Apply sprintf() on input.
-
 Array will also be processed (all the elements are fed to sprintf(), the result
 is a single string), unless C<skip_array> is set to true.
 
@@ -172,4 +169,3 @@ Return value:
 Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =cut
-

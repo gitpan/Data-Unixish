@@ -11,7 +11,7 @@ use SHARYANTO::String::Util qw(pad);
 use Text::ANSI::Util qw(ta_pad ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 sub _pad {
     my ($which, %args) = @_;
@@ -47,6 +47,7 @@ sub _pad {
 # ABSTRACT: _pad
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -57,7 +58,7 @@ Data::Unixish::_pad - _pad
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 AUTHOR
 
@@ -78,4 +79,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-

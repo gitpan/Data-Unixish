@@ -7,7 +7,7 @@ use warnings;
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -167,8 +167,8 @@ sub lduxl { _dux('l', 'l', @_) }
 1;
 # ABSTRACT: Implementation for Unixish, a data transformation framework
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -179,7 +179,7 @@ Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 SYNOPSIS
 
@@ -317,4 +317,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

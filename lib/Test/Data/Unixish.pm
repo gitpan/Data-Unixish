@@ -7,7 +7,7 @@ use warnings;
 use Test::More 0.96;
 use Module::Load;
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -45,8 +45,8 @@ sub test_dux_func {
 1;
 # ABSTRACT: Routines to test Data::Unixish
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -57,7 +57,7 @@ Test::Data::Unixish - Routines to test Data::Unixish
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =for Pod::Coverage .+
 
@@ -80,4 +80,3 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =cut
-

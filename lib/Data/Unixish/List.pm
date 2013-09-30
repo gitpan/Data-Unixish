@@ -7,7 +7,7 @@ use warnings;
 
 use Data::Unixish;
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -18,8 +18,8 @@ sub dux { goto &Data::Unixish::lduxl }
 1;
 # ABSTRACT: (DEPRECATED) Apply dux function to list (and return result as list)
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -30,7 +30,7 @@ Data::Unixish::List - (DEPRECATED) Apply dux function to list (and return result
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 SYNOPSIS
 
@@ -63,4 +63,3 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

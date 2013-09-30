@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 our %SPEC;
 
@@ -93,9 +93,8 @@ sub sort {
 1;
 # ABSTRACT: Sort items
 
-
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -106,7 +105,7 @@ Data::Unixish::sort - Sort items
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 SYNOPSIS
 
@@ -143,8 +142,6 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =head2 sort(%args) -> [status, msg, result, meta]
-
-Sort items.
 
 By default sort ascibetically, unless C<numeric> is set to true to sort
 numerically.
@@ -184,4 +181,3 @@ Return value:
 Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =cut
-

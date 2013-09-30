@@ -7,7 +7,7 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 our %SPEC;
 
@@ -39,9 +39,8 @@ sub uc {
 1;
 # ABSTRACT: Convert text to uppercase
 
-
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -52,7 +51,7 @@ Data::Unixish::uc - Convert text to uppercase
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 SYNOPSIS
 
@@ -86,8 +85,6 @@ None are exported by default, but they are exportable.
 
 =head2 uc(%args) -> [status, msg, result, meta]
 
-Convert text to uppercase.
-
 Arguments ('*' denotes required arguments):
 
 =over 4
@@ -107,4 +104,3 @@ Return value:
 Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =cut
-

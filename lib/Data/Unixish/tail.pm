@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 use Data::Unixish::Util qw(%common_args);
 
@@ -48,8 +48,8 @@ sub tail {
 1;
 # ABSTRACT: Output the last items of data
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -60,7 +60,7 @@ Data::Unixish::tail - Output the last items of data
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 SYNOPSIS
 
@@ -100,8 +100,6 @@ None are exported by default, but they are exportable.
 
 =head2 tail(%args) -> [status, msg, result, meta]
 
-Output the last items of data.
-
 Arguments ('*' denotes required arguments):
 
 =over 4
@@ -125,4 +123,3 @@ Return value:
 Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =cut
-

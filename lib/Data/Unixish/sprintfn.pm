@@ -12,7 +12,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use Text::sprintfn ();
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 our %SPEC;
 
@@ -91,9 +91,8 @@ sub sprintfn {
 1;
 # ABSTRACT: Like sprintf, but use sprintfn() from Text::sprintfn
 
-
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -104,7 +103,7 @@ Data::Unixish::sprintfn - Like sprintf, but use sprintfn() from Text::sprintfn
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 SYNOPSIS
 
@@ -133,8 +132,6 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =head2 sprintfn(%args) -> [status, msg, result, meta]
-
-Like sprintf, but use sprintfn() from Text::sprintfn.
 
 Unlike in I<sprintf>, with this function, hash will also be processed.
 
@@ -165,4 +162,3 @@ Return value:
 Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =cut
-

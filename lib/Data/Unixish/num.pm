@@ -13,7 +13,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use SHARYANTO::Number::Util qw(format_metric);
 
-our $VERSION = '1.38'; # VERSION
+our $VERSION = '1.39'; # VERSION
 
 our %SPEC;
 
@@ -138,8 +138,8 @@ sub num {
 1;
 # ABSTRACT: Format number
 
-
 __END__
+
 =pod
 
 =encoding utf-8
@@ -150,7 +150,7 @@ Data::Unixish::num - Format number
 
 =head1 VERSION
 
-version 1.38
+version 1.39
 
 =head1 SYNOPSIS
 
@@ -185,8 +185,6 @@ the same terms as the Perl 5 programming language system itself.
 None are exported by default, but they are exportable.
 
 =head2 num(%args) -> [status, msg, result, meta]
-
-Format number.
 
 Observe locale environment variable settings.
 
@@ -269,4 +267,3 @@ Return value:
 Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =cut
-
