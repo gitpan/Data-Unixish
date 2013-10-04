@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.40'; # VERSION
+our $VERSION = '1.41'; # VERSION
 
 our %SPEC;
 
@@ -63,7 +63,7 @@ Data::Unixish::lins - Add some text at the beginning of each line of text
 
 =head1 VERSION
 
-version 1.40
+version 1.41
 
 =head1 SYNOPSIS
 
@@ -78,6 +78,10 @@ In command line:
  % echo -e "1\n 2" | dux lins --text xx
  xx1
  xx 2
+
+=head1 SEE ALSO
+
+indent, rins
 
 =head1 AUTHOR
 

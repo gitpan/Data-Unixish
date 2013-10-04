@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.40'; # VERSION
+our $VERSION = '1.41'; # VERSION
 
 our %SPEC;
 
@@ -54,7 +54,7 @@ Data::Unixish::head - Output the first items of data
 
 =head1 VERSION
 
-version 1.40
+version 1.41
 
 =head1 SYNOPSIS
 

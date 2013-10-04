@@ -19,6 +19,7 @@ lib/Data/Unixish/centerpad.pm
 lib/Data/Unixish/date.pm
 lib/Data/Unixish/grep.pm
 lib/Data/Unixish/head.pm
+lib/Data/Unixish/indent.pm
 lib/Data/Unixish/lc.pm
 lib/Data/Unixish/lcfirst.pm
 lib/Data/Unixish/lins.pm
@@ -56,6 +57,7 @@ t/centerpad.t
 t/date.t
 t/grep.t
 t/head.t
+t/indent.t
 t/lc.t
 t/lcfirst.t
 t/lins.t

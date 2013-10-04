@@ -3,7 +3,7 @@ NAME
     framework
 
 VERSION
-    version 1.40
+    version 1.41
 
 SYNOPSIS
      # the a/f/l/c prefix determines whether function accepts

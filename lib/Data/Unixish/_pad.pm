@@ -11,7 +11,7 @@ use SHARYANTO::String::Util qw(pad);
 use Text::ANSI::Util qw(ta_pad ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
 
-our $VERSION = '1.40'; # VERSION
+our $VERSION = '1.41'; # VERSION
 
 sub _pad {
     my ($which, %args) = @_;
@@ -58,7 +58,7 @@ Data::Unixish::_pad - _pad
 
 =head1 VERSION
 
-version 1.40
+version 1.41
 
 =head1 AUTHOR
 

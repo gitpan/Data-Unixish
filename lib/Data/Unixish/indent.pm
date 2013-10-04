@@ -1,4 +1,4 @@
-package Data::Unixish::shuf;
+package Data::Unixish::indent;
 
 use 5.010;
 use strict;
@@ -7,35 +7,51 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-use List::Util qw(shuffle);
 
 our $VERSION = '1.41'; # VERSION
 
 our %SPEC;
 
-$SPEC{shuf} = {
+$SPEC{indent} = {
     v => 1.1,
-    summary => 'Shuffle items',
+    summary => 'Add spaces or tabs to the beginnning of each line of text',
     args => {
         %common_args,
+        num => {
+            summary => 'Number of spaces to add',
+            schema  => ['int*', default=>4],
+            cmdline_aliases => {
+                n => {},
+            },
+        },
+        tab => {
+            summary => 'Number of spaces to add',
+            schema  => ['bool' => default => 0],
+            cmdline_aliases => {
+                t => {},
+            },
+        },
     },
-    tags => [qw/ordering/],
+    tags => [qw/text/],
 };
-sub shuf {
+sub indent {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
+    my $indent = ($args{tab} ? "\t" : " ") x ($args{num} // 4);
 
-    my @tmp;
     while (my ($index, $item) = each @$in) {
-        push @tmp, $item;
+        if (defined($item) && !ref($item)) {
+            $item =~ s/^/$indent/mg;
+        }
+
+        push @$out, $item;
     }
 
-    push @$out, $_ for shuffle @tmp;
     [200, "OK"];
 }
 
 1;
-# ABSTRACT: Shuffle items
+# ABSTRACT: Add spaces or tabs to the beginning of each line of text
 
 __END__
 
@@ -45,7 +61,7 @@ __END__
 
 =head1 NAME
 
-Data::Unixish::shuf - Shuffle items
+Data::Unixish::indent - Add spaces or tabs to the beginning of each line of text
 
 =head1 VERSION
 
@@ -55,15 +71,19 @@ version 1.41
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @shuffled = dux('shuffle', 1, 2, 3); # => (2, 1, 3)
+ use Data::Unixish qw(aduxa);
+ my @res = aduxa('indent', "a", " b", "", undef, ["c"]);
+ # => ("    a", "     b", "    ", undef, ["c"])
 
 In command line:
 
- % echo -e "1\n2\n3" | dux shuf --format=text-simple
- 3
- 1
- 2
+ % echo -e "1\n 2" | dux indent -n 2
+   1
+    2
+
+=head1 SEE ALSO
+
+lins, rins
 
 =head1 AUTHOR
 
@@ -83,7 +103,7 @@ the same terms as the Perl 5 programming language system itself.
 
 None are exported by default, but they are exportable.
 
-=head2 shuf(%args) -> [status, msg, result, meta]
+=head2 indent(%args) -> [status, msg, result, meta]
 
 Arguments ('*' denotes required arguments):
 
@@ -93,9 +113,17 @@ Arguments ('*' denotes required arguments):
 
 Input stream (e.g. array or filehandle).
 
+=item * B<num> => I<int> (default: 4)
+
+Number of spaces to add.
+
 =item * B<out> => I<any>
 
 Output stream (e.g. array or filehandle).
+
+=item * B<tab> => I<bool> (default: 0)
+
+Number of spaces to add.
 
 =back
 
