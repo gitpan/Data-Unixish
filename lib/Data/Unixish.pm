@@ -7,7 +7,7 @@ use warnings;
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.41'; # VERSION
+our $VERSION = '1.42'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -179,7 +179,7 @@ Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-version 1.41
+version 1.42
 
 =head1 SYNOPSIS
 
@@ -288,6 +288,11 @@ None are exported by default, but they are exportable.
 
 =head1 FAQ
 
+=head2 I'm getting "Use of uninitialized value in push at lib/Data/Unixish/XXX.pm line XX." messages!
+
+This looks like a bug in perl 5.10.1 or earlier. Try upgrading to perl 5.12 or
+later.
+
 =head2 How do I use the diamond operator as input?
 
 You can use L<Tie::Diamond>, e.g.:
@@ -304,6 +309,23 @@ allows you to access dux function from the command-line.
 L<Unixish>
 
 L<dux> script in L<App::dux>
+
+=head1 HOMEPAGE
+
+Please visit the project's homepage at L<https://metacpan.org/release/Data-Unixish>.
+
+=head1 SOURCE
+
+Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website
+L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
 
 =head1 AUTHOR
 

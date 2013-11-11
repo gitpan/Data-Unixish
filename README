@@ -3,7 +3,7 @@ NAME
     framework
 
 VERSION
-    version 1.41
+    version 1.42
 
 SYNOPSIS
      # the a/f/l/c prefix determines whether function accepts
@@ -92,6 +92,10 @@ FUNCTIONS
     None are exported by default, but they are exportable.
 
 FAQ
+  I'm getting "Use of uninitialized value in push at lib/Data/Unixish/XXX.pm line XX." messages!
+    This looks like a bug in perl 5.10.1 or earlier. Try upgrading to perl
+    5.12 or later.
+
   How do I use the diamond operator as input?
     You can use Tie::Diamond, e.g.:
 
@@ -106,6 +110,21 @@ SEE ALSO
     Unixish
 
     dux script in App::dux
+
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/Data-Unixish>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/sharyanto/perl-Data-Unixish>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
 
 AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
