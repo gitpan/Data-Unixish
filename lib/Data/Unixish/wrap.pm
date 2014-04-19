@@ -10,7 +10,7 @@ use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
 use Text::WideChar::Util qw(mbwrap);
 
-our $VERSION = '1.42'; # VERSION
+our $VERSION = '1.43'; # VERSION
 
 our %SPEC;
 
@@ -33,34 +33,42 @@ $SPEC{wrap} = {
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub wrap {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $w     = $args{width} // 80;
-    my $ansi  = $args{ansi};
-    my $mb    = $args{mb};
 
+    _wrap_begin(\%args);
     while (my ($index, $item) = each @$in) {
-        {
-            last if !defined($item) || ref($item);
-            if ($ansi) {
-                if ($mb) {
-                    $item = ta_mbwrap($item, $w);
-                } else {
-                    $item = ta_wrap  ($item, $w);
-                }
-            } elsif ($mb) {
-                $item = mbwrap($item, $w);
-            } else {
-                $item = Text::WideChar::Util::wrap($item, $w);
-            }
-        }
-        push @$out, $item;
+        push @$out, _wrap_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _wrap_begin {
+    my $args = shift;
+    $args->{width} //= 80;
+}
+
+sub _wrap_item {
+    my ($item, $args) = @_;
+    {
+        last if !defined($item) || ref($item);
+        if ($args->{ansi}) {
+            if ($args->{mb}) {
+                $item = ta_mbwrap($item, $args->{width});
+            } else {
+                $item = ta_wrap  ($item, $args->{width});
+            }
+        } elsif ($args->{mb}) {
+            $item = mbwrap($item, $args->{width});
+        } else {
+            $item = Text::WideChar::Util::wrap($item, $args->{width});
+        }
+    }
+    return $item;
 }
 
 1;
@@ -70,7 +78,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -78,14 +86,14 @@ Data::Unixish::wrap - Wrap text
 
 =head1 VERSION
 
-version 1.42
+version 1.43
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- $wrapped = dux([wrap => {width=>20}], "xxxx xxxx xxxx xxxx xxxx"); # "xxxx xxxx xxxx xxxx\nxxxx"
+ use Data::Unixish qw(lduxl);
+ $wrapped = lduxl([wrap => {width=>20}], "xxxx xxxx xxxx xxxx xxxx"); # "xxxx xxxx xxxx xxxx\nxxxx"
 
 In command line:
 
@@ -93,14 +101,12 @@ In command line:
  xxxx xxxx xxxx xxxx
  xxxx
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
 =head2 wrap(%args) -> [status, msg, result, meta]
+
+Wrap text.
 
 Arguments ('*' denotes required arguments):
 
@@ -130,7 +136,14 @@ Target column width.
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
 
 =head1 SEE ALSO
 
@@ -146,8 +159,7 @@ Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
-Please report any bugs or feature requests on the bugtracker website
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -159,7 +171,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

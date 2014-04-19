@@ -10,7 +10,7 @@ use Scalar::Util qw(looks_like_number blessed);
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.42'; # VERSION
+our $VERSION = '1.43'; # VERSION
 
 our %SPEC;
 
@@ -29,32 +29,44 @@ _
         },
         # tz?
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub date {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $format  = $args{format} // '%Y-%m-%d %H:%M:%S';
 
+    _date_begin(\%args);
     while (my ($index, $item) = each @$in) {
-        my @lt;
-        if (looks_like_number($item) &&
-                $item >= 0 && $item <= 2**31) { # XXX Y2038-bug
-            @lt = localtime($item);
-        } elsif (blessed($item) && $item->isa('DateTime')) {
-            # XXX timezone!
-            @lt = localtime($item->epoch);
-        } else {
-            goto OUT_ITEM;
-        }
-
-        $item = strftime $format, @lt;
-
-      OUT_ITEM:
-        push @$out, $item;
+        push @$out, _date_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _date_begin {
+    my $args = shift;
+
+    $args->{format} //= '%Y-%m-%d %H:%M:%S';
+}
+
+sub _date_item {
+    my ($item, $args) = @_;
+
+    my @lt;
+    if (looks_like_number($item) &&
+            $item >= 0 && $item <= 2**31) { # XXX Y2038-bug
+        @lt = localtime($item);
+    } elsif (blessed($item) && $item->isa('DateTime')) {
+        # XXX timezone!
+        @lt = localtime($item->epoch);
+    } else {
+        goto OUT_ITEM;
+    }
+
+    $item = strftime $args->{format}, @lt;
+
+  OUT_ITEM:
+    return $item;
 }
 
 1;
@@ -64,7 +76,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -72,14 +84,14 @@ Data::Unixish::date - Format date
 
 =head1 VERSION
 
-version 1.42
+version 1.43
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([date => {format=>"%Y-%m-%d"}], DateTime->new(year=>2012, month=>9, day=>6), 1290380232, "foo");
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([date => {format=>"%Y-%m-%d"}], DateTime->new(year=>2012, month=>9, day=>6), 1290380232, "foo");
  # => ("2012-09-06","2010-11-22","foo")
 
 In command line:
@@ -88,14 +100,12 @@ In command line:
  2010-11-22 05:57:12
  foo
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
 =head2 date(%args) -> [status, msg, result, meta]
+
+Format date.
 
 Arguments ('*' denotes required arguments):
 
@@ -117,7 +127,14 @@ Output stream (e.g. array or filehandle).
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
 
 =head1 HOMEPAGE
 
@@ -129,8 +146,7 @@ Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
-Please report any bugs or feature requests on the bugtracker website
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -142,7 +158,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

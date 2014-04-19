@@ -11,7 +11,7 @@ use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_trunc ta_mbtrunc);
 use Text::WideChar::Util qw(mbtrunc);
 
-our $VERSION = '1.42'; # VERSION
+our $VERSION = '1.43'; # VERSION
 
 our %SPEC;
 
@@ -43,34 +43,33 @@ _
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub trunc {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $w    = $args{width};
-    my $ansi = $args{ansi};
-    my $mb   = $args{mb};
 
     while (my ($index, $item) = each @$in) {
-        {
-            last if !defined($item) || ref($item);
-            if ($ansi) {
-                if ($mb) {
-                    $item = ta_mbtrunc($item, $w);
-                } else {
-                    $item = ta_trunc($item, $w);
-                }
-            } elsif ($mb) {
-                $item = mbtrunc($item, $w);
-            } else {
-                $item = substr($item, 0, $w);
-            }
-        }
-        push @$out, $item;
+        push @$out, _trunc_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _trunc_item {
+    my ($item, $args) = @_;
+    return $item if !defined($item) || ref($item);
+    if ($args->{ansi}) {
+        if ($args->{mb}) {
+            return ta_mbtrunc($item, $args->{width});
+        } else {
+            return ta_trunc($item, $args->{width});
+        }
+    } elsif ($args->{mb}) {
+        return mbtrunc($item, $args->{width});
+    } else {
+        return substr($item, 0, $args->{width});
+    }
 }
 
 1;
@@ -80,7 +79,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -88,14 +87,14 @@ Data::Unixish::trunc - Truncate string to a certain column width
 
 =head1 VERSION
 
-version 1.42
+version 1.43
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([trunc => {width=>4}], "123", "1234", "12345"); # => ("123", "1234", "1234")
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([trunc => {width=>4}], "123", "1234", "12345"); # => ("123", "1234", "1234")
 
 In command line:
 
@@ -104,14 +103,12 @@ In command line:
  1234
  1234
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
 =head2 trunc(%args) -> [status, msg, result, meta]
+
+Truncate string to a certain column width.
 
 This function can handle text containing wide characters and ANSI escape codes.
 
@@ -145,7 +142,14 @@ Output stream (e.g. array or filehandle).
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
 
 =head1 HOMEPAGE
 
@@ -157,8 +161,7 @@ Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
-Please report any bugs or feature requests on the bugtracker website
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -170,7 +173,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

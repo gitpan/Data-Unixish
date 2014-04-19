@@ -13,7 +13,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use SHARYANTO::Number::Util qw(format_metric);
 
-our $VERSION = '1.42'; # VERSION
+our $VERSION = '1.43'; # VERSION
 
 our %SPEC;
 
@@ -73,18 +73,31 @@ _
             schema => ['str*'],
         },
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub num {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $style = $args{style} // 'general';
-    $style = 'general' if !$styles{$style};
 
-    my $prefix  = $args{prefix} // "";
-    my $suffix  = $args{suffix} // "";
-    my $decdigs = $args{decimal_digits} //
-        ($style eq 'kilo' || $style eq 'kibi' ? 1 : 2);
+    my $orig_locale = _num_begin(\%args);
+    while (my ($index, $item) = each @$in) {
+        push @$out, _num_item($item, \%args);
+    }
+    _num_end(\%args, $orig_locale);
+
+    [200, "OK"];
+}
+
+sub _num_begin {
+    my $args = shift;
+
+    $args->{style} //= 'general';
+    $args->{style} = 'general' if !$styles{$args->{style}};
+
+    $args->{prefix} //= "";
+    $args->{suffix} //= "";
+    $args->{decimal_digits} //=
+        ($args->{style} eq 'kilo' || $args->{style} eq 'kibi' ? 1 : 2);
 
     my $orig_locale = setlocale(LC_ALL);
     if ($ENV{LC_NUMERIC}) {
@@ -95,44 +108,52 @@ sub num {
         setlocale(LC_ALL, $ENV{LANG});
     }
 
+    # args abused to store object/state
     my %nfargs;
-    if (defined $args{thousands_sep}) {
-        $nfargs{THOUSANDS_SEP} = $args{thousands_sep};
+    if (defined $args->{thousands_sep}) {
+        $nfargs{THOUSANDS_SEP} = $args->{thousands_sep};
     }
-    my $nf = Number::Format->new(%nfargs);
+    $args->{_nf} = Number::Format->new(%nfargs);
 
-    while (my ($index, $item) = each @$in) {
-        {
-            last if !defined($item) || !looks_like_number($item);
-            if ($style eq 'fixed') {
-                $item = $nf->format_number($item, $decdigs, $decdigs);
-            } elsif ($style eq 'scientific') {
-                $item = sprintf("%.${decdigs}e", $item);
-            } elsif ($style eq 'kilo') {
-                my $res = format_metric(
-                    $item, {base=>2, return_array=>1});
-                $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
-                    $res->[1];
-            } elsif ($style eq 'kibi') {
-                my $res = format_metric(
-                    $item, {base=>10, return_array=>1});
-                $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
-                    $res->[1];
-            } elsif ($style eq 'percent') {
-                $item = sprintf("%.${decdigs}f%%", $item*100);
-            } else {
-                # general
-                $item = $nf->format_number($item);
-            }
+    return $orig_locale;
+}
 
-            $item = "$prefix$item$suffix";
+sub _num_item {
+    my ($item, $args) = @_;
+
+    {
+        last if !defined($item) || !looks_like_number($item);
+        my $nf      = $args->{_nf};
+        my $style   = $args->{style};
+        my $decdigs = $args->{decimal_digits};
+
+        if ($style eq 'fixed') {
+            $item = $nf->format_number($item, $decdigs, $decdigs);
+        } elsif ($style eq 'scientific') {
+            $item = sprintf("%.${decdigs}e", $item);
+        } elsif ($style eq 'kilo') {
+            my $res = format_metric($item, {base=>2, return_array=>1});
+            $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
+                $res->[1];
+        } elsif ($style eq 'kibi') {
+            my $res = format_metric(
+                $item, {base=>10, return_array=>1});
+            $item = $nf->format_number($res->[0], $decdigs, $decdigs) .
+                $res->[1];
+        } elsif ($style eq 'percent') {
+            $item = sprintf("%.${decdigs}f%%", $item*100);
+        } else {
+            # general
+            $item = $nf->format_number($item);
         }
-        push @$out, $item;
+        $item = "$args->{prefix}$item$args->{suffix}";
     }
+    return $item;
+}
 
+sub _num_end {
+    my ($args, $orig_locale) = @_;
     setlocale(LC_ALL, $orig_locale);
-
-    [200, "OK"];
 }
 
 1;
@@ -142,7 +163,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -150,14 +171,14 @@ Data::Unixish::num - Format number
 
 =head1 VERSION
 
-version 1.42
+version 1.43
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([num => {style=>"fixed"}], 0, 10, -2, 34.5, [2], {}, "", undef);
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([num => {style=>"fixed"}], 0, 10, -2, 34.5, [2], {}, "", undef);
  # => ("0.00", "10.00", "-2.00", "34.50", [2], {}, "", undef)
 
 In command line:
@@ -166,14 +187,12 @@ In command line:
  1,00
  -2,00
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
 =head2 num(%args) -> [status, msg, result, meta]
+
+Format number.
 
 Observe locale environment variable settings.
 
@@ -253,7 +272,14 @@ Use empty string "" if you want to disable printing thousands separator.
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
 
 =head1 HOMEPAGE
 
@@ -265,8 +291,7 @@ Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
-Please report any bugs or feature requests on the bugtracker website
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -278,7 +303,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

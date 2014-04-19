@@ -11,7 +11,7 @@ use Data::Unixish::Util qw(%common_args);
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.42'; # VERSION
+our $VERSION = '1.43'; # VERSION
 
 our %SPEC;
 
@@ -43,13 +43,25 @@ _
             schema=>[bool => default=>0],
         },
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub sprintf {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
     my $format = $args{format};
 
+    my $orig_locale = _sprintf_begin();
+
+    while (my ($index, $item) = each @$in) {
+        push @$out, _sprintf_item($item, \%args);
+    }
+
+    _sprintf_end(\%args, $orig_locale);
+
+    [200, "OK"];
+}
+
+sub _sprintf_begin {
     my $orig_locale = setlocale(LC_ALL);
     if ($ENV{LC_NUMERIC}) {
         setlocale(LC_NUMERIC, $ENV{LC_NUMERIC});
@@ -58,30 +70,35 @@ sub sprintf {
     } elsif ($ENV{LANG}) {
         setlocale(LC_ALL, $ENV{LANG});
     }
+    return $orig_locale;
+}
 
-    while (my ($index, $item) = each @$in) {
-        {
-            last unless defined($item);
-            my $r = ref($item);
-            if ($r eq 'ARRAY' && !$args{skip_array}) {
-                no warnings;
-                $item = CORE::sprintf($format, @$item);
-                last;
-            }
-            last if $r;
-            last if $item eq '';
-            last if !looks_like_number($item) && $args{skip_non_number};
-            {
-                no warnings;
-                $item = CORE::sprintf($format, $item);
-            }
-        }
-        push @$out, $item;
-    }
-
+sub _sprintf_end {
+    my ($args, $orig_locale) = @_;
     setlocale(LC_ALL, $orig_locale);
+}
 
-    [200, "OK"];
+sub _sprintf_item {
+    my ($item, $args) = @_;
+
+    {
+        last unless defined($item);
+
+        my $r = ref($item);
+        if ($r eq 'ARRAY' && !$args->{skip_array}) {
+            no warnings;
+            $item = CORE::sprintf($args->{format}, @$item);
+            last;
+        }
+        last if $r;
+        last if $item eq '';
+        last if !looks_like_number($item) && $args->{skip_non_number};
+        {
+            no warnings;
+            $item = CORE::sprintf($args->{format}, $item);
+        }
+    }
+    return $item;
 }
 
 1;
@@ -91,7 +108,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -99,14 +116,14 @@ Data::Unixish::sprintf - Apply sprintf() on input
 
 =head1 VERSION
 
-version 1.42
+version 1.43
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([sprintf => {format=>"%.1f"}], 0, 1, [2], {}, "", undef);
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([sprintf => {format=>"%.1f"}], 0, 1, [2], {}, "", undef);
  # => ("0.0", "1.0", "2.0", {}, "", undef)
 
 In command line:
@@ -117,14 +134,12 @@ In command line:
 
  x
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
 =head2 sprintf(%args) -> [status, msg, result, meta]
+
+Apply sprintf() on input.
 
 Array will also be processed (all the elements are fed to sprintf(), the result
 is a single string), unless C<skip_array> is set to true.
@@ -155,7 +170,14 @@ Output stream (e.g. array or filehandle).
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
 
 =head1 SEE ALSO
 
@@ -173,8 +195,7 @@ Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
-Please report any bugs or feature requests on the bugtracker website
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -186,7 +207,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

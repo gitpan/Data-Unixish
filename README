@@ -3,7 +3,7 @@ NAME
     framework
 
 VERSION
-    version 1.42
+    version 1.43
 
 SYNOPSIS
      # the a/f/l/c prefix determines whether function accepts
@@ -17,6 +17,7 @@ SYNOPSIS
                            aduxc cduxc fduxc lduxc
                            aduxf cduxf fduxf lduxf
                            aduxl cduxl fduxl lduxl
+                           siduxs
      ); # or you can use :all to export all functions
 
      # apply function, without argument
@@ -27,6 +28,12 @@ SYNOPSIS
      # apply function, with some arguments
      my $fh = fduxf([trunc => {width=>80, ansi=>1, mb=>1}], \*STDIN);
      say while <$fh>;
+
+     # apply function to a single item, function must be itemfunc
+     my $res = duxitem(, $item);
+
+     # apply function to multiple items, function must be itemfunc
+     my @res = aduxitem(, $item1, $item2, $item3);
 
 DESCRIPTION
     This distribution implements Unixish, a data transformation framework
@@ -89,7 +96,20 @@ FUNCTIONS
   lduxl($func, @input) => LIST
     The "ldux*" functions accepts list as input.
 
-    None are exported by default, but they are exportable.
+  siduxs($func, $item) => $res
+  aiduxa($func, \@items) => ARRAYREF
+  aiduxl($func, \@items) => LIST
+  liduxa($func, @items) => ARRAYREF
+  liduxl($func, @items) => LIST
+    The "*idux*" functions apply dux function on single item(s). Only dux
+    functions tagged with "itemfunc" can be used. These functions can
+    operate on a single item and return a single result. Examples of
+    itemfunc functions are "uc", "lc", "sprintf". Examples of non-itemfunc
+    functions are "head", "tail", "wc".
+
+    The "*idux*" functions can be useful if you want to call a dux function
+    from another dux function for each item. For example, see
+    "Data::Unixish::condapply".
 
 FAQ
   I'm getting "Use of uninitialized value in push at lib/Data/Unixish/XXX.pm line XX." messages!
@@ -106,6 +126,7 @@ FAQ
     Also see the dux command-line utility in the App::dux distribution which
     allows you to access dux function from the command-line.
 
+TODO
 SEE ALSO
     Unixish
 
@@ -130,7 +151,7 @@ AUTHOR
     Steven Haryanto <stevenharyanto@gmail.com>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2013 by Steven Haryanto.
+    This software is copyright (c) 2014 by Steven Haryanto.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

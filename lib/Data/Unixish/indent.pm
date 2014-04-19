@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.42'; # VERSION
+our $VERSION = '1.43'; # VERSION
 
 our %SPEC;
 
@@ -32,22 +32,34 @@ $SPEC{indent} = {
             },
         },
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub indent {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $indent = ($args{tab} ? "\t" : " ") x ($args{num} // 4);
 
+    _indent_begin(\%args);
     while (my ($index, $item) = each @$in) {
-        if (defined($item) && !ref($item)) {
-            $item =~ s/^/$indent/mg;
-        }
-
-        push @$out, $item;
+        push @$out, _indent_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _indent_begin {
+    my $args = shift;
+
+    # args abused to store state
+    $args->{_indent} = ($args->{tab} ? "\t" : " ") x ($args->{num} // 4);
+}
+
+sub _indent_item {
+    my ($item, $args) = @_;
+
+    if (defined($item) && !ref($item)) {
+        $item =~ s/^/$args->{_indent}/mg;
+    }
+    return $item;
 }
 
 1;
@@ -57,7 +69,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -65,7 +77,7 @@ Data::Unixish::indent - Add spaces or tabs to the beginning of each line of text
 
 =head1 VERSION
 
-version 1.42
+version 1.43
 
 =head1 SYNOPSIS
 
@@ -81,14 +93,12 @@ In command line:
    1
     2
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
 =head2 indent(%args) -> [status, msg, result, meta]
+
+Add spaces or tabs to the beginnning of each line of text.
 
 Arguments ('*' denotes required arguments):
 
@@ -114,7 +124,14 @@ Number of spaces to add.
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
 
 =head1 SEE ALSO
 
@@ -130,8 +147,7 @@ Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
-Please report any bugs or feature requests on the bugtracker website
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -143,7 +159,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -1,4 +1,4 @@
-package Data::Unixish::avg;
+package Data::Unixish::rand;
 
 use 5.010;
 use strict;
@@ -7,39 +7,61 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-use Scalar::Util 'looks_like_number';
-
 our $VERSION = '1.43'; # VERSION
 
 our %SPEC;
 
-$SPEC{avg} = {
+$SPEC{rand} = {
     v => 1.1,
-    summary => 'Average numbers',
+    summary => 'Generate a stream of random numbers',
     args => {
         %common_args,
+        min => {
+            summary => 'Minimum possible value (inclusive)',
+            schema => ['float*', default=>0],
+            cmdline_aliases => { a=>{} },
+        },
+        max => {
+            summary => 'Maximum possible value (inclusive)',
+            schema => ['float*', default=>1],
+            cmdline_aliases => { b=>{} },
+        },
+        int => {
+            schema => ['bool*', default=>0],
+            cmdline_aliases => { i=>{} },
+        },
+        num => {
+            summary => 'Number of numbers to generate, -1 means infinite',
+            schema => ['int*', default=>1],
+            cmdline_aliases => { n=>{} },
+        },
     },
-    tags => [qw/group/],
+    tags => [qw/number gen-data/],
+    'x.dux.is_stream_output' => 1,
 };
-sub avg {
+sub rand {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
 
-    my $sum = 0;
-    my $n = 0;
-    while (my ($index, $item) = each @$in) {
-        $n++;
-        $sum += $item if looks_like_number($item);
+    # XXX schema
+    my $min = $args{min} // 0;
+    my $max = $args{max} // 1;
+    my $int = $args{int};
+    my $num = $args{num} // 1;
+
+    my $i = 0;
+    while (1) {
+        last if $num >= 0 && ++$i > $num;
+        my $rand = $min + rand()*($max-$min);
+        $rand = sprintf("%.0f", $rand) if $int;
+        push @$out, $rand;
     }
 
-    my $avg = $n ? $sum/$n : 0;
-
-    push @$out, $avg;
     [200, "OK"];
 }
 
 1;
-# ABSTRACT: Average numbers
+# ABSTRACT: Generate a stream of random numbers
 
 __END__
 
@@ -49,7 +71,7 @@ __END__
 
 =head1 NAME
 
-Data::Unixish::avg - Average numbers
+Data::Unixish::rand - Generate a stream of random numbers
 
 =head1 VERSION
 
@@ -57,24 +79,24 @@ version 1.43
 
 =head1 SYNOPSIS
 
-In Perl:
-
- use Data::Unixish qw(lduxl);
- my $avg = lduxl('avg', 1, 2, 3, 4, 5); # => 3
-
 In command line:
 
- % seq 0 100 | dux avg
- .----.
- | 50 |
- '----'
+ % dux rand
+ 0.0744685671097649
+
+ % dux rand --min 1 --max 10 --num 5 --int
+ 3
+ 4
+ 1
+ 1
+ 5
 
 =head1 FUNCTIONS
 
 
-=head2 avg(%args) -> [status, msg, result, meta]
+=head2 rand(%args) -> [status, msg, result, meta]
 
-Average numbers.
+Generate a stream of random numbers.
 
 Arguments ('*' denotes required arguments):
 
@@ -83,6 +105,20 @@ Arguments ('*' denotes required arguments):
 =item * B<in> => I<any>
 
 Input stream (e.g. array or filehandle).
+
+=item * B<int> => I<bool> (default: 0)
+
+=item * B<max> => I<float> (default: 1)
+
+Maximum possible value (inclusive).
+
+=item * B<min> => I<float> (default: 0)
+
+Minimum possible value (inclusive).
+
+=item * B<num> => I<int> (default: 1)
+
+Number of numbers to generate, -1 means infinite.
 
 =item * B<out> => I<any>
 
@@ -100,6 +136,8 @@ First element (status) is an integer containing HTTP status code
 200. Third element (result) is optional, the actual result. Fourth
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
+
+=head1 SEE ALSO
 
 =head1 HOMEPAGE
 

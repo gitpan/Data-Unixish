@@ -9,7 +9,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.42'; # VERSION
+our $VERSION = '1.43'; # VERSION
 
 our %SPEC;
 
@@ -84,25 +84,36 @@ _
         },
         # XXX: flag to ignore references
     },
-    tags => [qw/format/],
+    tags => [qw/format itemfunc/],
 };
 sub bool {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $notion = $args{notion} // 'perl';
-    my $style  = $args{style}  // 'one_zero';
-    $style = 'one_zero' if !$styles{$style};
 
-    my $tc = $args{true_char}  // $styles{$style}[0];
-    my $fc = $args{false_char} // $styles{$style}[1];
-
+    _bool_begin(\%args);
     while (my ($index, $item) = each @$in) {
-        my $t = _is_true($item, $notion);
-        $item = $t ? $tc : defined($t) ? $fc : undef;
-        push @$out, $item;
+        push @$out, _bool_item($item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub _bool_begin {
+    my $args = shift;
+
+    $args->{notion} //= 'perl';
+    $args->{style}  //= 'one_zero';
+    $args->{style} = 'one_zero' if !$styles{$args->{style}};
+
+    $args->{true_char}  //= $styles{$args->{style}}[0];
+    $args->{false_char} //= $styles{$args->{style}}[1];
+}
+
+sub _bool_item {
+    my ($item, $args) = @_;
+
+    my $t = _is_true($item, $args->{notion});
+    $t ? $args->{true_char} : defined($t) ? $args->{false_char} : undef;
 }
 
 1;
@@ -112,7 +123,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -120,14 +131,14 @@ Data::Unixish::bool - Format bool
 
 =head1 VERSION
 
-version 1.42
+version 1.43
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux([bool => {style=>"check_cross"}], [0, "one", 2, ""])
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl([bool => {style=>"check_cross"}], [0, "one", 2, ""])
  # => ("✕","✓","✓","✕")
 
 In command line:
@@ -138,14 +149,12 @@ In command line:
  y
  n
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
 =head2 bool(%args) -> [status, msg, result, meta]
+
+Format boolean.
 
 Arguments ('*' denotes required arguments):
 
@@ -250,7 +259,14 @@ Instead of style, you can also specify character for true value.
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
 
 =head1 HOMEPAGE
 
@@ -262,8 +278,7 @@ Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
-Please report any bugs or feature requests on the bugtracker website
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -275,7 +290,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

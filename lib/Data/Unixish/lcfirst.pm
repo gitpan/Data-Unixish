@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.42'; # VERSION
+our $VERSION = '1.43'; # VERSION
 
 our %SPEC;
 
@@ -21,20 +21,26 @@ _
     args => {
         %common_args,
     },
-    tags => [qw/text/],
+    tags => [qw/text itemfunc/],
 };
 sub lcfirst {
     my %args = @_;
     my ($in, $out) = ($args{in}, $args{out});
 
     while (my ($index, $item) = each @$in) {
-        if (defined($item) && !ref($item)) {
-            $item = CORE::lcfirst($item);
-        }
-        push @$out, $item;
+        push @$out, _lcfirst_item($item);
     }
 
     [200, "OK"];
+}
+
+sub _lcfirst_item {
+    my $item = shift;
+
+    if (defined($item) && !ref($item)) {
+        $item = CORE::lcfirst($item);
+    }
+    return $item;
 }
 
 1;
@@ -44,7 +50,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -52,28 +58,26 @@ Data::Unixish::lcfirst - Convert first character of text to lowercase
 
 =head1 VERSION
 
-version 1.42
+version 1.43
 
 =head1 SYNOPSIS
 
 In Perl:
 
- use Data::Unixish::List qw(dux);
- my @res = dux('lcfirst', 'Steven', 'STEVEN'); # => ('steven', 'sTEVEN')
+ use Data::Unixish qw(lduxl);
+ my @res = lduxl('lcfirst', 'Steven', 'STEVEN'); # => ('steven', 'sTEVEN')
 
 In command line:
 
  % echo -e "STEVEN" | dux lcfirst
  sTEVEN
 
-=head1 DESCRIPTION
-
 =head1 FUNCTIONS
 
 
-None are exported by default, but they are exportable.
-
 =head2 lcfirst(%args) -> [status, msg, result, meta]
+
+Convert first character of text to lowercase.
 
 Arguments ('*' denotes required arguments):
 
@@ -91,7 +95,14 @@ Output stream (e.g. array or filehandle).
 
 Return value:
 
-Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
+Returns an enveloped result (an array).
+
+First element (status) is an integer containing HTTP status code
+(200 means OK, 4xx caller error, 5xx function error). Second element
+(msg) is a string containing error message, or 'OK' if status is
+200. Third element (result) is optional, the actual result. Fourth
+element (meta) is called result metadata and is optional, a hash
+that contains extra information.
 
 =head1 HOMEPAGE
 
@@ -103,8 +114,7 @@ Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
-Please report any bugs or feature requests on the bugtracker website
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -116,7 +126,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

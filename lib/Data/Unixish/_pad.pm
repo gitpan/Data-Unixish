@@ -11,36 +11,47 @@ use SHARYANTO::String::Util qw(pad);
 use Text::ANSI::Util qw(ta_pad ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
 
-our $VERSION = '1.42'; # VERSION
+our $VERSION = '1.43'; # VERSION
 
 sub _pad {
     my ($which, %args) = @_;
     my ($in, $out) = ($args{in}, $args{out});
-    my $w     = $args{width};
-    my $ansi  = $args{ansi};
-    my $mb    = $args{mb};
-    my $char  = $args{char} // " ";
-    my $trunc = $args{trunc};
 
+    __pad_begin($which, \%args);
     while (my ($index, $item) = each @$in) {
-        {
-            last if !defined($item) || ref($item);
-            if ($ansi) {
-                if ($mb) {
-                    $item = ta_mbpad($item, $w, $which, $char, $trunc);
-                } else {
-                    $item = ta_pad  ($item, $w, $which, $char, $trunc);
-                }
-            } elsif ($mb) {
-                $item = mbpad($item, $w, $which, $char, $trunc);
-            } else {
-                $item = pad  ($item, $w, $which, $char, $trunc);
-            }
-        }
-        push @$out, $item;
+        push @$out, __pad_item($which, $item, \%args);
     }
 
     [200, "OK"];
+}
+
+sub __pad_begin {
+    my ($which, $args) = @_;
+    $args->{char} //= ' ';
+}
+
+sub __pad_item {
+    my ($which, $item, $args) = @_;
+
+    {
+        last if !defined($item) || ref($item);
+        if ($args->{ansi}) {
+            if ($args->{mb}) {
+                $item = ta_mbpad($item, $args->{width}, $which,
+                                 $args->{char}, $args->{trunc});
+            } else {
+                $item = ta_pad  ($item, $args->{width}, $which,
+                                 $args->{char}, $args->{trunc});
+            }
+        } elsif ($args->{mb}) {
+            $item = mbpad($item, $args->{width}, $which,
+                          $args->{char}, $args->{trunc});
+        } else {
+            $item = pad  ($item, $args->{width}, $which,
+                          $args->{char}, $args->{trunc});
+        }
+    }
+    return $item;
 }
 
 1;
@@ -50,7 +61,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -58,14 +69,7 @@ Data::Unixish::_pad - _pad
 
 =head1 VERSION
 
-version 1.42
-
-=head1 DESCRIPTION
-
-=head1 FUNCTIONS
-
-
-None are exported by default, but they are exportable.
+version 1.43
 
 =head1 HOMEPAGE
 
@@ -77,8 +81,7 @@ Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
-Please report any bugs or feature requests on the bugtracker website
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=Data-Unixish>
 
 When submitting a bug or request, please include a test-file or a
 patch to an existing test-file that illustrates the bug or desired
@@ -90,7 +93,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by Steven Haryanto.
+This software is copyright (c) 2014 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

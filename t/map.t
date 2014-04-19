@@ -23,10 +23,17 @@ test_dux_func(
             args => { callback => sub { int($.) } },
             in   => [ "2.2", "3.3", "4.4", "5.5" ],
             out  => [ 0 .. 3 ],
+            skip_itemfunc => 1,
         },
         {
             name => 'returning a list',
             args => { callback => sub { split /\./ } },
+            in   => [ "2.2", "3.3", "4.4", "5.5" ],
+            out  => [ 2, 2, 3, 3, 4, 4, 5, 5 ],
+        },
+        {
+            name => 'accept code string',
+            args => { callback => 'split /\./' },
             in   => [ "2.2", "3.3", "4.4", "5.5" ],
             out  => [ 2, 2, 3, 3, 4, 4, 5, 5 ],
         },
