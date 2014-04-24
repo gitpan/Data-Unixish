@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -50,7 +50,8 @@ _
         },
     },
     tags => [qw/text group/],
-    "x.dux.strip_newlines" => 0,
+    "x.dux.strip_newlines" => 0, # for duxapp < 1.41, will be removed later
+    "x.app.dux.strip_newlines" => 0,
     "x.perinci.cmdline.default_format" => "text-simple",
 };
 sub wc {
@@ -108,7 +109,11 @@ Data::Unixish::wc - Print newline, word, and byte counts
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 

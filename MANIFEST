@@ -9,7 +9,6 @@ README
 dist.ini
 lib/Data/Unixish.pm
 lib/Data/Unixish/Apply.pm
-lib/Data/Unixish/List.pm
 lib/Data/Unixish/Util.pm
 lib/Data/Unixish/_pad.pm
 lib/Data/Unixish/avg.pm

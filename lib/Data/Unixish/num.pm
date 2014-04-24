@@ -13,7 +13,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use SHARYANTO::Number::Util qw(format_metric);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -47,6 +47,7 @@ _
         style => {
             schema=>['str*', in=>[keys %styles], default=>'general'],
             cmdline_aliases => { s=>{} },
+            pos => 0,
             description => "Available styles:\n\n".
                 join("", map {" * $_  ($styles{$_})\n"} sort keys %styles),
         },
@@ -171,7 +172,11 @@ Data::Unixish::num - Format number
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 

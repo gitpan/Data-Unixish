@@ -11,7 +11,7 @@ use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_trunc ta_mbtrunc);
 use Text::WideChar::Util qw(mbtrunc);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -32,6 +32,7 @@ _
         width => {
             schema => ['int*', min => 0],
             req => 1,
+            pos => 0,
             cmdline_aliases => { w => {} },
         },
         ansi => {
@@ -87,7 +88,11 @@ Data::Unixish::trunc - Truncate string to a certain column width
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 

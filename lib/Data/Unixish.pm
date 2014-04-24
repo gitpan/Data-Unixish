@@ -7,7 +7,7 @@ use warnings;
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -86,7 +86,7 @@ sub _dux {
     }
 
     if (ref($func) eq 'ARRAY') {
-        $args{$_} = $func->[1]{$_} for keys %{$func->[1]};
+        $args{$_} = $func->[1]{$_} for grep {/\A\w+\z/} keys %{$func->[1]};
         $func = $func->[0];
     }
 
@@ -252,7 +252,11 @@ Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 

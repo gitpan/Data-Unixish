@@ -10,7 +10,7 @@ use warnings;
 require Data::Unixish; # for siduxs
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -46,6 +46,7 @@ _
         },
     },
     tags => [qw/perl unsafe itemfunc/],
+    "x.app.dux.is_stream_output" => 1,
 };
 sub cond {
     my %args = @_;
@@ -65,8 +66,12 @@ sub _cond_begin {
     my $args = shift;
 
     if (ref($args->{if}) ne 'CODE') {
-        $args->{if} = eval "sub { $args->{if} }";
-        die "invalid Perl code for if: $@" if $@;
+        if ($args->{-cmdline}) {
+            $args->{if} = eval "sub { $args->{if} }";
+            die "invalid Perl code for if: $@" if $@;
+        } else {
+            die "Please supply coderef for 'if'";
+        }
     }
     $args->{then} //= 'cat';
     $args->{else} //= 'cat';
@@ -100,7 +105,11 @@ Data::Unixish::cond - Apply dux function conditionally
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 

@@ -9,7 +9,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -40,8 +40,12 @@ sub grep {
         my $re = $callback;
         $callback = sub { $_ =~ $re };
     } elsif (ref($callback) ne 'CODE') {
-        $callback = eval "sub { $callback }";
-        die "invalid code for grep: $@" if $@;
+        if ($args{-cmdline}) {
+            $callback = eval "sub { $callback }";
+            die "invalid code for grep: $@" if $@;
+        } else {
+            die "Please supply coderef (or regex) for 'callback'";
+        }
     }
 
     local ($., $_);
@@ -67,7 +71,11 @@ Data::Unixish::grep - Perl grep
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 

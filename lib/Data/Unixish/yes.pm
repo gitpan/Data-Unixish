@@ -7,7 +7,7 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -28,7 +28,8 @@ _
         },
     },
     tags => [qw/text gen-data/],
-    'x.dux.is_stream_output' => 1,
+    'x.dux.is_stream_output' => 1, # for duxapp < 1.41, will be removed later
+    'x.app.dux.is_stream_output' => 1,
 };
 sub yes {
     my %args = @_;
@@ -58,7 +59,11 @@ Data::Unixish::yes - Output a string repeatedly until killed
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 

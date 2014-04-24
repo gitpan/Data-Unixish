@@ -37,11 +37,14 @@ my %WriteMakefileArgs = (
   },
   "TEST_REQUIRES" => {
     "File::Spec" => 0,
+    "File::Which" => 0,
     "IO::Handle" => 0,
     "IPC::Open3" => 0,
+    "JSON" => 0,
+    "String::ShellQuote" => 0,
     "Test::More" => "0.98"
   },
-  "VERSION" => "1.43",
+  "VERSION" => "1.44",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -50,14 +53,17 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "File::Spec" => 0,
+  "File::Which" => 0,
   "IO::Handle" => 0,
   "IPC::Open3" => 0,
+  "JSON" => 0,
   "Log::Any" => 0,
   "Number::Format" => 0,
   "Rinci" => "v1.1.0",
   "SHARYANTO::Number::Util" => "0.38",
   "SHARYANTO::Package::Util" => 0,
   "SHARYANTO::String::Util" => "0.24",
+  "String::ShellQuote" => 0,
   "Syntax::Feature::EachOnArray" => 0,
   "Test::More" => "0.98",
   "Text::ANSI::Util" => "0.06",

@@ -10,7 +10,7 @@ use Scalar::Util qw(looks_like_number blessed);
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -24,8 +24,9 @@ _
         %common_args,
         format => {
             summary => 'Format',
-            schema=>[str => {default=>0}],
+            schema => 'str*',
             cmdline_aliases => { f=>{} },
+            pos => 0,
         },
         # tz?
     },
@@ -84,7 +85,11 @@ Data::Unixish::date - Format date
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 
@@ -111,7 +116,7 @@ Arguments ('*' denotes required arguments):
 
 =over 4
 
-=item * B<format> => I<str> (default: 0)
+=item * B<format> => I<str>
 
 Format.
 

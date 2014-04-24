@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -25,10 +25,12 @@ Example: `%04d|`.
 
 _
             schema  => [str => default=>'%4s|'],
+            cmdline_aliases => { f=>{} },
         },
         start => {
             summary => 'Number to start from',
             schema  => [int => default => 1],
+            cmdline_aliases => { s=>{} },
         },
         blank_empty_lines => {
             schema => [bool => default=>1],
@@ -59,7 +61,8 @@ _
         },
     },
     tags => [qw/text itemfunc/],
-    "x.dux.strip_newlines" => 0,
+    "x.dux.strip_newlines" => 0, # for duxapp < 1.41, will be removed later
+    "x.app.dux.strip_newlines" => 0,
 };
 sub linum {
     my %args = @_;
@@ -116,7 +119,11 @@ Data::Unixish::linum - Add line numbers
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 

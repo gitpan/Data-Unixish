@@ -1,10 +1,10 @@
 package Data::Unixish::Util;
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 require Exporter;
 our @ISA       = qw(Exporter);
-our @EXPORT_OK = qw(%common_args);
+our @EXPORT_OK = qw(%common_args filter_args);
 
 our %common_args = (
     in  => {
@@ -18,6 +18,11 @@ our %common_args = (
         #req => 1,
     },
 );
+
+sub filter_args {
+    my $hash = shift;
+    return { map {$_=>$hash->{$_}} grep {/\A\w+\z/} keys %$hash };
+}
 
 1;
 #ABSTRACT: Utility routines
@@ -34,7 +39,19 @@ Data::Unixish::Util - Utility routines
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
+
+=head1 EXPORTS
+
+C<%common_args>
+
+=head1 FUNCTIONS
+
+=head2 filter_args
 
 =head1 HOMEPAGE
 

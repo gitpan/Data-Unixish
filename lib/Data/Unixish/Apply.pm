@@ -5,11 +5,11 @@ use strict;
 use warnings;
 #use Log::Any '$log';
 
-use Data::Unixish::Util qw(%common_args);
+use Data::Unixish::Util qw(%common_args filter_args);
 use Module::Load;
 use SHARYANTO::Package::Util qw(package_exists);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -66,7 +66,7 @@ sub apply {
         my ($fn0, $fargs);
         if (ref($f) eq 'ARRAY') {
             $fn0 = $f->[0];
-            $fargs = $f->[1] // {};
+            $fargs = filter_args($f->[1]) // {};
         } else {
             $fn0 = $f;
             $fargs = {};
@@ -117,7 +117,11 @@ Data::Unixish::Apply - Apply one or more dux functions to data
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 

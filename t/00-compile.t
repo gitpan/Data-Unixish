@@ -2,16 +2,15 @@ use 5.006;
 use strict;
 use warnings;
 
-# this test was generated with Dist::Zilla::Plugin::Test::Compile 2.039
+# this test was generated with Dist::Zilla::Plugin::Test::Compile 2.040
 
-use Test::More  tests => 43 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
+use Test::More  tests => 42 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 
 
 my @module_files = (
     'Data/Unixish.pm',
     'Data/Unixish/Apply.pm',
-    'Data/Unixish/List.pm',
     'Data/Unixish/Util.pm',
     'Data/Unixish/_pad.pm',
     'Data/Unixish/avg.pm',

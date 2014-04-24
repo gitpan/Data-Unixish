@@ -10,7 +10,7 @@ use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_wrap ta_mbwrap);
 use Text::WideChar::Util qw(mbwrap);
 
-our $VERSION = '1.43'; # VERSION
+our $VERSION = '1.44'; # VERSION
 
 our %SPEC;
 
@@ -23,6 +23,7 @@ $SPEC{wrap} = {
             summary => 'Target column width',
             schema =>[int => {default=>80, min=>1}],
             cmdline_aliases => { c=>{} },
+            pos => 0,
         },
         ansi => {
             summary => 'Whether to handle ANSI escape codes',
@@ -86,7 +87,11 @@ Data::Unixish::wrap - Wrap text
 
 =head1 VERSION
 
-version 1.43
+version 1.44
+
+=head1 RELEASE DATE
+
+2014-04-24
 
 =head1 SYNOPSIS
 
