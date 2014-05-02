@@ -15,6 +15,7 @@ lib/Data/Unixish/avg.pm
 lib/Data/Unixish/bool.pm
 lib/Data/Unixish/cat.pm
 lib/Data/Unixish/centerpad.pm
+lib/Data/Unixish/chain.pm
 lib/Data/Unixish/cond.pm
 lib/Data/Unixish/date.pm
 lib/Data/Unixish/grep.pm
@@ -52,10 +53,12 @@ lib/Test/Data/Unixish.pm
 t/00-compile.t
 t/01-basics.t
 t/Apply.t
+t/Util.t
 t/avg.t
 t/bool.t
 t/cat.t
 t/centerpad.t
+t/chain.t
 t/cond.t
 t/date.t
 t/grep.t

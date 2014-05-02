@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.44'; # VERSION
+our $VERSION = '1.45'; # VERSION
 
 our %SPEC;
 
@@ -50,11 +50,7 @@ Data::Unixish::cat - Pass input unchanged
 
 =head1 VERSION
 
-version 1.44
-
-=head1 RELEASE DATE
-
-2014-04-24
+This document describes version 1.45 of Data::Unixish::cat (from Perl distribution Data-Unixish), released on 2014-05-02.
 
 =head1 SYNOPSIS
 

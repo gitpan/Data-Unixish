@@ -11,7 +11,7 @@ use SHARYANTO::String::Util qw(pad);
 use Text::ANSI::Util qw(ta_pad ta_mbpad);
 use Text::WideChar::Util qw(mbpad);
 
-our $VERSION = '1.44'; # VERSION
+our $VERSION = '1.45'; # VERSION
 
 sub _pad {
     my ($which, %args) = @_;
@@ -69,11 +69,7 @@ Data::Unixish::_pad - _pad
 
 =head1 VERSION
 
-version 1.44
-
-=head1 RELEASE DATE
-
-2014-04-24
+This document describes version 1.45 of Data::Unixish::_pad (from Perl distribution Data-Unixish), released on 2014-05-02.
 
 =head1 HOMEPAGE
 

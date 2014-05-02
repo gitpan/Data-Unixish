@@ -1,5 +1,10 @@
 Revision history for Data-Unixish
 
+1.45    2014-05-02 (SHARYANTO)
+
+        - Add dux func: chain.
+
+
 1.44    2014-04-24 (SHARYANTO)
 
         [SECURITY]
@@ -8,7 +13,7 @@ Revision history for Data-Unixish
           through apply() or ?dux?() (which means, in-process), disallow it to
           avoid running untrusted Perl string code. This is motivated by
           Text::ANSITable allowing reading formats from environment variables
-          and apply it using apply().
+          and applying them using apply().
 
         [REMOVED FEATURES]
 

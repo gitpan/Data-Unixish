@@ -3,10 +3,8 @@ NAME
     framework
 
 VERSION
-    version 1.44
-
-RELEASE DATE
-    2014-04-24
+    This document describes version 1.45 of Data::Unixish (from Perl
+    distribution Data-Unixish), released on 2014-05-02.
 
 SYNOPSIS
      # the a/f/l/c prefix determines whether function accepts

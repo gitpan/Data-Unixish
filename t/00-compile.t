@@ -2,9 +2,9 @@ use 5.006;
 use strict;
 use warnings;
 
-# this test was generated with Dist::Zilla::Plugin::Test::Compile 2.040
+# this test was generated with Dist::Zilla::Plugin::Test::Compile 2.039
 
-use Test::More  tests => 42 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
+use Test::More  tests => 43 + ($ENV{AUTHOR_TESTING} ? 1 : 0);
 
 
 
@@ -17,6 +17,7 @@ my @module_files = (
     'Data/Unixish/bool.pm',
     'Data/Unixish/cat.pm',
     'Data/Unixish/centerpad.pm',
+    'Data/Unixish/chain.pm',
     'Data/Unixish/cond.pm',
     'Data/Unixish/date.pm',
     'Data/Unixish/grep.pm',
