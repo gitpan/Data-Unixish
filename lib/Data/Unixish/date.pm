@@ -10,7 +10,7 @@ use Scalar::Util qw(looks_like_number blessed);
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.45'; # VERSION
+our $VERSION = '1.46'; # VERSION
 
 our %SPEC;
 
@@ -30,7 +30,7 @@ _
         },
         # tz?
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/datatype:date itemfunc formatting/],
 };
 sub date {
     my %args = @_;
@@ -85,7 +85,7 @@ Data::Unixish::date - Format date
 
 =head1 VERSION
 
-This document describes version 1.45 of Data::Unixish::date (from Perl distribution Data-Unixish), released on 2014-05-02.
+This document describes version 1.46 of Data::Unixish::date (from Perl distribution Data-Unixish), released on 2014-05-05.
 
 =head1 SYNOPSIS
 

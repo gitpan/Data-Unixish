@@ -11,7 +11,7 @@ use Data::Unixish::Util qw(%common_args);
 use Text::ANSI::Util qw(ta_trunc ta_mbtrunc);
 use Text::WideChar::Util qw(mbtrunc);
 
-our $VERSION = '1.45'; # VERSION
+our $VERSION = '1.46'; # VERSION
 
 our %SPEC;
 
@@ -44,7 +44,7 @@ _
             schema => ['bool', default => 0],
         },
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/itemfunc text/],
 };
 sub trunc {
     my %args = @_;
@@ -88,7 +88,7 @@ Data::Unixish::trunc - Truncate string to a certain column width
 
 =head1 VERSION
 
-This document describes version 1.45 of Data::Unixish::trunc (from Perl distribution Data-Unixish), released on 2014-05-02.
+This document describes version 1.46 of Data::Unixish::trunc (from Perl distribution Data-Unixish), released on 2014-05-05.
 
 =head1 SYNOPSIS
 

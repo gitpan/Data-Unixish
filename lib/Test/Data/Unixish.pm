@@ -13,8 +13,8 @@ use Module::Load;
 use String::ShellQuote;
 use Test::More 0.96;
 
-our $VERSION = '1.45'; # VERSION
-our $DATE = '2014-05-02'; # DATE
+our $VERSION = '1.46'; # VERSION
+our $DATE = '2014-05-05'; # DATE
 
 require Exporter;
 our @ISA = qw(Exporter);
@@ -149,7 +149,7 @@ Test::Data::Unixish - Routines to test Data::Unixish
 
 =head1 VERSION
 
-This document describes version 1.45 of Test::Data::Unixish (from Perl distribution Data-Unixish), released on 2014-05-02.
+This document describes version 1.46 of Test::Data::Unixish (from Perl distribution Data-Unixish), released on 2014-05-05.
 
 =for Pod::Coverage .+
 

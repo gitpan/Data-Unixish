@@ -7,7 +7,7 @@ use warnings;
 #use Log::Any '$log';
 
 use Data::Unixish::Util qw(%common_args);
-our $VERSION = '1.45'; # VERSION
+our $VERSION = '1.46'; # VERSION
 
 our %SPEC;
 
@@ -36,7 +36,7 @@ $SPEC{rand} = {
             cmdline_aliases => { n=>{} },
         },
     },
-    tags => [qw/number gen-data/],
+    tags => [qw/datatype:num gen-data/],
     "x.dux.is_stream_output" => 1, # for duxapp < 1.41, will be removed later
     'x.app.dux.is_stream_output' => 1,
 };
@@ -76,7 +76,7 @@ Data::Unixish::rand - Generate a stream of random numbers
 
 =head1 VERSION
 
-This document describes version 1.45 of Data::Unixish::rand (from Perl distribution Data-Unixish), released on 2014-05-02.
+This document describes version 1.46 of Data::Unixish::rand (from Perl distribution Data-Unixish), released on 2014-05-05.
 
 =head1 SYNOPSIS
 

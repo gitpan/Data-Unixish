@@ -9,7 +9,7 @@ use warnings;
 use Data::Unixish::Util qw(%common_args);
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.45'; # VERSION
+our $VERSION = '1.46'; # VERSION
 
 our %SPEC;
 
@@ -19,7 +19,7 @@ $SPEC{avg} = {
     args => {
         %common_args,
     },
-    tags => [qw/group/],
+    tags => [qw/datatype:num group/],
 };
 sub avg {
     my %args = @_;
@@ -53,7 +53,7 @@ Data::Unixish::avg - Average numbers
 
 =head1 VERSION
 
-This document describes version 1.45 of Data::Unixish::avg (from Perl distribution Data-Unixish), released on 2014-05-02.
+This document describes version 1.46 of Data::Unixish::avg (from Perl distribution Data-Unixish), released on 2014-05-05.
 
 =head1 SYNOPSIS
 

@@ -13,7 +13,7 @@ use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 use SHARYANTO::Number::Util qw(format_metric);
 
-our $VERSION = '1.45'; # VERSION
+our $VERSION = '1.46'; # VERSION
 
 our %SPEC;
 
@@ -74,7 +74,7 @@ _
             schema => ['str*'],
         },
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/formatting itemfunc datatype:num/],
 };
 sub num {
     my %args = @_;
@@ -172,7 +172,7 @@ Data::Unixish::num - Format number
 
 =head1 VERSION
 
-This document describes version 1.45 of Data::Unixish::num (from Perl distribution Data-Unixish), released on 2014-05-02.
+This document describes version 1.46 of Data::Unixish::num (from Perl distribution Data-Unixish), released on 2014-05-05.
 
 =head1 SYNOPSIS
 

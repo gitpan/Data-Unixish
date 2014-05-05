@@ -9,7 +9,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.45'; # VERSION
+our $VERSION = '1.46'; # VERSION
 
 our %SPEC;
 
@@ -43,7 +43,7 @@ _
             cmdline_aliases => {f => {}},
         },
     },
-    tags => [qw/itemfunc/],
+    tags => [qw/itemfunc func/],
 };
 sub chain {
     my %args = @_;
@@ -130,7 +130,7 @@ Data::Unixish::chain - Chain several dux functions together
 
 =head1 VERSION
 
-This document describes version 1.45 of Data::Unixish::chain (from Perl distribution Data-Unixish), released on 2014-05-02.
+This document describes version 1.46 of Data::Unixish::chain (from Perl distribution Data-Unixish), released on 2014-05-05.
 
 =head1 SYNOPSIS
 

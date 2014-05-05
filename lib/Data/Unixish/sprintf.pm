@@ -11,7 +11,7 @@ use Data::Unixish::Util qw(%common_args);
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
 
-our $VERSION = '1.45'; # VERSION
+our $VERSION = '1.46'; # VERSION
 
 our %SPEC;
 
@@ -43,7 +43,7 @@ _
             schema=>[bool => default=>0],
         },
     },
-    tags => [qw/format itemfunc/],
+    tags => [qw/formatting itemfunc text/],
 };
 sub sprintf {
     my %args = @_;
@@ -116,7 +116,7 @@ Data::Unixish::sprintf - Apply sprintf() on input
 
 =head1 VERSION
 
-This document describes version 1.45 of Data::Unixish::sprintf (from Perl distribution Data-Unixish), released on 2014-05-02.
+This document describes version 1.46 of Data::Unixish::sprintf (from Perl distribution Data-Unixish), released on 2014-05-05.
 
 =head1 SYNOPSIS
 
