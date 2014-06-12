@@ -8,7 +8,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.46'; # VERSION
+our $VERSION = '1.47'; # VERSION
 
 our %SPEC;
 
@@ -119,7 +119,7 @@ Data::Unixish::linum - Add line numbers
 
 =head1 VERSION
 
-This document describes version 1.46 of Data::Unixish::linum (from Perl distribution Data-Unixish), released on 2014-05-05.
+This document describes version 1.47 of Data::Unixish::linum (from Perl distribution Data-Unixish), released on 2014-06-12.
 
 =head1 SYNOPSIS
 

@@ -3,8 +3,8 @@ NAME
     framework
 
 VERSION
-    This document describes version 1.46 of Data::Unixish (from Perl
-    distribution Data-Unixish), released on 2014-05-05.
+    This document describes version 1.47 of Data::Unixish (from Perl
+    distribution Data-Unixish), released on 2014-06-12.
 
 SYNOPSIS
      # the a/f/l/c prefix determines whether function accepts
@@ -59,7 +59,8 @@ FUNCTIONS
 
     The *duxf functions returns filehandle immediately. A child process is
     forked, and dux function is run in the child process. You read output as
-    lines from the returned filehandle.
+    lines from the returned filehandle. (Currently not yet supported on
+    Windows due to no support for open '-|').
 
     The *duxl functions returns result as list. It can be evaluated in
     scalar to return only the first element of the list. However, the whole
@@ -89,7 +90,7 @@ FUNCTIONS
   fduxf($func, $file_or_handle, @args) => FILEHANDLE
   fduxl($func, $file_or_handle, @args) => LIST
     The "fdux*" functions accepts filename or filehandle. @args is optional
-    and will be passed to Tie::File.
+    and will be passed to Tie::File. Currently not yet supported on Windows.
 
   lduxa($func, @input) => ARRAYREF
   lduxc($func, $callback, @input)
