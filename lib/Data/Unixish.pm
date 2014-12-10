@@ -1,14 +1,14 @@
 package Data::Unixish;
 
+our $DATE = '2014-12-10'; # DATE
+our $VERSION = '1.48'; # VERSION
+
 use 5.010001;
 use strict;
 use warnings;
 
 use Module::Load;
-use SHARYANTO::Package::Util qw(package_exists);
-
-our $VERSION = '1.47'; # VERSION
-our $DATE = '2014-06-12'; # DATE
+use Package::MoreUtil qw(package_exists);
 
 require Exporter;
 our @ISA       = qw(Exporter);
@@ -253,7 +253,7 @@ Data::Unixish - Implementation for Unixish, a data transformation framework
 
 =head1 VERSION
 
-This document describes version 1.47 of Data::Unixish (from Perl distribution Data-Unixish), released on 2014-06-12.
+This document describes version 1.48 of Data::Unixish (from Perl distribution Data-Unixish), released on 2014-12-10.
 
 =head1 SYNOPSIS
 
@@ -417,7 +417,7 @@ Please visit the project's homepage at L<https://metacpan.org/release/Data-Unixi
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
+Source repository is at L<https://github.com/perlancar/perl-Data-Unixish>.
 
 =head1 BUGS
 
@@ -429,11 +429,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -3,8 +3,8 @@ NAME
     framework
 
 VERSION
-    This document describes version 1.47 of Data::Unixish (from Perl
-    distribution Data-Unixish), released on 2014-06-12.
+    This document describes version 1.48 of Data::Unixish (from Perl
+    distribution Data-Unixish), released on 2014-12-10.
 
 SYNOPSIS
      # the a/f/l/c prefix determines whether function accepts
@@ -140,7 +140,7 @@ HOMEPAGE
 
 SOURCE
     Source repository is at
-    <https://github.com/sharyanto/perl-Data-Unixish>.
+    <https://github.com/perlancar/perl-Data-Unixish>.
 
 BUGS
     Please report any bugs or feature requests on the bugtracker website
@@ -150,10 +150,10 @@ BUGS
     to an existing test-file that illustrates the bug or desired feature.
 
 AUTHOR
-    Steven Haryanto <stevenharyanto@gmail.com>
+    perlancar <perlancar@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2014 by Steven Haryanto.
+    This software is copyright (c) 2014 by perlancar@cpan.org.
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.

@@ -1,5 +1,8 @@
 package Data::Unixish::num;
 
+our $DATE = '2014-12-10'; # DATE
+our $VERSION = '1.48'; # VERSION
+
 use 5.010;
 use locale;
 use strict;
@@ -9,11 +12,9 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 use Number::Format;
+use Number::Format::Metric qw(format_metric);
 use POSIX qw(locale_h);
 use Scalar::Util 'looks_like_number';
-use SHARYANTO::Number::Util qw(format_metric);
-
-our $VERSION = '1.47'; # VERSION
 
 our %SPEC;
 
@@ -52,6 +53,7 @@ _
                 join("", map {" * $_  ($styles{$_})\n"} sort keys %styles),
         },
         decimal_digits => {
+            schema => ['int*'],
             summary => 'Number of digits to the right of decimal point',
         },
         thousands_sep => {
@@ -172,7 +174,7 @@ Data::Unixish::num - Format number
 
 =head1 VERSION
 
-This document describes version 1.47 of Data::Unixish::num (from Perl distribution Data-Unixish), released on 2014-06-12.
+This document describes version 1.48 of Data::Unixish::num (from Perl distribution Data-Unixish), released on 2014-12-10.
 
 =head1 SYNOPSIS
 
@@ -203,11 +205,11 @@ Arguments ('*' denotes required arguments):
 
 =over 4
 
-=item * B<decimal_digits> => I<any>
+=item * B<decimal_digits> => I<int>
 
 Number of digits to the right of decimal point.
 
-=item * B<in> => I<any>
+=item * B<in> => I<array>
 
 Input stream (e.g. array or filehandle).
 
@@ -225,35 +227,17 @@ Available styles:
 
 =over
 
-=item *
+=item * fixed  (Fixed number of decimal digits, e.g. 1.00, default decimal digits=2)
 
-fixed  (Fixed number of decimal digits, e.g. 1.00, default decimal digits=2)
+=item * general  (General formatting, e.g. 1, 2.345)
 
+=item * kibi  (Use Ki/Mi/GiB/etc suffix with base-10 [1000], e.g. 1.2Mi)
 
-=item *
+=item * kilo  (Use K/M/G/etc suffix with base-2, e.g. 1.2M)
 
-general  (General formatting, e.g. 1, 2.345)
+=item * percent  (Percentage, e.g. 10.00%)
 
-
-=item *
-
-kibi  (Use Ki/Mi/GiB/etc suffix with base-10 [1000], e.g. 1.2Mi)
-
-
-=item *
-
-kilo  (Use K/M/G/etc suffix with base-2, e.g. 1.2M)
-
-
-=item *
-
-percent  (Percentage, e.g. 10.00%)
-
-
-=item *
-
-scientific  (Scientific notation, e.g. 1.23e+21)
-
+=item * scientific  (Scientific notation, e.g. 1.23e+21)
 
 =back
 
@@ -282,13 +266,15 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
+ (any)
+
 =head1 HOMEPAGE
 
 Please visit the project's homepage at L<https://metacpan.org/release/Data-Unixish>.
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
+Source repository is at L<https://github.com/perlancar/perl-Data-Unixish>.
 
 =head1 BUGS
 
@@ -300,11 +286,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

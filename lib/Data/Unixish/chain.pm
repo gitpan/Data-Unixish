@@ -9,7 +9,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.47'; # VERSION
+our $VERSION = '1.48'; # VERSION
 
 our %SPEC;
 
@@ -130,7 +130,7 @@ Data::Unixish::chain - Chain several dux functions together
 
 =head1 VERSION
 
-This document describes version 1.47 of Data::Unixish::chain (from Perl distribution Data-Unixish), released on 2014-06-12.
+This document describes version 1.48 of Data::Unixish::chain (from Perl distribution Data-Unixish), released on 2014-12-10.
 
 =head1 SYNOPSIS
 
@@ -168,7 +168,7 @@ The functions to chain.
 Each element must either be function name (like C<date>) or a 2-element array
 containing the function name and its arguments (like C<[bool, {style: dot}]>).
 
-=item * B<in> => I<any>
+=item * B<in> => I<array>
 
 Input stream (e.g. array or filehandle).
 
@@ -189,13 +189,15 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
+ (any)
+
 =head1 HOMEPAGE
 
 Please visit the project's homepage at L<https://metacpan.org/release/Data-Unixish>.
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
+Source repository is at L<https://github.com/perlancar/perl-Data-Unixish>.
 
 =head1 BUGS
 
@@ -207,11 +209,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

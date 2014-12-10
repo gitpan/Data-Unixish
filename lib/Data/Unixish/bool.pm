@@ -9,7 +9,7 @@ use warnings;
 
 use Data::Unixish::Util qw(%common_args);
 
-our $VERSION = '1.47'; # VERSION
+our $VERSION = '1.48'; # VERSION
 
 our %SPEC;
 
@@ -131,7 +131,7 @@ Data::Unixish::bool - Format bool
 
 =head1 VERSION
 
-This document describes version 1.47 of Data::Unixish::bool (from Perl distribution Data-Unixish), released on 2014-06-12.
+This document describes version 1.48 of Data::Unixish::bool (from Perl distribution Data-Unixish), released on 2014-12-10.
 
 =head1 SYNOPSIS
 
@@ -164,7 +164,7 @@ Arguments ('*' denotes required arguments):
 
 Instead of style, you can also specify character for true value.
 
-=item * B<in> => I<any>
+=item * B<in> => I<array>
 
 Input stream (e.g. array or filehandle).
 
@@ -189,65 +189,29 @@ Available styles:
 
 =over
 
-=item *
+=item * Y_N: N Y
 
-Y_N: N Y
+=item * check (uses Unicode):   ✓
 
+=item * check_cross (uses Unicode): ✕ ✓
 
-=item *
+=item * dot (uses Unicode):   ●
 
-check (uses Unicode):   ✓
+=item * dot_cross (uses Unicode): ✘ ●
 
+=item * heavy_check_cross (uses Unicode): ✘ ✔
 
-=item *
+=item * one_zero: 0 1
 
-check_cross (uses Unicode): ✕ ✓
+=item * t_f: f t
 
+=item * true_false: false true
 
-=item *
+=item * v_X: X v
 
-dot (uses Unicode):   ●
+=item * y_n: n y
 
-
-=item *
-
-dot_cross (uses Unicode): ✘ ●
-
-
-=item *
-
-heavyI<check>cross (uses Unicode): ✘ ✔
-
-
-=item *
-
-one_zero: 0 1
-
-
-=item *
-
-t_f: f t
-
-
-=item *
-
-true_false: false true
-
-
-=item *
-
-v_X: X v
-
-
-=item *
-
-y_n: n y
-
-
-=item *
-
-yes_no: no yes
-
+=item * yes_no: no yes
 
 =back
 
@@ -268,13 +232,15 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
+ (any)
+
 =head1 HOMEPAGE
 
 Please visit the project's homepage at L<https://metacpan.org/release/Data-Unixish>.
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
+Source repository is at L<https://github.com/perlancar/perl-Data-Unixish>.
 
 =head1 BUGS
 
@@ -286,11 +252,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
