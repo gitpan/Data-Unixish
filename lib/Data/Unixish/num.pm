@@ -1,7 +1,7 @@
 package Data::Unixish::num;
 
-our $DATE = '2014-12-10'; # DATE
-our $VERSION = '1.48'; # VERSION
+our $DATE = '2015-01-03'; # DATE
+our $VERSION = '1.49'; # VERSION
 
 use 5.010;
 use locale;
@@ -174,7 +174,7 @@ Data::Unixish::num - Format number
 
 =head1 VERSION
 
-This document describes version 1.48 of Data::Unixish::num (from Perl distribution Data-Unixish), released on 2014-12-10.
+This document describes version 1.49 of Data::Unixish::num (from Perl distribution Data-Unixish), released on 2015-01-03.
 
 =head1 SYNOPSIS
 
@@ -255,8 +255,6 @@ Use empty string "" if you want to disable printing thousands separator.
 
 =back
 
-Return value:
-
 Returns an enveloped result (an array).
 
 First element (status) is an integer containing HTTP status code
@@ -266,15 +264,14 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
- (any)
-
+Return value:  (any)
 =head1 HOMEPAGE
 
 Please visit the project's homepage at L<https://metacpan.org/release/Data-Unixish>.
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/perlancar/perl-Data-Unixish>.
+Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
@@ -290,7 +287,7 @@ perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by perlancar@cpan.org.
+This software is copyright (c) 2015 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

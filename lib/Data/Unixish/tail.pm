@@ -6,7 +6,7 @@ use syntax 'each_on_array'; # to support perl < 5.12
 use warnings;
 #use Log::Any '$log';
 
-our $VERSION = '1.48'; # VERSION
+our $VERSION = '1.49'; # VERSION
 
 use Data::Unixish::Util qw(%common_args);
 
@@ -60,7 +60,7 @@ Data::Unixish::tail - Output the last items of data
 
 =head1 VERSION
 
-This document describes version 1.48 of Data::Unixish::tail (from Perl distribution Data-Unixish), released on 2014-12-10.
+This document describes version 1.49 of Data::Unixish::tail (from Perl distribution Data-Unixish), released on 2015-01-03.
 
 =head1 SYNOPSIS
 
@@ -105,8 +105,6 @@ Output stream (e.g. array or filehandle).
 
 =back
 
-Return value:
-
 Returns an enveloped result (an array).
 
 First element (status) is an integer containing HTTP status code
@@ -116,8 +114,7 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
- (any)
-
+Return value:  (any)
 =head1 SEE ALSO
 
 tail(1)
@@ -130,7 +127,7 @@ Please visit the project's homepage at L<https://metacpan.org/release/Data-Unixi
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/perlancar/perl-Data-Unixish>.
+Source repository is at L<https://github.com/sharyanto/perl-Data-Unixish>.
 
 =head1 BUGS
 
@@ -146,7 +143,7 @@ perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by perlancar@cpan.org.
+This software is copyright (c) 2015 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
